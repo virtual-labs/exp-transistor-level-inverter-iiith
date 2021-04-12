@@ -17,7 +17,7 @@ The transistor is in linear region when V<sub>gs</sub> - V<sub>t</sub> > V<sub>d
 The transistor is said to be in saturation region when v<sub>gs</sub> - V<sub>t</sub> < V<sub>ds</sub>
 
 The transfer characteristic(i.e. the output voltage vs input voltage) is shown in the figure below. The operation is divided into 5 region depending on the range of input voltage(Move your mouse over the region to know about the region). The output voltage in every region is obtained by equating drain to source current of pmos and nmos.
-<img src="vlsi_images/DC_CHARC.jpg">
+<img src="images/DC_CHARC.jpg">
 
 
 **EFFECT OF W/L RATIO ON OUTPUT WAVEFORM**
