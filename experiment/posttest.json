@@ -1,18 +1,94 @@
 [
-{"question":"This is a Sample Question 1?",
+{"question":"1. The number of inputs in an inverter is ____.",
 "answers":{
-            "a":"answer1",
-            "b":"answer2",
-            "c":"answer3",
-            "d":"answer4"
+            "a":"1",
+            "b":"2",
+            "c":"3",
+            "d":"4"
           },
 "correctAnswer":"a"},
-{"question":"This is a Sample Question 2?",
+            
+{"question":"2. Inverter gate is same as __________.",
 "answers":{
-            "a":"answer1",
-            "b":"answer2",
-            "c":"answer3",
-            "d":"answer4"
+            "a":"AND gate",
+            "b":"NOT gate",
+            "c":"NOR gate",
+            "d":"NAND gate"
           },
-"correctAnswer":"c"} 
+"correctAnswer":"b"},
+            
+{"question":"3. Which is the most suitable representation for a NOT gate?",
+"answers":{
+            "a":"<img src='images/1st.jpg'>",
+            "b":"<img src='images/2nd.jpg'>",
+            "c":"<img src='images/3rd.jpg'>",
+            "d":"<img src='images/4th.jpg'>"
+          },
+"correctAnswer":"a"},
+            
+{"question":"4. Identify which statement is true for inverter?",
+"answers":{
+            "a":"Any difference in inputs gurantees a high output",
+            "b":"Any difference in inputs gurantees a low output",
+            "c":"A high input gives a high output",
+            "d":"A low input gives a high output"
+          },
+"correctAnswer":"d"},
+            
+
+{"question":"5. What is the traditional symbol for inverter?",
+"answers":{
+            "a":"<img src='images/nand.jpg'>",
+            "b":"<img src='images/nor.jpg'>",
+            "c":"<img src='images/not.jpg'>",
+            "d":"<img src='images/inv.jpg'>"
+          },
+"correctAnswer":"c"},
+            
+{"question":"6. Choose the electrical analogue of an inverter?",
+"answers":{
+            "a":"<img src='images/elec_anal2.jpg'>",
+            "b":"<img src='images/elec_anal1.jpg'>",
+            "c":"<img src='images/elec_anal3.jpg'>",
+            "d":"None of these"
+          },
+"correctAnswer":"b"},
+            
+{"question":"7. What is the correct input voltage range for region D?",
+"answers":{
+            "a":"V<sub>dd/2</sub> < V<sub>in</sub> ≤ V<sub>dd</sub>-V<sub>tp</sub>",
+            "b":"V<sub>in</sub> = V<sub>dd/2</sub>",
+            "c":"0 ≤ V<sub>in</sub> ≤ V<sub>tn</sub>",
+            "d":"V<sub>in</sub> ≥ V<sub>dd</sub>-V<sub>tp</sub>"
+          },
+"correctAnswer":"a"},
+            
+{"question":"8. What are the operation states of n-device and p-device respectively in region B?",
+"answers":{
+            "a":"Linear & unsaturated",
+            "b":"Cut-off & linear",
+            "c":"Linear & saturated",
+            "d":"Saturated & linear"
+          },
+"correctAnswer":"d"},
+            
+{"question":"9. What is delay?",
+"answers":{
+            "a":"Maximum of rise time and fall time",
+            "b":"Product of rise time and fall time",
+            "c":"Average of rise time and fall time",
+            "d":"Addition of rise time and fall time"
+          },
+"correctAnswer":"c"},
+            
+{"question":"10. What is desirable β<sub>n</sub>/β<sub>p</sub> ratio for an inverter?",
+"answers":{
+            "a":"0",
+            "b":"1",
+            "c":"0.5",
+            "d":"∞"
+          },
+"correctAnswer":"b"}            
+            
+            
 ]
