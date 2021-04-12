@@ -3,9 +3,6 @@ Inverter is a logic gate, with one input and one output. Its symbol is shown bel
 <img src="images/not.jpg">
 
 The output of inverter is complement of the input i.e. if the input is 0, the output will be 1 and vice-versa. The truth table for inverter is shown below :-
-|Input 	Output
-0 	1
-1 	0
 
 | Inout  | Output |
 | -------| -------|
