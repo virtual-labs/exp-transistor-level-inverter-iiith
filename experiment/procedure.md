@@ -1,1 +1,1 @@
-<img src=images/inverter_procedure.jpg">
+<img src="images/inverter_procedure.jpg">
