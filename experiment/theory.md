@@ -17,14 +17,15 @@ The transistor is in linear region when V<sub>gs</sub> - V<sub>t</sub> > V<sub>d
 The transistor is said to be in saturation region when v<sub>gs</sub> - V<sub>t</sub> < V<sub>ds</sub>
 
 The transfer characteristic(i.e. the output voltage vs input voltage) is shown in the figure below. The operation is divided into 5 region depending on the range of input voltage(Move your mouse over the region to know about the region). The output voltage in every region is obtained by equating drain to source current of pmos and nmos.
+
 <img src="images/DC_CHARC.jpg">
 
 
 **EFFECT OF W/L RATIO ON OUTPUT WAVEFORM**
 
-Before proceeding to the study of effect please read the definition of β (gain factor).
+Before proceeding to the study of effect please read the definition of Î² (gain factor).
 
-W/L ratio is directly proportional to β. The ratio βn/βp is crucial in determinig the transfer characteristic of the inverter. When the ratio is increased the transition shifts from left to right, but the output voltage transition remains sharp. For CMOS the ratio is desired to be 1 so that it requires equal time to charge and discharge.
+W/L ratio is directly proportional to Î². The ratio Î²n/Î²p is crucial in determinig the transfer characteristic of the inverter. When the ratio is increased the transition shifts from left to right, but the output voltage transition remains sharp. For CMOS the ratio is desired to be 1 so that it requires equal time to charge and discharge.
 
 **EFFECT OF CAPACITANCE ON THE RISE AND FALL TIME**
 
