@@ -20,7 +20,7 @@
 {"question":"3. Which is the most suitable representation for a NOT gate?",
 "answers":{
             "a":"<img src='images/1st.jpg'>",
-            "b":"<img src='images/2nd.jpg'>",
+            "b":"<<img src='images/2nd.jpg'>>",
             "c":"<img src='images/3rd.jpg'>",
             "d":"<img src='images/4th.jpg'>"
           },
