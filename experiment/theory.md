@@ -1,6 +1,6 @@
 **CMOS INVERTER**
 
-In the transistor level design of CMOS inverter consists of nmos and pmos transistor in series. The PMOS transistor is connected between Vdd and output node, whereas the NMOS is connected betweeen the output node and gnd.
+In the [transistor](http://cse14-iiith.vlabs.ac.in/final-build/EXP_1sep2010/exp1/Theory.html?domain=Computer%20Science%20&%20Engineering&lab=VLSI%20LAB#transistor) level design of CMOS inverter consists of nmos and pmos transistor in series. The PMOS transistor is connected between Vdd and output node, whereas the NMOS is connected betweeen the output node and gnd.
 
 **WORKING OF CMOS INVERTER**
 
