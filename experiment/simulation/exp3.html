@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>jsPlumb Video</title>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jsPlumb/2.15.6/js/jsplumb.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.3.0/d3.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.1/p5.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/interact.js/1.0.2/interact.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+
+
+
+
+
+
+
+
+
+  <style>
+    #diagram,
+    #toolbox {
+      margin-left: 50px;
+      border-width: 2px;
+      border-style: solid;
+      border-color: lightgrey;
+      height: 180vh;
+    }
+
+    #toolbox {
+      display: flex;
+      padding: 10px;
+      flex-flow: row wrap;
+      align-content: flex-start;
+    }
+
+    .control {
+      border-color: green;
+      border-radius: 10px;
+      border-width: 2px;
+      border-style: solid;
+      width: 100px;
+      text-align: center;
+      cursor: move;
+      height: fit-content;
+      height: -moz-max-content;
+      background-color: white;
+    }
+
+    #diagram .control {
+      position: absolute;
+    }
+
+    .window {
+      z-index: 20;
+    }
+
+    .jtk-connector {
+      z-index: 4;
+    }
+
+    .jtk-endpoint {
+      z-index: 5;
+    }
+
+    .jtk-overlay {
+      z-index: 6;
+    }
+
+    .custom-menu {
+      z-index: 1000;
+      position: absolute;
+      background-color: #C0C0C0;
+      border: 1px solid black;
+      padding: 2px;
+    }
+
+    #toolbox .control {
+      margin: 10px 5px;
+    }
+  </style>
+
+</head>
+
+<body>
+  <div class="container-fluid">
+    <div class="row">
+
+      <div class="col-md-9">
+        <div id="diagram" style="height: 180vh; position: relative">
+          <div id="control1" class="control" style="left: 50px; top: 50px">
+            Nmos
+
+            <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" id="div_id">
+
+
+
+              <g class="draggable-group">
+
+                <path d="M 27.71 77 L 27.71 27" fill="none" stroke="green" stroke-width="2.5"
+                  stroke-miterlimit="0.01" />
+                <path d="M 36.29 77 L 36.29 27" fill="none" stroke="green" stroke-width="2.5"
+                  stroke-miterlimit="0.01" />
+                <path d="M 36.29 39.5 L 62 39.5 L 62 2" fill="none" stroke="green" stroke-width="2.5"
+                  stroke-miterlimit="0.01" />
+                <path d="M 62 102 L 62 64.5 L 36.29 64.5" fill="none" stroke="green" stroke-width="2.5"
+                  stroke-miterlimit="0.011" />
+                <path d="M 2 52 L 27.71 52" fill="none" stroke="green" stroke-width="2.5" stroke-miterlimit="0.01">
+
+              </g>
+
+
+            </svg>
+          </div>
+          <div id="control3" class="control" style="left: 50px; top: 250px">
+            Pmos
+
+            <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" id="div_id1">
+
+
+
+              <g class="draggable-group">
+
+                <path d="M 27.71 77 L 27.71 27" fill="none" stroke="green" stroke-width="2.5"
+                  stroke-miterlimit="0.01" />
+                <path d="M 36.29 77 L 36.29 27" fill="none" stroke="green" stroke-width="2.5"
+                  stroke-miterlimit="0.01" />
+                <path d="M 36.29 39.5 L 62 39.5 L 62 2" fill="none" stroke="green" stroke-width="2.5"
+                  stroke-miterlimit="0.01" />
+                <path d="M 62 102 L 62 64.5 L 36.29 64.5" fill="none" stroke="green" stroke-width="2.5"
+                  stroke-miterlimit="0.011" />
+                <path d="M 2 52 L 27.71 52" fill="none" stroke="green" stroke-width="2.5" stroke-miterlimit="0.01">
+
+              </g>
+
+
+            </svg>
+          </div>
+          <div id="control2" class="control" style="left: 300px; top: 200px">Volt</div>
+          <div id="control6" class="control" style="left: 300px; top: 200px">Ground</div>
+
+          <div id="control4" class="control" style="left: 300px; top: 200px">Input</div>
+          <div id="control5" class="control" style="left: 300px; top: 200px">Output</div>
+          <button onclick="javascriptbutton()">SIMULATE</button>
+         
+        
+        </div>
+        
+      </div>
+      <div id="graphimg" class="control" style="left: 300px; top: 200px"></div>
+    </div>
+  </div>
+  <script>
+
+
+    instance = jsPlumb.getInstance({});
+    instance.setContainer("diagram");
+    instance.bind("ready", function () {
+      instance.registerConnectionTypes({
+        "red-connection": {
+          paintStyle: { stroke: "red", strokeWidth: 5 },
+          hoverPaintStyle: { stroke: "red", strokeWidth: 10 },
+          connector: "Flowchart"
+        }
+      });
+      instance.draggable("control1", { "containment": true });
+      instance.draggable("control3", { "containment": true });
+      instance.draggable("control2", { "containment": true });
+      instance.draggable("control4", { "containment": true });
+      instance.draggable("control5", { "containment": true });
+      instance.draggable("control6", { "containment": true });
+
+      instance.addEndpoint("control2", {
+        endpoint: "Dot",
+        anchor: ["Right"],
+        isSource: true,
+        connectionType: "red-connection"
+      });
+      instance.addEndpoint("control4", {
+        endpoint: "Dot",
+        anchor: ["Right"],
+        isSource: true,
+        connectionType: "red-connection"
+      });
+      instance.addEndpoint("control4", {
+        endpoint: "Dot",
+        anchor: ["Left"],
+        isSource: true,
+        connectionType: "red-connection"
+      });
+      instance.addEndpoint("control5", {
+        endpoint: "Dot",
+        anchor: ["Right"],
+        isTarget: true,
+        connectionType: "red-connection"
+      });
+      instance.addEndpoint("control6", {
+        endpoint: "Dot",
+        anchor: ["Right"],
+        isSource: true,
+        connectionType: "red-connection"
+      });
+      instance.addEndpoint("control5", {
+        endpoint: "Dot",
+        anchor: ["Left"],
+        isTarget: true,
+        connectionType: "red-connection"
+      });
+      instance.addEndpoint("control3", {
+        endpoint: "Dot",
+        anchor: ["Bottom"],
+        isSource: true,
+        connectionType: "red-connection"
+      });
+      instance.addEndpoint("control3", {
+        endpoint: "Dot",
+        anchor: ["Left"],
+        isTarget: true,
+        connectionType: "red-connection"
+      });
+      instance.addEndpoint("control3", {
+        endpoint: "Dot",
+        anchor: ["Top"],
+        isTarget: true,
+        connectionType: "red-connection"
+      });
+      instance.addEndpoint("control1", {
+        endpoint: "Dot",
+        anchor: ["Bottom"],
+        isSource: true,
+        connectionType: "red-connection"
+      });
+      instance.addEndpoint("control1", {
+        endpoint: "Dot",
+        anchor: ["Left"],
+        isTarget: true,
+        connectionType: "red-connection"
+      });
+      instance.addEndpoint("control1", {
+        endpoint: "Dot",
+        anchor: ["Top"],
+        isTarget: true,
+        connectionType: "red-connection"
+      });
+
+
+
+    });
+
+    function javascriptbutton() {
+      var conns = instance.getAllConnections();
+      if (conns.length == 6) {
+
+        alert("Circuit is completed")
+        var x = document.getElementById("graphimg")
+        x.innerHTML = '<img width="1000" height="1000" src="graph.png">';
+        
+        
+      }
+
+    }
+
+  </script>
+  
+</body>
+
+
+</html>
