@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virtual labs</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/virtual-labs/virtual-style@0.0.7-b/css/style.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsPlumb/2.15.6/js/jsplumb.min.js"></script>
+    <link rel="stylesheet" href="./css/main.css">
+    <link rel="manifest" href="manifest.json">
+</head>
+
+<body>
+    <div class="columns mt-2 is-variable is-centered is-flex is-flex-wrap-wrap">
+        <div id="start" class="column is-2-tablet is-5-mobile my-2 center-content">
+            <button class="v-button">Start</button>
+        </div>
+        <div id="restart" class="column is-2-tablet is-5-mobile my-2 center-content">
+            <button class="v-button">Restart</button>
+        </div>
+        <div id="div-select" class="column is-2-tablet is-8-mobile my-2 center-content">
+            <div class="select">
+                <select name="exp-select" id="exp-select">
+                    <option>Complementary CMOS logic</option>
+                    <option>Japan</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="columns mt-2 is-centered is-flex is-flex-wrap-wrap">
+        <div class="column is-2-desktop is-3-tablet is-3-mobile my-2 center-content">
+            <div class="toolbar">
+                <div class="toolbar-title is-size-5 v-bold has-text-centered">
+                    ToolBar
+                </div>
+                <div class="toolbar-item-list">
+                    <div class="toolbar-component">
+                        <div class="component has-text-centered">
+                            Ground
+                            <svg xmlns="http://www.w3.org/2000/svg" class="svg-component" height="100" width="100"
+                                viewBox="0 0 100 100">
+                                <g>
+                                    <path d="M 1 31 L 61 31 L 31 31 L 31 1" fill="none" stroke="green"
+                                        stroke-width="2.5" stroke-miterlimit="0.01" />
+                                    <path d="M 11 41 L 51 41" fill="none" stroke="green" stroke-width="2.5"
+                                        stroke-miterlimit="0.01" />
+                                    <path d="M 21 51 L 41 51" fill="none" stroke="green" stroke-width="2.5"
+                                        stroke-miterlimit="0.01" />
+                                </g>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="toolbar-component">
+                        <div class="component has-text-centered">
+                            Nmos
+                            <svg xmlns="http://www.w3.org/2000/svg" class="svg-component"height="100" width="100" viewBox="0 0 100 100">
+                                <g class="draggable-group">
+                                    <path d="M 27.71 77 L 27.71 27" fill="none" stroke="green" stroke-width="2.5"
+                                        stroke-miterlimit="0.01" />
+                                    <path d="M 36.29 77 L 36.29 27" fill="none" stroke="green" stroke-width="2.5"
+                                        stroke-miterlimit="0.01" />
+                                    <path d="M 36.29 39.5 L 62 39.5 L 62 2" fill="none" stroke="green"
+                                        stroke-width="2.5" stroke-miterlimit="0.01" />
+                                    <path d="M 62 102 L 62 64.5 L 36.29 64.5" fill="none" stroke="green"
+                                        stroke-width="2.5" stroke-miterlimit="0.011" />
+                                    <path d="M 2 52 L 27.71 52" fill="none" stroke="green" stroke-width="2.5"
+                                        stroke-miterlimit="0.01">
+                                </g>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="column is-7-desktop is-9-tablet is-9-mobile my-2 center-content workspace">
+            <div class="is-flex is-flex-wrap-wrap center-content simulation-container" id="diagram">
+                <div id="control1" class="control" style="left: 50px; top: 50px">
+                    Nmos
+                    <svg xmlns="http://www.w3.org/2000/svg" height="100" width="100" id="div_id">
+                        <g class="draggable-group">
+                            <path d="M 27.71 77 L 27.71 27" fill="none" stroke="green" stroke-width="2.5"
+                                stroke-miterlimit="0.01" />
+                            <path d="M 36.29 77 L 36.29 27" fill="none" stroke="green" stroke-width="2.5"
+                                stroke-miterlimit="0.01" />
+                            <path d="M 36.29 39.5 L 62 39.5 L 62 2" fill="none" stroke="green" stroke-width="2.5"
+                                stroke-miterlimit="0.01" />
+                            <path d="M 62 102 L 62 64.5 L 36.29 64.5" fill="none" stroke="green" stroke-width="2.5"
+                                stroke-miterlimit="0.011" />
+                            <path d="M 2 52 L 27.71 52" fill="none" stroke="green" stroke-width="2.5"
+                                stroke-miterlimit="0.01">
+                        </g>
+                    </svg>
+                </div>
+            </div>
+        </div>
+        <div class="column is-3-desktop is-6-tablet is-6-mobile my-2 center-content graph">
+            <div class="v-datalist-container">
+                <div class="v-datalist-title">Graph</div>
+                <div class="v-datalist-row">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        instance = jsPlumb.getInstance({});
+        instance.setContainer("diagram");
+        instance.bind("ready", function () {
+            instance.registerConnectionTypes({
+                "red-connection": {
+                    paintStyle: { stroke: "red", strokeWidth: 3 },
+                    hoverPaintStyle: { stroke: "red", strokeWidth: 8 },
+                    connector: "Flowchart"
+                }
+            });
+            instance.draggable("control1", { "containment": true }, instance.repaintEverything());
+            // instance.draggable("control3", { "containment": true, filter: ".ui-resizable-handle" });
+            // instance.draggable("control2", { "containment": true, filter: ".ui-resizable-handle" });
+            // instance.draggable("control4", { "containment": true, filter: ".ui-resizable-handle" });
+            // instance.draggable("control5", { "containment": true, filter: ".ui-resizable-handle" });
+            // instance.draggable("control6", { "containment": true, filter: ".ui-resizable-handle" });
+
+            // instance.addEndpoint("control2", {
+            //     endpoint: "Dot",
+            //     anchor: ["Right"],
+            //     isSource: true,
+            //     maxConnections: -1,
+            //     connectionType: "red-connection"
+            // });
+            // instance.addEndpoint("control4", {
+            //     endpoint: "Dot",
+            //     anchor: ["Right"],
+            //     isSource: true,
+            //     maxConnections: -1,
+            //     connectionType: "red-connection"
+            // });
+
+
+            // instance.addEndpoint("control6", {
+            //     endpoint: "Dot",
+            //     anchor: ["Right"],
+            //     isSource: true,
+            //     maxConnections: -1,
+            //     connectionType: "red-connection"
+            // });
+            // instance.addEndpoint("control5", {
+            //     endpoint: "Dot",
+            //     anchor: ["Left"],
+            //     isTarget: true,
+            //     maxConnections: -1,
+            //     connectionType: "red-connection"
+            // });
+            // instance.addEndpoint("control3", {
+            //     endpoint: "Dot",
+            //     anchor: ["Bottom"],
+            //     isSource: true,
+            //     maxConnections: -1,
+            //     connectionType: "red-connection"
+            // });
+            // instance.addEndpoint("control3", {
+            //     endpoint: "Dot",
+            //     anchor: ["Left"],
+            //     isTarget: true,
+            //     maxConnections: -1,
+            //     connectionType: "red-connection",
+            //     maxConnections: -1
+            // });
+            // instance.addEndpoint("control3", {
+            //     endpoint: "Dot",
+            //     anchor: ["Top"],
+            //     isTarget: true,
+            //     maxConnections: -1,
+            //     connectionType: "red-connection"
+            // });
+            instance.addEndpoint("control1", {
+                endpoint: "Dot",
+                anchor: ["Bottom"],
+                isSource: true,
+                maxConnections: -1,
+                connectionType: "red-connection"
+            });
+            instance.addEndpoint("control1", {
+                endpoint: "Dot",
+                anchor: ["Left"],
+                isTarget: true,
+                maxConnections: -1,
+                connectionType: "red-connection"
+            });
+            instance.addEndpoint("control1", {
+                endpoint: "Dot",
+                anchor: ["Top"],
+                isTarget: true,
+                maxConnections: -1,
+                connectionType: "red-connection"
+            });
+
+
+
+        });
+
+        var count = 0;
+        function addinstance(id) {
+            instance.addEndpoint("id", {
+                endpoint: "Dot",
+                anchor: ["Right"],
+                isSource: true,
+                maxConnections: -1,
+                connectionType: "red-connection"
+            });
+
+        }
+
+        function jpmos() {
+            var person;
+
+            var id = "mlk" + count;
+
+            person = '<div id = id class="control" >Volt</div>'
+
+
+            count = count + 1;
+            var container = document.getElementById("diagram");
+            instance = jsPlumb.getInstance({});
+            instance.setContainer("diagram");
+            instance.bind("ready", function () {
+                instance.registerConnectionTypes({
+                    "red-connection": {
+                        paintStyle: { stroke: "red", strokeWidth: 3 },
+                        hoverPaintStyle: { stroke: "red", strokeWidth: 8 },
+                        connector: "Flowchart"
+                    }
+                });
+            });
+            container.insertAdjacentHTML("afterbegin", person);
+            if (count < 4) {
+                instance.draggable("id", { "containment": true });
+            }
+
+
+
+            addinstance(id);
+            console.log(id);
+
+
+        }
+    </script>
+</body>
+
+</html>
