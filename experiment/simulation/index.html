@@ -1,16 +1,603 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-	<!-- Add CSS at the head of HTML file -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virtual labs</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/virtual-labs/virtual-style@0.0.7-b/css/style.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsPlumb/2.15.6/js/jsplumb.min.js"></script>
     <link rel="stylesheet" href="./css/main.css">
+    <link rel="manifest" href="manifest.json">
 </head>
+
 <body>
-		<!-- Your code goes here-->
-		<p><li>Make sure that you have<a href="../../../Introduction.html" target="_PARENT"> prerequisites</a> installed to run experiment</li> </p>
+    <div class="columns mt-2 is-variable is-1 is-centered is-flex is-flex-wrap-wrap">
+        <div class="column is-3-tablet is-8-mobile center-content">
+            <div class="control">
+                <label class="v-radio">
+                    <input type="radio" class="v-radio-input-large" name="exp-type" />
+                    Complementary CMOS Logic
+                </label>
+            </div>
+        </div>
+        <div class="column is-3-tablet is-8-mobile center-content">
+            <div class="control">
+                <label class="v-radio">
+                    <input type="radio" class="v-radio-input" name="exp-type" />
+                    Pseudo NMOS Logic
+                </label>
+            </div>
+        </div>
+        <div class="column is-3-tablet is-8-mobile center-content">
+            <div class="control">
+                <button class="v-button has-background-link">Select</button>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="columns mt-2 is-variable is-1 is-centered is-flex is-flex-wrap-wrap">
+        <div id="start" class="column is-2-desktop is-2-tablet is-3-mobile my-2 center-content">
+            <button class="v-button has-background-success">Start</button>
+        </div>
+        <div id="restart" class="column is-2-desktop is-2-tablet is-3-mobile my-2 center-content">
+            <button class="v-button has-background-warning-dark">Restart</button>
+        </div>
+    </div>
 
-	<p>Click <a href="exp1/exp1.html">here</a> to perform the experiment</p>
+    <div class="columns is-centered is-flex">
+        <div class="column mt-2 is-4-desktop is-10-tablet is-10-mobile has-text-centered">
+            <div class="v-instruction-container">
+                <div class="v-instruction-title">Instructions</div>
+                <div id="procedure-message" class="v-instruction-text">
 
-	<!-- Add JS at the bottom of HTML file --> 
-        <script src="./js/main.js"></script>
+                </div>
+                <div id="error-message" class="v-instruction-text">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="columns mt-2 is-variable is-1 is-centered is-flex is-flex-wrap-wrap">
+        <div class="column is-2-desktop is-3-tablet is-2-mobile my-2 center-content">
+            <div class="toolbar">
+                <div class="toolbar-title is-size-5 v-bold has-text-centered">
+                    ToolBar
+                </div>
+                <div class="toolbar-item-list">
+                    <div class="toolbar-component" onclick="jpmos()">
+                        <div class="each-toolbar-component has-text-centered">
+                            <svg class="svg-component" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+                                <g>
+                                    <path d="M 29.78 77 L 29.78 27" fill="none" stroke="green" stroke-width="2.5"
+                                        stroke-miterlimit="0.01" />
+                                    <path d="M 35.33 77 L 35.33 27" fill="none" stroke="green" stroke-width="2.5"
+                                        stroke-miterlimit="0.01" />
+                                    <path d="M 35.33 39.5 L 52 39.5 L 52 2" fill="none" stroke="green"
+                                        stroke-width="2.5" stroke-miterlimit="0.01" />
+                                    <path d="M 52 102 L 52 64.5 L 35.33 64.5" fill="none" stroke="green"
+                                        stroke-width="2.5" stroke-miterlimit="0.01" />
+                                    <path d="M 2 52 L 18.67 52" fill="none" stroke="green" stroke-width="2.5"
+                                        stroke-miterlimit="0.01" />
+                                    <ellipse cx="24.02" cy="51.11" rx="5.357142857142858" ry="5.357142857142858"
+                                        fill="none" stroke="green" stroke-width="2.5" />
+                                </g>
+                            </svg>
+                            PMOS
+                        </div>
+                    </div>
+                    <div class="toolbar-component" onclick="jnmos()">
+                        <div class="each-toolbar-component has-text-centered">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="svg-component" height="100" width="100"
+                                viewBox="0 0 100 100">
+                                <g class="draggable-group">
+                                    <path d="M 27.71 77 L 27.71 27" fill="none" stroke="green" stroke-width="2.5"
+                                        stroke-miterlimit="0.01" />
+                                    <path d="M 36.29 77 L 36.29 27" fill="none" stroke="green" stroke-width="2.5"
+                                        stroke-miterlimit="0.01" />
+                                    <path d="M 36.29 39.5 L 62 39.5 L 62 2" fill="none" stroke="green"
+                                        stroke-width="2.5" stroke-miterlimit="0.01" />
+                                    <path d="M 62 102 L 62 64.5 L 36.29 64.5" fill="none" stroke="green"
+                                        stroke-width="2.5" stroke-miterlimit="0.011" />
+                                    <path d="M 2 52 L 27.71 52" fill="none" stroke="green" stroke-width="2.5"
+                                        stroke-miterlimit="0.01">
+                                </g>
+                            </svg>
+                            NMOS
+                        </div>
+                    </div>
+                    <div class="toolbar-component" onclick="jvdd()">
+                        <div class="each-toolbar-component has-text-centered">
+                            <svg class="svg-component" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+                                <g>
+                                    <path d="M 21 41 L 21 1 L 1 1 L 41 1" fill="none" stroke="green" stroke-width="2.5"
+                                        stroke-miterlimit="0.01" />
+                                </g>
+                            </svg>
+                            VDD
+                        </div>
+                    </div>
+                    <div class="toolbar-component" onclick="jground()">
+                        <div class="each-toolbar-component has-text-centered">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="svg-component" height="100" width="100"
+                                viewBox="0 0 100 100">
+                                <g>
+                                    <path d="M 1 31 L 61 31 L 31 31 L 31 1" fill="none" stroke="green"
+                                        stroke-width="2.5" stroke-miterlimit="0.01" />
+                                    <path d="M 11 41 L 51 41" fill="none" stroke="green" stroke-width="2.5"
+                                        stroke-miterlimit="0.01" />
+                                    <path d="M 21 51 L 41 51" fill="none" stroke="green" stroke-width="2.5"
+                                        stroke-miterlimit="0.01" />
+                                </g>
+                            </svg>
+                            Ground
+                        </div>
+                    </div>
+                    <div class="toolbar-component" onclick="jinput()">
+                        <div class="each-toolbar-component has-text-centered">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="svg-component" height="100" width="100"
+                                viewBox="0 0 100 100">
+                                <g>
+                                    <path d="M 1 31 L 1 1 L 61 1 L 41 31" fill="none" stroke="green" stroke-width="2.5"
+                                        stroke-miterlimit="0.01" />
+                                    <path d="M 1 31 L 41 31" fill="none" stroke="green" stroke-width="2.5"
+                                        stroke-miterlimit="0.01" />
+                                </g>
+                            </svg>
+                            Input
+                        </div>
+                    </div>
+                    <div class="toolbar-component" onclick="joutput()">
+                        <div class="each-toolbar-component has-text-centered">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="svg-component" height="100" width="100"
+                                viewBox="0 0 100 100">
+                                <g>
+                                    <path d="M 61 31 L 61 1 L 1 1 L 21 31" fill="none" stroke="green" stroke-width="2.5"
+                                        stroke-miterlimit="0.01" />
+                                    <path d="M 61 31 L 21 31" fill="none" stroke="green" stroke-width="2.5"
+                                        stroke-miterlimit="0.01" />
+                                </g>
+                            </svg>
+                            Output
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="column is-7-desktop is-9-tablet is-10-mobile my-2 center-content workspace">
+            <div class="is-flex is-flex-wrap-wrap center-content simulation-container" id="diagram">
+            </div>
+        </div>
+        <div class="column is-3-desktop is-6-tablet is-6-mobile my-2 center-content graph">
+            <div class="toolbar">
+                <div class="toolbar-title is-size-5 v-bold has-text-centered">
+                    Graph
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <script>
+        const jsmap = new Map();
+        var list_pmos = [];
+        var list_nmos = [];
+        var list_input = [];
+        var list_ouput = [];
+        var list_ground = [];
+        var list_vdd = [];
+
+
+        var instance = jsPlumb.getInstance({
+            container: diagram,
+            maxConnections: -1,
+            endpoint: {
+                type: "Dot",
+                options: { radius: 7 },
+            },
+            dragOptions: {
+                containment: "parentEnclosed",
+                containmentPadding: 5,
+            },
+            connector: "Flowchart",
+            paintStyle: { strokeWidth: 3, stroke: "#456" },
+            connectionsDetachable: false,
+        });
+        instance.bind("ready", function () {
+            instance.registerConnectionTypes({
+                "red-connection": {
+                    paintStyle: { stroke: "red", strokeWidth: 3 },
+                    hoverPaintStyle: { stroke: "red", strokeWidth: 8 },
+                    connector: "Flowchart"
+                }
+            });
+        });
+        instance.bind("connection", function (ci) { 
+            var s = ci.sourceId, t = ci.targetId;
+            jsmap.set(s, t)
+
+        });
+
+
+
+
+        var count1 = 0;
+        var count2 = 0;
+        var count3 = 0;
+        var count4 = 0;
+        var count5 = 0;
+        var count6 = 0;
+        var count7 = 0;
+        var count8 = 0;
+
+        function addinstancepmos(id) {
+            instance.addEndpoint(id, {
+                endpoint: ["Dot", { radius: 5 }],
+                anchor: ["Bottom"],
+                isSource: true,
+                // isSource: true,
+                maxConnections: -1,
+                connectionType: "red-connection"
+            });
+            instance.addEndpoint(id, {
+                endpoint: ["Dot", { radius: 5 }],
+                anchor: ["Left"],
+                isTarget: true,
+                // isSource: true,
+                maxConnections: -1,
+                connectionType: "red-connection"
+            });
+            instance.addEndpoint(id, {
+                endpoint: ["Dot", { radius: 5 }],
+                anchor: ["Top"],
+                isTarget: true,
+                // isSource: true,
+                maxConnections: -1,
+                connectionType: "red-connection"
+            });
+            console.log(instance);
+        }
+
+        function addinstancenmos(id) {
+            instance.addEndpoint(id, {
+                endpoint: ["Dot", { radius: 5 }],
+                anchor: ["Bottom"],
+                isTarget: true,
+                // isSource: true,
+                maxConnections: -1,
+                connectionType: "red-connection"
+            });
+            instance.addEndpoint(id, {
+                endpoint: ["Dot", { radius: 5 }],
+                anchor: ["Left"],
+                isTarget: true,
+                // isSource: true,
+                maxConnections: -1,
+                connectionType: "red-connection"
+            });
+            instance.addEndpoint(id, {
+                endpoint: ["Dot", { radius: 5 }],
+                anchor: ["Top"],
+                // isTarget: true,
+                isSource: true,
+                maxConnections: -1,
+                connectionType: "red-connection"
+            });
+
+        }
+
+        function addinstancevdd(id) {
+            instance.addEndpoint(id, {
+                endpoint: ["Dot", { radius: 5 }],
+                anchor: ["Bottom"],
+                isSource: true,
+                // isSource: true,
+                maxConnections: -1,
+                connectionType: "red-connection"
+            });
+        }
+
+        function addinstanceground(id) {
+            instance.addEndpoint(id, {
+                endpoint: ["Dot", { radius: 5 }],
+                anchor: ["Top"],
+                isSource: true,
+                // isTarget: true,
+                maxConnections: -1,
+                connectionType: "red-connection"
+            });
+        }
+
+        
+
+        function addinstanceinput(id) {
+            instance.addEndpoint(id, {
+                endpoint: ["Dot", { radius: 5 }],
+                anchor: ["Right"],
+                isSource: true,
+                // isSource: true,
+                maxConnections: -1,
+                connectionType: "red-connection"
+            });
+        }
+
+        function addinstanceoutput(id) {
+            instance.addEndpoint(id, {
+                endpoint: ["Dot", { radius: 5 }],
+                anchor: ["Left"],
+                // isSource: true,
+                isTarget: true,
+                maxConnections: -1,
+                connectionType: "red-connection"
+            });
+        }
+
+        function jpmos() {
+            var person;
+
+            var id = "pmos" + count1;
+
+
+
+            count1 = count1 + 1;
+            var container = document.getElementById("diagram");
+
+
+            var d = document.createElement('div');
+            d.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="svg-component" height="100" width="100" viewBox="0 0 100 100"><g><path d="M 29.78 77 L 29.78 27" fill="none" stroke="green" stroke-width="2.5" stroke-miterlimit="0.01"/><path d="M 35.33 77 L 35.33 27" fill="none" stroke="green" stroke-width="2.5" stroke-miterlimit="0.01"/><path d="M 35.33 39.5 L 52 39.5 L 52 2" fill="none" stroke="green" stroke-width="2.5" stroke-miterlimit="0.01"/><path d="M 52 102 L 52 64.5 L 35.33 64.5" fill="none" stroke="green" stroke-width="2.5" stroke-miterlimit="0.01"/><path d="M 2 52 L 18.67 52" fill="none" stroke="green" stroke-width="2.5" stroke-miterlimit="0.01"/><ellipse cx="24.02" cy="51.11" rx="5.357142857142858" ry="5.357142857142858" fill="none" stroke="green" stroke-width="2.5"/></g></svg>'
+            d.id = id;
+            d.className = 'component';
+            d.midterminal = 1;
+            d.outterminal = 0;
+            d.voltage = 0;
+            d.outvoltage = 0;
+            container.insertAdjacentElement("afterbegin", d);
+            instance.draggable(id, { "containment": true });
+
+
+            list_pmos.push(d);
+            addinstancepmos(id);
+
+
+
+        }
+        function jnmos() {
+            var person;
+
+            var id = "nmos" + count2;
+
+
+            var d = document.createElement('div');
+            d.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="svg-component" height="100" width="100" viewBox="0 0 100 100"><g><path d="M 29.78 77 L 29.78 27" fill="none" stroke="green" stroke-width="2.5" stroke-miterlimit="0.01"/><path d="M 35.33 77 L 35.33 27" fill="none" stroke="green" stroke-width="2.5" stroke-miterlimit="0.01"/><path d="M 35.33 39.5 L 52 39.5 L 52 2" fill="none" stroke="green" stroke-width="2.5" stroke-miterlimit="0.01"/><path d="M 52 102 L 52 64.5 L 35.33 64.5" fill="none" stroke="green" stroke-width="2.5" stroke-miterlimit="0.01"/><path d="M 2 52 L 18.67 52" fill="none" stroke="green" stroke-width="2.5" stroke-miterlimit="0.01"/><ellipse cx="24.02" cy="51.11" rx="5.357142857142858" ry="5.357142857142858" fill="none" stroke="green" stroke-width="2.5"/></g></svg>'
+            d.id = id;
+            d.className = 'component';
+            d.voltage = 0;
+            d.midterminal = 1;
+            d.outterminal = 1;
+            d.outvoltage = 0;
+            count2 = count2 + 1;
+            var container = document.getElementById("diagram");
+
+
+
+            container.insertAdjacentElement("afterbegin", d);
+
+            instance.draggable(id, { "containment": true });
+            list_nmos.push(d);
+
+            addinstancenmos(id);
+
+
+        }
+        function jvdd() {
+            var person;
+
+            var id = "vdd" + count3;
+
+            var d = document.createElement('div');
+            d.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="svg-component" height="100" width="100" viewBox="0 0 100 100"><g><path d="M 29.78 77 L 29.78 27" fill="none" stroke="green" stroke-width="2.5" stroke-miterlimit="0.01"/><path d="M 35.33 77 L 35.33 27" fill="none" stroke="green" stroke-width="2.5" stroke-miterlimit="0.01"/><path d="M 35.33 39.5 L 52 39.5 L 52 2" fill="none" stroke="green" stroke-width="2.5" stroke-miterlimit="0.01"/><path d="M 52 102 L 52 64.5 L 35.33 64.5" fill="none" stroke="green" stroke-width="2.5" stroke-miterlimit="0.01"/><path d="M 2 52 L 18.67 52" fill="none" stroke="green" stroke-width="2.5" stroke-miterlimit="0.01"/><ellipse cx="24.02" cy="51.11" rx="5.357142857142858" ry="5.357142857142858" fill="none" stroke="green" stroke-width="2.5"/></g></svg>'
+            d.id = id;
+            d.className = 'component';
+            d.voltage = 34;
+            count3 = count3 + 1;
+            var container = document.getElementById("diagram");
+
+
+            container.insertAdjacentElement("afterbegin", d);
+
+            instance.draggable(id, { "containment": true });
+            list_vdd.push(d);
+
+            addinstancevdd(id);
+
+
+        }
+
+        function jground() {
+            var person;
+
+            var id = "ground" + count4;
+
+
+
+
+            var container = document.getElementById("diagram");
+
+            var d = document.createElement('div');
+            d.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="svg-component" height="100" width="100" viewBox="0 0 100 100"><g><path d="M 31 1 L 31 31 L 1 31 L 61 31" fill="none" stroke="green" stroke-width="2.5" stroke-miterlimit="0.01"/><path d="M 11 41 L 51 41" fill="none" stroke="green" stroke-width="2.5" stroke-miterlimit="0.01"/><path d="M 21 51 L 41 51" fill="none" stroke="green" stroke-width="2.5" stroke-miterlimit="0.01"/></g></svg>'
+            d.id = id;
+            d.className = 'component';
+            d.voltage = -34;
+            count4 = count4 + 1;
+
+
+
+
+            container.insertAdjacentElement("afterbegin", d);
+
+            instance.draggable(id, { "containment": true });
+            list_ground.push(d);
+
+            addinstanceground(id);
+            console.log(id)
+
+
+        }
+
+        function jinput() {
+            var person;
+
+            var id = "input" + count5;
+
+
+            var d = document.createElement('div');
+            d.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="svg-component" height="100" width="100" viewBox="0 0 100 100"><g><path d="M 1 31 L 1 1 L 61 1 L 41 31" fill="none" stroke="green" stroke-width="2.5" stroke-miterlimit="0.01"/><path d="M 1 31 L 41 31" fill="none" stroke="green" stroke-width="2.5" stroke-miterlimit="0.01"/></g></svg>'
+            d.id = id;
+            d.className = 'component';
+            d.input = 1;
+            d.voltage = 5;
+            count5 = count5 + 1;
+            var container = document.getElementById("diagram");
+
+
+            container.insertAdjacentElement("afterbegin", d);
+
+            instance.draggable(id, { "containment": true });
+            list_input.push(d);
+
+            addinstanceinput(id);
+
+        }
+
+        function joutput() {
+            var person;
+
+            var id = "output" + count6;
+            var d = document.createElement('div');
+            d.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="svg-component" height="100" width="100" viewBox="0 0 100 100"><g><path d="M 61 31 L 61 1 L 1 1 L 21 31" fill="none" stroke="green" stroke-width="2.5" stroke-miterlimit="0.01"/><path d="M 61 31 L 21 31" fill="none" stroke="green" stroke-width="2.5" stroke-miterlimit="0.01"/></g></svg>'
+            d.id = id;
+            d.className = 'component';
+            d.outputsign = 1;
+            d.voltage = 0;
+
+
+            count6 = count6 + 1;
+            var container = document.getElementById("diagram");
+
+
+            container.insertAdjacentElement("afterbegin", d);
+
+            instance.draggable(id, { "containment": true });
+            list_ouput.push(d);
+           
+            addinstanceoutput(id);
+           
+
+        }
+        function checkandupdate(){
+            for(i=0;i<list_vdd.length;i++)
+            {
+                for(j=0;j<list_pmos.length;j++)
+                {
+                    if(jsmap.has(list_vdd[i].id) && jsmap.get(list_vdd[i].id) == list_pmos[j].id)
+                    {
+                         list_pmos[j].voltage = 34;
+
+                    }
+                }
+               
+            }
+            for(i=0;i<list_ground.length;i++)
+            {
+                for(j=0;j<list_pmos.length;j++)
+                {
+                    if(jsmap.has(list_ground[i].id) && jsmap.get(list_ground[i].id) == list_pmos[j].id)
+                    {
+                         list_pmos[j].voltage = -34;
+                         
+                    }
+                }
+               
+            }
+            for(i=0;i<list_vdd.length;i++)
+            {
+                for(j=0;j<list_nmos.length;j++)
+                {
+                    if(jsmap.has(list_vdd[i].id) && jsmap.get(list_vdd[i].id) == list_nmos[j].id)
+                    {
+                         list_nmos[j].voltage = 34;
+
+                    }
+                }
+               
+            }
+            for(i=0;i<list_ground.length;i++)
+            {
+                for(j=0;j<list_nmos.length;j++)
+                {
+                    if(jsmap.has(list_ground[i].id) && jsmap.get(list_ground[i].id) == list_nmos[j].id)
+                    {
+                         list_nmos[j].voltage = -34;
+                         
+                    }
+                }
+               
+            }
+            for(i=0;i<list_input.length;i++)
+            {
+                for(j=0;j<list_nmos.length;j++)
+                {
+                    if(jsmap.has(list_input[i].id) && jsmap.get(list_input[i].id) == list_nmos[j].id)
+                    {
+                         
+                         if(list_nmos[j].voltage < 0)
+                         {
+                             list_nmos[j].outvoltage = -5;
+                         }
+                         else
+                         {
+                            list_nmos[j].outvoltage = 5;
+                         }
+                         
+                    }
+                }
+               
+            }
+            for(i=0;i<list_nmos.length;i++)
+            {
+                for(j=0;j<list_ouput.length;j++)
+                {
+                    if(jsmap.has(list_nmos[i].id) && jsmap.get(list_nmos[i].id) == list_ouput[j].id)
+                    {
+                         
+                         if(list_nmos[i].outterminal == 1)
+                         {
+                             list_ouput[j].voltage = list_nmos[i].outvoltage;
+                             console.log("hurray");
+                         }
+                        
+                    }
+                }
+               
+            }
+            
+            
+        }
+        function check1()
+        {
+            for(i=0;i<list_ouput.length;i++)
+            {
+                 console.log(list_ouput[i].voltage);
+            }
+        }
+
+
+
+    </script>
+    <button onclick = "checkandupdate()">Check</button>
+    <button onclick = "check1()">Check1</button>
 </body>
+
 </html>
