@@ -7,6 +7,12 @@ body {
   color: red;
 }
 
+#sim-img {
+  height: 100%;
+  overflow-x: auto;
+  display: hidden;
+}
+
 .v-button:hover {
   background-color: aliceblue;
 }
@@ -24,6 +30,15 @@ body {
   border: 2px solid green;
   position: relative;
   background-color: #f1f1f1;
+}
+
+.text-success {
+  text-align: center;
+  color: green;
+}
+.text-danger {
+  text-align: center;
+  color: red;
 }
 
 #diagram .component {
@@ -83,7 +98,7 @@ body {
   background-color: rgb(225, 238, 225);
   border-radius: 6px;
   /* cursor:not-allowed; */
-  pointer-events: none;
+  /* pointer-events: none; */
 }
 
 .toolbar-component:hover {

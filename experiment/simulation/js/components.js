@@ -1,6 +1,6 @@
 
 var instance = jsPlumb.getInstance({
-    
+
     container: diagram,
     maxConnections: -1,
     endpoint: {
@@ -13,7 +13,7 @@ var instance = jsPlumb.getInstance({
     },
     connector: "Flowchart",
     paintStyle: { strokeWidth: 3, stroke: "#456" },
-    connectionsDetachable: false,
+    connectionsDetachable: true,
 });
 instance.bind("ready", function () {
     instance.registerConnectionTypes({
@@ -24,16 +24,33 @@ instance.bind("ready", function () {
         }
     });
 });
-instance.bind("connection", function (ci) {
-    var s = ci.sourceId, t = ci.targetId;
-    jsmap.set(s, t)
 
+
+instance.bind("connection", function (ci) {
+    let con = instance.getAllConnections();
+    jsmap.clear();
+    for (i = 0; i < con.length; i++) {
+        var s = con[i].sourceId, t = con[i].targetId;
+        let r = s.concat("$",t);
+        jsmap.set(r, t)
+        
+    }
 });
-/*instance.bind("dblclick", function (ci) {
+instance.bind("dblclick", function (ci) {
    
     instance.deleteConnection(ci);
+    let con = instance.getAllConnections();
+    jsmap.clear();
+    for (i = 0; i < con.length; i++) {
+        var s = con[i].sourceId, t = con[i].targetId;
+        let r = s.concat("$",t);
+        jsmap.set(r, t)
+        
+    }
+    console.log(jsmap)
+
 });
-instance.bind("click", function (conn) {
+/*instance.bind("click", function (conn) {
 
     instance.remove(conn);
 });*/
@@ -98,7 +115,7 @@ function addinstancenmos(id) {
     instance.addEndpoint(id, {
         endpoint: ["Dot", { radius: 5 }],
         anchor: ["Top"],
-       // isTarget: true,
+        // isTarget: true,
         isSource: true,
         maxConnections: -1,
         connectionType: "red-connection"
@@ -111,7 +128,7 @@ function addinstancevdd(id) {
         endpoint: ["Dot", { radius: 5 }],
         anchor: ["Bottom"],
         isSource: true,
-       // isSource: true,
+        // isSource: true,
         maxConnections: -1,
         connectionType: "red-connection"
     });
@@ -140,12 +157,29 @@ function addinstanceinput(id) {
         connectionType: "red-connection"
     });
 }
-
+function addinstanceinverter(id) {
+    instance.addEndpoint(id, {
+        endpoint: ["Dot", { radius: 5 }],
+        anchor: ["Right"],
+        isSource: true,
+        // isSource: true,
+        maxConnections: -1,
+        connectionType: "red-connection"
+    });
+    instance.addEndpoint(id, {
+        endpoint: ["Dot", { radius: 5 }],
+        anchor: ["Left"],
+        isTarget: true ,
+        // isSource: true,
+        maxConnections: -1,
+        connectionType: "red-connection"
+    });
+}
 function addinstanceoutput(id) {
     instance.addEndpoint(id, {
         endpoint: ["Dot", { radius: 5 }],
         anchor: ["Left"],
-       // isSource: true,
+        // isSource: true,
         isTarget: true,
         maxConnections: -1,
         connectionType: "red-connection"
