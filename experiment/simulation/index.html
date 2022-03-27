@@ -9,88 +9,60 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/virtual-labs/virtual-style@0.0.7-b/css/style.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jsPlumb/2.15.6/js/jsplumb.min.js"></script>
     <link rel="stylesheet" href="./css/main.css">
-    <link rel="manifest" href="manifest.json">
 </head>
 
 <body>
-    <form action="">
-        <div class="columns mt-2 is-variable is-1 is-centered is-flex is-flex-wrap-wrap">
-            <div class="column is-3-tablet is-8-mobile center-content">
-                <div class="control">
-                    <label class="v-radio">
-                        <input type="radio" class="v-radio-input-large" name="exp-type" checked value = 0/>
-                        Complementary CMOS Logic
-                    </label>
-                </div>
-            </div>
-            <div class="column is-3-tablet is-8-mobile center-content">
-                <div class="control">
-                    <label class="v-radio">
-                        <input type="radio" class="v-radio-input" name="exp-type" value = 1/>
-                        Pseudo NMOS logic
-                    </label>
-                </div>
-            </div>
-            <!-- <div class="column is-3-tablet is-8-mobile center-content">
-                <div class="control">
-                    <button class="v-button has-background-link" type="submit">Select</button>
-                </div>
-            </div> -->
-        </div>
-    </form>
-    <hr>
     <div class="columns mt-2 is-variable is-1 is-centered is-flex is-flex-wrap-wrap">
+        <div class="v-tabs">
+            <ul>
+                <li class="is-active">
+                    <a>
+                        <span>Complementary CMOS</span>
+                    </a>
+                </li>
+                <li>
+                    <a>
+                        <span>Pseudo NMOS</span>
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+
+    <div class="columns is-centered is-flex my-0">
+        <div class="column is-6-desktop is-10-tablet is-10-mobile">
+            <div class="instruction-box">
+                <button id="instruction-bar" onclick="expand_instructions()" class="collapsible"> Instructions </button>
+                <div id="content-box" class="content">
+                  <ul style="list-style: disc;">
+                    <li>Click or tap on an element in the tool bar to place it in the workspace</li>
+                    <li>Double click on a wire to delete it</li>
+                    <li>Double click on input element to change it's value</li>
+                    <li>If you did anything wrong click on reset button</li>
+                    <li>Select the appropriate tab and click on validate after completion of circuit</li>
+                  </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="columns is-variable is-1 is-centered is-flex is-flex-wrap-wrap my-0">
         <div id="start" class="column is-2-desktop is-2-tablet is-3-mobile my-2 center-content">
-            <button class="v-button has-background-success" onclick="cmosvalid()">Validate</button>
+            <button class="v-button" onclick="cmosvalid()">Validate</button>
         </div>
         <div id="restart" class="column is-2-desktop is-2-tablet is-3-mobile my-2 center-content">
-            <button class="v-button has-background-warning-dark" onclick="refresh()">Reset</button>
+            <button class="v-button" onclick="refresh()">Reset</button>
         </div>
     </div>
 
-    <form id="myForm">
-        <div class="columns mt-2 is-variable is-1 is-centered is-flex is-flex-wrap-wrap">
-            <div class="column is-3-tablet is-5-mobile center-content">
-                <div class="control">
-                    <label class="v-radio">
-                        <input type="radio" class="v-radio-input-large" checked name="inp1-type" value = "0" />
-                        0 (Input 1)
-                    </label>
-                </div>
-            </div>
-            <div class="column is-3-tablet is-5-mobile center-content">
-                <div class="control">
-                    <label class="v-radio">
-                        <input type="radio" class="v-radio-input" name="inp1-type" value = "1"/>
-                        1 (Input 1)
-                    </label>
-                </div>
-            </div>
-        </div>
-    </form>
-
-    <div class="columns is-centered is-flex" >
-        <div class="column mt-2 is-4-desktop is-10-tablet is-10-mobile has-text-centered">
-            <div class="v-instruction-container">
-                <div class="v-instruction-title">Instructions</div>
-              
-                <div id="success-message" class="v-instruction-text">
-
-                </div>
-                <div id="error-message" class="v-instruction-text">
-
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="columns mt-2 is-variable is-1 is-centered is-flex is-flex-wrap-wrap">
+    <div class="columns is-variable is-1 is-centered is-flex is-flex-wrap-wrap">
         <div class="column is-2-desktop is-3-tablet is-2-mobile my-2 center-content">
-            <div class="toolbar">
-                <div class="toolbar-title is-size-5 v-bold has-text-centered">
+            <div class="v-datalist-container">
+                <div class="v-datalist-title">
                     ToolBar
                 </div>
-                <div class="toolbar-item-list">
+                <div class="v-datalist-row toolbar-item-list">
                     <div class="toolbar-component" onclick="jpmos()">
                         <div class="each-toolbar-component has-text-centered">
                             <svg class="svg-component" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
@@ -187,29 +159,53 @@
                             Output
                         </div>
                     </div>
-                   
                 </div>
             </div>
         </div>
-        <div class="column is-7-desktop is-9-tablet is-10-mobile my-2 center-content workspace">
+
+        <div class="column is-7-desktop is-9-tablet is-10-mobile my-2 center-content">
             <div class="is-flex is-flex-wrap-wrap center-content simulation-container" id="diagram">
             </div>
         </div>
-        <div class="column is-3-desktop is-6-tablet is-6-mobile my-2 center-content graph">
-            <div class="toolbar">
-                <div class="toolbar-title is-size-5 v-bold has-text-centered">
+
+        <div class="column is-3-desktop is-8-tablet is-8-mobile my-2 center-content">
+            <div class="v-datalist-container">
+                <div class="v-datalist-title">
                     Observation
                 </div>
-                <div id="output-box">
-
+                <div class="v-datalist-row" id="obs-table">
+                    <div class="v-table-wrap">
+						<table class="table is-bordered is-fullwidth">
+							<thead id="table-head">
+								<tr>
+									<th colspan="1">Inputs</th>
+									<th colspan="1">Expected Values</th>
+									<th colspan="1">Observed Values</th>
+								</tr>
+								<tr>
+									<th>Input 1</th>
+									<!-- <th>Input 2</th> -->
+									<th>Output</th>
+									<th>Output</th>
+								</tr>
+							</thead>
+							<tbody id="table-body">
+							</tbody>
+						</table>
+					</div>
+					<div id="result"></div>
                 </div>
-                
+                <div id = "output-box">
+                   
+                </div>
             </div>
         </div>
     </div>
 
     <script>
+        //Creating js map to store connections
         const jsmap = new Map();
+        // these arrays are used to store various components
         var list_pmos = [];
         var list_nmos = [];
         var list_input = [];
@@ -217,32 +213,57 @@
         var list_ground = [];
         var list_vdd = [];
         var list_inverter = [];
-
-
-        
+        // Disable right click 
         var container = document.getElementById("diagram");
         container.addEventListener("contextmenu", function (e) {
             e.preventDefault();
-
-
         });
+
         var pmos_nand = 0;
         var nmos_nand = 0;
+        // Tab selection
+        var selected_tab = 0
+        const tabs = document.querySelectorAll('.v-tabs li');
 
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                tabs.forEach(item => item.classList.remove('is-active'));
+                tab.classList.add('is-active');
 
+                var parent = tab.parentNode;
+                selected_tab = Array.prototype.indexOf.call(parent.children, tab);
+            })
+        })
+
+        function expand_instructions()
+        {
+            a = document.getElementById("instruction-bar")
+            b = document.getElementById("content-box")
+            if(a.classList.contains("active")){
+                a.classList.remove("active")
+                b.classList.remove("content-box-height")
+            }
+            else{
+                a.classList.add("active")
+                b.classList.remove("content")
+                b.classList.add("content-box-height")
+                b.classList.add("content")
+            }
+        }
 
     </script>
+
     <script src="js/components.js"></script>
     <script src="js/integrate.js"></script>
-    <script src = "js/circuit.js"></script>
-    <script src = "js/nand.js"></script>
-    
+    <script src="js/circuit.js"></script>
+    <script src="js/nand.js"></script>
 
-    <button onclick="checkandupdate()">Check</button>
-    <button onclick="check1()">Check1</button>
-    <button onclick="changeoutput()">Input</button>
-    <button onclick="pseudonmos()">Pesudonmos</button>
+    <!-- <button onclick="changeoutput()">Input</button> -->
+
+    <script>
+        jfinput0()
+        jfoutput()
+    </script>
 
 </body>
-
 </html>
