@@ -1,5 +1,10 @@
-
 function jpmos() {
+    comp_count1 -= 1
+    if(comp_count1 < 0){
+        document.getElementById('error-container').style.display='flex'
+        window.setTimeout("document.getElementById('error-container').style='display:none !important;';", 5000)
+        return
+    }
     
     //  keep tracking count
     var id = "pmos" + count1;
@@ -34,6 +39,13 @@ function jpmos() {
 }
 
 function jnmos() {
+    comp_count2 -= 1
+    if(comp_count2 < 0){
+        document.getElementById('error-container').style.display='flex'
+        window.setTimeout("document.getElementById('error-container').style='display:none !important;';", 5000)
+        return
+    }
+
     var person;
 
     var id = "nmos" + count2;
@@ -68,6 +80,13 @@ function jnmos() {
 
 }
 function jvdd() {
+    comp_count3 -= 1
+    if(comp_count3 < 0){
+        document.getElementById('error-container').style.display='flex'
+        window.setTimeout("document.getElementById('error-container').style='display:none !important;';", 5000)
+        return
+    }
+
     var person;
 
     var id = "vdd" + count3;
@@ -97,12 +116,15 @@ function jvdd() {
 }
 
 function jground() {
-   
+
+    comp_count4 -= 1
+    if(comp_count4 < 0){
+        document.getElementById('error-container').style.display='flex'
+        window.setTimeout("document.getElementById('error-container').style='display:none !important;';", 5000)
+        return
+    }
 
     var id = "ground" + count4;
-
-
-
 
     var container = document.getElementById("diagram");
 
@@ -117,8 +139,6 @@ function jground() {
     d1.id = id;
     d1.voltage = 0;
 
-
-
     container.insertAdjacentElement("afterbegin", d);
 
     instance.draggable(id, { "containment": true });
@@ -126,237 +146,6 @@ function jground() {
 
     addinstanceground(id);
     
-
-
-}
-
-// function jinput() {
-//     var person;
-
-//     var id = "input" + count5;
-
-
-//     var d = document.createElement('div');
-//     d.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="svg-component" height="100" width="100" viewBox="0 0 100 100"><g><path d="M 1 31 L 1 1 L 61 1 L 41 31" fill="none" stroke="green" stroke-width="2.5" stroke-miterlimit="0.01"/><path d="M 1 31 L 41 31" fill="none" stroke="green" stroke-width="2.5" stroke-miterlimit="0.01"/></g></svg>'
-//     d.id = id;
-//     d.className = 'component';
-//     d.input = 0;
-//     d.voltage = 5;
-//     count5 = count5 + 1;
-//     var container = document.getElementById("diagram");
-    
-//     let d1 = new Object();
-//     d1.id = id;
-//     d1.input = 1;
-//     d1.voltage = 5;
-
-//     container.insertAdjacentElement("afterbegin", d);
-
-//     instance.draggable(id, { "containment": true });
-//     list_input.push(d1);
-
-//     addinstanceinput(id);
-
-// }
-
-// function joutput() {
-//     var person;
-
-//     var id = "output" + count6;
-//     var d = document.createElement('div');
-//     d.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="svg-component" height="100" width="100" viewBox="0 0 100 100"><g><path d="M 61 31 L 61 1 L 1 1 L 21 31" fill="none" stroke="green" stroke-width="2.5" stroke-miterlimit="0.01"/><path d="M 61 31 L 21 31" fill="none" stroke="green" stroke-width="2.5" stroke-miterlimit="0.01"/></g></svg>'
-//     d.id = id;
-//     d.className = 'component';
-//     d.outputsign = 1;
-//     d.voltage = 0;
-
-//     let d1 = new Object();
-//     d1.id = id;
-//     d1.voltage = 0;
-//     d1.outputsign = 1;
-
-//     count6 = count6 + 1;
-//     var container = document.getElementById("diagram");
-
-
-//     container.insertAdjacentElement("afterbegin", d);
-
-//     instance.draggable(id, { "containment": true });
-//     list_ouput.push(d1);
-
-//     addinstanceoutput(id);
-
-
-// }
-function jinverter() {
-    
-    var id = "inverter" + count7;
-    var d = document.createElement('div');
-    d.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="svg-component" height="100" width="100" viewBox="0 0 100 100"><g><path d="M 31 81 L 71 41 L 31 1 L 31 81" fill="none" stroke="green" stroke-width="2.5" stroke-miterlimit="0.01" pointer-events="stroke"/><path d="M 1 41 L 31 41" fill="none" stroke="green" stroke-width="2.5" stroke-miterlimit="0.01" pointer-events="stroke"/><ellipse cx="81" cy="41" rx="10" ry="10" fill="none" stroke="green" stroke-width="2.5" pointer-events="all"/><path d="M 91 41 L 111 41" fill="none" stroke="green" stroke-width="2.5" stroke-miterlimit="0.01" pointer-events="stroke"/></g></svg>'
-    d.id = id;
-    d.className = 'component';
-    d.outputsign = 1;
-    d.voltage = 0;
-
-    let d1 = new Object();
-    d1.id = id;
-    d1.voltage = 0;
-    d1.outputsign = 1;
-
-    count7 = count7 + 1;
-    var container = document.getElementById("diagram");
-
-
-    container.insertAdjacentElement("afterbegin", d);
-
-    instance.draggable(id, { "containment": true });
-    list_inverter.push(d1);
-
-    addinstanceinverter(id);
-
-
-}
-
-function jmux() {
-    
-    var id = "mux" + count8;
-    var d = document.createElement('div');
-    d.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="svg-component" height="100" width="100" viewBox="0 0 100 100"><g><path d="M 1 41 L 1 1 L 21 21 L 41 1 L 41 41" fill="none" stroke="green" stroke-width="2.5" stroke-miterlimit="0.01" pointer-events="stroke"/></g></svg>'
-    d.id = id;
-    d.className = 'component';
-    d.outputsign = 1;
-    d.voltage = 0;
-
-    let d1 = new Object();
-    d1.id = id;
-    d1.voltage = 0;
-    d1.outputsign = 1;
-
-    count8 = count8 + 1;
-    var container = document.getElementById("diagram");
-
-
-    container.insertAdjacentElement("afterbegin", d);
-
-    instance.draggable(id, { "containment": true });
-    list_inverter.push(d1);
-
-    addinstancemux(id);
-
-
-}
-
-function jlatch() {
-    
-    var id = "latch" + count9;
-    var d = document.createElement('div');
-    d.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="svg-component" height="100" width="100" viewBox="0 0 100 100"><g><path d="M 41 41 L 1 41 L 1 1" fill="none" stroke="green" stroke-width="2.5" stroke-miterlimit="0.01" pointer-events="stroke"/></g></svg>'
-    d.id = id;
-    d.className = 'component';
-   
-
-    let d1 = new Object();
-    d1.id = id;
-    d1.voltage = 0;
-    d1.outputsign = 1;
-
-    count9 = count9 + 1;
-    var container = document.getElementById("diagram");
-
-
-    container.insertAdjacentElement("afterbegin", d);
-
-    instance.draggable(id, { "containment": true });
-    list_inverter.push(d1);
-
-    addinstancelatch(id);
-
-
-}
-
-function jtransistor() {
-    
-    var id = "pt" + count10;
-    var d = document.createElement('div');
-    d.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="svg-component" height="100" width="100" viewBox="0 0 100 100"><g><path d="M 1 81 L 1 1 L 41 21 L 1 41" fill="none" stroke="green" stroke-width="2.5" stroke-miterlimit="0.01" pointer-events="stroke"/></g></svg>'
-    d.id = id;
-    d.className = 'component';
-  
-    let d1 = new Object();
-    d1.id = id;
-    d1.voltage = 0;
-    d1.outputsign = 1;
-
-    count10 = count10 + 1;
-    var container = document.getElementById("diagram");
-
-
-    container.insertAdjacentElement("afterbegin", d);
-
-    instance.draggable(id, { "containment": true });
-    list_inverter.push(d1);
-
-    addinstancetransistor(id);
-
-
-}
-function jclock() {
-    
-    var id = "clock" + count11;
-    var d = document.createElement('div');
-    //d.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="svg-component" height="100" width="100" viewBox="0 0 100 100"><g><path d="M 1 81 L 1 1 L 41 21 L 1 41" fill="none" stroke="green" stroke-width="2.5" stroke-miterlimit="0.01" pointer-events="stroke"/></g></svg>'
-    d.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="svg-component" height="100" width="100" viewBox="0 0 100 100"><g><path d="M 1 31 L 1 1 L 61 1 L 41 31" fill="none" stroke="green" stroke-width="2.5" stroke-miterlimit="0.01"/><path d="M 1 31 L 41 31" fill="none" stroke="green" stroke-width="2.5" stroke-miterlimit="0.01"/></g></svg>'
-    d.id = id;
-    d.className = 'component';
-    d.outputsign = 1;
-    d.voltage = 0;
-
-    let d1 = new Object();
-    d1.id = id;
-    d1.voltage = 0;
-    d1.outputsign = 1;
-
-    count11 = count11 + 1;
-    var container = document.getElementById("diagram");
-
-
-    container.insertAdjacentElement("afterbegin", d);
-
-    instance.draggable(id, { "containment": true });
-    list_inverter.push(d1);
-
-    addinstanceclock(id);
-
-
-}
-function jclockbar() {
-    
-    var id = "clockbar" + count12;
-    var d = document.createElement('div');
-    d.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="svg-component" height="100" width="100" viewBox="0 0 100 100"><g><path d="M 1 31 L 1 1 L 61 1 L 41 31" fill="none" stroke="green" stroke-width="2.5" stroke-miterlimit="0.01"/><path d="M 1 31 L 41 31" fill="none" stroke="green" stroke-width="2.5" stroke-miterlimit="0.01"/></g></svg>'
-    //d.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="svg-component" height="100" width="100" viewBox="0 0 100 100"><g><path d="M 1 81 L 1 1 L 41 21 L 1 41" fill="none" stroke="green" stroke-width="2.5" stroke-miterlimit="0.01" pointer-events="stroke"/></g></svg>'
-    d.id = id;
-    d.className = 'component';
-    d.outputsign = 1;
-    d.voltage = 0;
-
-    let d1 = new Object();
-    d1.id = id;
-    d1.voltage = 0;
-    d1.outputsign = 1;
-
-    count12 = count12 + 1;
-    var container = document.getElementById("diagram");
-
-
-    container.insertAdjacentElement("afterbegin", d);
-
-    instance.draggable(id, { "containment": true });
-    list_inverter.push(d1);
-
-    addinstanceclockbar(id);
-
-
 }
 
 function jfinput0() {

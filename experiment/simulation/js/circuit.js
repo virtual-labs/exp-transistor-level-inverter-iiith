@@ -181,17 +181,58 @@ function checkandupdate() {
 
 }*/
 
+function permutator(inputArr) {
+    var results = [];
+
+    function permute(arr, memo) {
+        var cur, memo = memo || [];
+
+        for (var i = 0; i < arr.length; i++) {
+            cur = arr.splice(i, 1);
+            if (arr.length === 0) {
+                results.push(memo.concat(cur));
+            }
+            permute(arr.slice(), memo.concat(cur));
+            arr.splice(i, 0, cur[0]);
+        }
+
+        return results;
+    }
+
+    return permute(inputArr);
+}
+
+function check_pseudo_nmos() {
+    x = permutator([0, 1])
+    // console.log(x)
+    ps_nmos_circuit_valid = 0
+    for (let i = 0; i < x.length; i++) {
+        if (jsmap.has("vdd0$pmos0") && jsmap.has("ground" + x[i][0] + "$pmos0") && jsmap.has("pmos0$output0") && jsmap.has("input0$nmos0") && jsmap.has("nmos0$output0") && jsmap.has("ground" + x[i][1] + "$nmos0")) {
+            ps_nmos_circuit_valid = 1
+            break
+        }
+    }
+    return ps_nmos_circuit_valid
+}
+
 function circuitvalid() {
+    ps_nmos_circuit_valid = check_pseudo_nmos()
     // check if correct nand gate is made using correct components
-    if (jsmap.has("vdd0$pmos0") && jsmap.has("input0$pmos0") && jsmap.has("pmos0$output0") && jsmap.has("input0$nmos0") && jsmap.has("nmos0$output0") && jsmap.has("ground0$nmos0")) {
-        document.getElementById("output-box").innerHTML = "  output is "
-        document.getElementById("output-box").innerHTML += list_ouput[0].voltage
+    if (selected_tab == 0 && jsmap.has("vdd0$pmos0") && jsmap.has("input0$pmos0") && jsmap.has("pmos0$output0") && jsmap.has("input0$nmos0") && jsmap.has("nmos0$output0") && jsmap.has("ground0$nmos0")) {
+        document.getElementById("output-box").innerHTML = "&#10004; Circuit is correct"
+        // document.getElementById("output-box").innerHTML += list_ouput[0].voltage
+        document.getElementById("output-box").classList.remove('text-danger')
+        document.getElementById("output-box").classList.add('text-success')
+    }
+    else if (selected_tab == 1 && ps_nmos_circuit_valid) {
+        document.getElementById("output-box").innerHTML = "&#10004; Circuit is correct"
+        // document.getElementById("output-box").innerHTML += list_ouput[0].voltage
         document.getElementById("output-box").classList.remove('text-danger')
         document.getElementById("output-box").classList.add('text-success')
     }
     else {
-        document.getElementById("output-box").innerHTML = " output is "
-        document.getElementById("output-box").innerHTML += list_ouput[0].voltage
+        document.getElementById("output-box").innerHTML = "&#10060; Circuit is incorrect"
+        // document.getElementById("output-box").innerHTML += list_ouput[0].voltage
         document.getElementById("output-box").classList.remove('text-success')
         document.getElementById("output-box").classList.add('text-danger')
     }
@@ -199,16 +240,23 @@ function circuitvalid() {
 
 function get_truth_value() {
     x = list_ouput[0].voltage
-    if (x == 5)
+    k = document.getElementById("input0")
+    ps_nmos_circuit_valid = check_pseudo_nmos()
+    if(list_input[0].input == 0 && ps_nmos_circuit_valid)
     {
         return "1"
     }
-    else if(x == -5)
+    else if(list_input[0].input == 1 && ps_nmos_circuit_valid)
     {
         return "0"
     }
-    else
-    {
+    else if (x == 5) {
+        return "1"
+    }
+    else if (x == -5) {
+        return "0"
+    }
+    else {
         return "-"
     }
 }
