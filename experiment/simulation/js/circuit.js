@@ -240,17 +240,7 @@ function circuitvalid() {
 
 function get_truth_value() {
     x = list_ouput[0].voltage
-    k = document.getElementById("input0")
-    ps_nmos_circuit_valid = check_pseudo_nmos()
-    if(list_input[0].input == 0 && ps_nmos_circuit_valid)
-    {
-        return "1"
-    }
-    else if(list_input[0].input == 1 && ps_nmos_circuit_valid)
-    {
-        return "0"
-    }
-    else if (x == 5) {
+    if (x == 5) {
         return "1"
     }
     else if (x == -5) {
