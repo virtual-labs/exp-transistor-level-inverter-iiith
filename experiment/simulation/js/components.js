@@ -68,7 +68,7 @@ let count12 = 0;
 let comp_count1 = 1
 let comp_count2 = 1
 let comp_count3 = 1
-let comp_count4 = 1
+let comp_count4 = 2
 
 function addinstancepmos(id) {
     addinstance(id, "Bottom", -1, true)
