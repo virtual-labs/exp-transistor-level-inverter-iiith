@@ -49,18 +49,10 @@
 
 	<div class="columns is-variable is-1 is-centered is-flex is-flex-wrap-wrap">
 		<div id="start" class="column is-2-desktop is-2-tablet is-3-mobile center-content">
-			<button class="v-button" onclick="cmosvalid()">Validate</button>
+			<button class="v-button" onclick="notvalid()">Validate</button>
 		</div>
 		<div id="restart" class="column is-2-desktop is-2-tablet is-3-mobile center-content">
 			<button class="v-button" onclick="location.reload()">Reset</button>
-		</div>
-	</div>
-
-	<div id="error-container" class="columns is-centered is-flex" style="display:none !important;">
-		<div class="column is-6-desktop is-10-tablet is-10-mobile">
-			<div class="text-danger">
-				Required no.of components of this type are already present in the workspace
-			</div>
 		</div>
 	</div>
 
@@ -169,6 +161,9 @@
 					</div>
 					<div id="result"></div>
 				</div>
+				<div class="v-datalist-row text-danger" id="error-container" style="display:none !important;">
+                    Required no.of components of this type are already present in the workspace
+                </div>
 				<div id="output-box">
 
 				</div>
@@ -214,7 +209,7 @@
 	<script src="js/components.js"></script>
 	<script src="js/integrate.js"></script>
 	<script src="js/circuit.js"></script>
-	<script src="js/nand.js"></script>
+	<script src="js/not.js"></script>
 
 	<script>
 		jfinput0()

@@ -2,7 +2,6 @@ function jpmos() {
 	comp_count1 -= 1
 	if (comp_count1 < 0) {
 		document.getElementById('error-container').style.display = 'flex'
-		window.setTimeout("document.getElementById('error-container').style='display:none !important;';", 5000)
 		return
 	}
 
@@ -42,7 +41,6 @@ function jnmos() {
 	comp_count2 -= 1
 	if (comp_count2 < 0) {
 		document.getElementById('error-container').style.display = 'flex'
-		window.setTimeout("document.getElementById('error-container').style='display:none !important;';", 5000)
 		return
 	}
 
@@ -81,7 +79,6 @@ function jvdd() {
 	comp_count3 -= 1
 	if (comp_count3 < 0) {
 		document.getElementById('error-container').style.display = 'flex'
-		window.setTimeout("document.getElementById('error-container').style='display:none !important;';", 5000)
 		return
 	}
 
@@ -116,7 +113,6 @@ function jground() {
 	comp_count4 -= 1
 	if (comp_count4 < 0) {
 		document.getElementById('error-container').style.display = 'flex'
-		window.setTimeout("document.getElementById('error-container').style='display:none !important;';", 5000)
 		return
 	}
 

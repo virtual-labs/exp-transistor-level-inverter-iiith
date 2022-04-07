@@ -211,7 +211,17 @@ function circuitvalid() {
 }
 
 function get_truth_value() {
-	x = list_ouput[0].voltage
+	out = list_ouput[0].voltage
+    k = document.getElementById("input0")
+    ps_nmos_circuit_valid = check_pseudo_nmos()
+    if(list_input[0].input == 0 && ps_nmos_circuit_valid == 1)
+    {
+        return "1"
+    }
+    else if(list_input[0].input == 1 && ps_nmos_circuit_valid == 1)
+    {
+        return "0"
+    }
 	if (x == 5) {
 		return "1"
 	}
