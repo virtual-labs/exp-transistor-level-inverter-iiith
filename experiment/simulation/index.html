@@ -2,199 +2,165 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Virtual labs</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/virtual-labs/virtual-style@0.0.7-b/css/style.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsPlumb/2.15.6/js/jsplumb.min.js"></script>
-    <link rel="stylesheet" href="./css/main.css">
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Virtual labs</title>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/virtual-labs/virtual-style@0.0.8-b/css/style.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jsPlumb/2.15.6/js/jsplumb.min.js"></script>
+	<link rel="stylesheet" href="./css/main.css">
 </head>
 
 <body>
-    <div class="columns mt-2 is-variable is-1 is-centered is-flex is-flex-wrap-wrap">
-        <div class="v-tabs">
-            <ul>
-                <li class="is-active">
-                    <a>
-                        <span>Complementary CMOS</span>
-                    </a>
-                </li>
-                <li>
-                    <a>
-                        <span>Pseudo NMOS</span>
-                    </a>
-                </li>
+	<div class="columns mt-2 is-variable is-1 is-centered is-flex is-flex-wrap-wrap">
+		<div class="v-tabs">
+			<ul>
+				<li class="is-active">
+					<a>
+						<span>Complementary CMOS</span>
+					</a>
+				</li>
+				<li>
+					<a>
+						<span>Pseudo NMOS</span>
+					</a>
+				</li>
 
-            </ul>
-        </div>
-    </div>
+			</ul>
+		</div>
+	</div>
 
-    <div class="columns is-centered is-flex my-0">
-        <div class="column is-6-desktop is-10-tablet is-10-mobile">
-            <div class="instruction-box">
-                <button id="instruction-bar" onclick="expand_instructions()" class="collapsible"> Instructions </button>
-                <div id="content-box" class="content">
-                  <ul style="list-style: disc;">
-                    <li>Click or tap on an element in the tool bar to place it in the workspace</li>
-                    <li>Double click on a wire to delete it</li>
-                    <li>Double click on input element to change it's value</li>
-                    <li>If you did anything wrong click on reset button</li>
-                    <li>Select the appropriate tab and click on validate after completion of circuit</li>
-                  </ul>
-                </div>
-            </div>
-        </div>
-    </div>
+	<div class="columns is-centered is-flex">
+		<div class="column is-6-desktop is-10-tablet is-10-mobile">
+			<div class="v-collapsible-instruction-container">
+				<div class="v-collapsible is-size-5">Instructions</div>
+				<div class="v-content">
+					<ul style="list-style: disc;">
+						<li>Click or tap on an element in the tool bar to place it in the workspace</li>
+						<li>Double click on a wire to delete it</li>
+						<li>Double click on input element to change it's value</li>
+						<li>If you did anything wrong click on reset button</li>
+						<li>Select the appropriate tab and click on validate after completion of circuit</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
 
-    <div class="columns is-variable is-1 is-centered is-flex is-flex-wrap-wrap my-0">
-        <div id="start" class="column is-2-desktop is-2-tablet is-3-mobile my-2 center-content">
-            <button class="v-button" onclick="cmosvalid()">Validate</button>
-        </div>
-        <div id="restart" class="column is-2-desktop is-2-tablet is-3-mobile my-2 center-content">
-            <button class="v-button" onclick="refresh()">Reset</button>
-        </div>
-    </div>
+	<div class="columns is-variable is-1 is-centered is-flex is-flex-wrap-wrap">
+		<div id="start" class="column is-2-desktop is-2-tablet is-3-mobile center-content">
+			<button class="v-button" onclick="cmosvalid()">Validate</button>
+		</div>
+		<div id="restart" class="column is-2-desktop is-2-tablet is-3-mobile center-content">
+			<button class="v-button" onclick="location.reload()">Reset</button>
+		</div>
+	</div>
 
-    <div id="error-container" class="columns is-centered is-flex my-0" style="display:none !important;">
-        <div class="column is-6-desktop is-10-tablet is-10-mobile">
-            <div class="text-danger">
-                Required no.of components of this type are already present in the workspace
-            </div>
-        </div>
-    </div>
+	<div id="error-container" class="columns is-centered is-flex" style="display:none !important;">
+		<div class="column is-6-desktop is-10-tablet is-10-mobile">
+			<div class="text-danger">
+				Required no.of components of this type are already present in the workspace
+			</div>
+		</div>
+	</div>
 
-    <div class="columns is-variable is-1 is-centered is-flex is-flex-wrap-wrap">
-        <div class="column is-2-desktop is-3-tablet is-2-mobile my-2 center-content">
-            <div class="v-datalist-container">
-                <div class="v-datalist-title">
-                    ToolBar
-                </div>
-                <div class="v-datalist-row toolbar-item-list">
-                    <div class="toolbar-component" onclick="jpmos()">
-                        <div class="each-toolbar-component has-text-centered">
-                            <svg class="svg-component" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-                                <g>
-                                    <path d="M 29.78 77 L 29.78 27" fill="none" stroke="green" stroke-width="2.5"
-                                        stroke-miterlimit="0.01" />
-                                    <path d="M 35.33 77 L 35.33 27" fill="none" stroke="green" stroke-width="2.5"
-                                        stroke-miterlimit="0.01" />
-                                    <path d="M 35.33 39.5 L 52 39.5 L 52 2" fill="none" stroke="green"
-                                        stroke-width="2.5" stroke-miterlimit="0.01" />
-                                    <path d="M 52 102 L 52 64.5 L 35.33 64.5" fill="none" stroke="green"
-                                        stroke-width="2.5" stroke-miterlimit="0.01" />
-                                    <path d="M 2 52 L 18.67 52" fill="none" stroke="green" stroke-width="2.5"
-                                        stroke-miterlimit="0.01" />
-                                    <ellipse cx="24.02" cy="51.11" rx="5.357142857142858" ry="5.357142857142858"
-                                        fill="none" stroke="green" stroke-width="2.5" />
-                                </g>
-                            </svg>
-                            PMOS
-                        </div>
-                    </div>
-                    <div class="toolbar-component" onclick="jnmos()">
-                        <div class="each-toolbar-component has-text-centered">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="svg-component" height="100" width="100"
-                                viewBox="0 0 100 100">
-                                <g class="draggable-group">
-                                    <path d="M 27.71 77 L 27.71 27" fill="none" stroke="green" stroke-width="2.5"
-                                        stroke-miterlimit="0.01" />
-                                    <path d="M 36.29 77 L 36.29 27" fill="none" stroke="green" stroke-width="2.5"
-                                        stroke-miterlimit="0.01" />
-                                    <path d="M 36.29 39.5 L 62 39.5 L 62 2" fill="none" stroke="green"
-                                        stroke-width="2.5" stroke-miterlimit="0.01" />
-                                    <path d="M 62 102 L 62 64.5 L 36.29 64.5" fill="none" stroke="green"
-                                        stroke-width="2.5" stroke-miterlimit="0.011" />
-                                    <path d="M 2 52 L 27.71 52" fill="none" stroke="green" stroke-width="2.5"
-                                        stroke-miterlimit="0.01">
-                                </g>
-                            </svg>
-                            NMOS
-                        </div>
-                    </div>
-                    <div class="toolbar-component" onclick="jvdd()">
-                        <div class="each-toolbar-component has-text-centered">
-                            <svg class="svg-component" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-                                <g>
-                                    <path d="M 21 41 L 21 1 L 1 1 L 41 1" fill="none" stroke="green" stroke-width="2.5"
-                                        stroke-miterlimit="0.01" />
-                                </g>
-                            </svg>
-                            VDD
-                        </div>
-                    </div>
-                    <div class="toolbar-component" onclick="jground()">
-                        <div class="each-toolbar-component has-text-centered">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="svg-component" height="100" width="100"
-                                viewBox="0 0 100 100">
-                                <g>
-                                    <path d="M 1 31 L 61 31 L 31 31 L 31 1" fill="none" stroke="green"
-                                        stroke-width="2.5" stroke-miterlimit="0.01" />
-                                    <path d="M 11 41 L 51 41" fill="none" stroke="green" stroke-width="2.5"
-                                        stroke-miterlimit="0.01" />
-                                    <path d="M 21 51 L 41 51" fill="none" stroke="green" stroke-width="2.5"
-                                        stroke-miterlimit="0.01" />
-                                </g>
-                            </svg>
-                            Ground
-                        </div>
-                    </div>
-                    <!-- <div class="toolbar-component" onclick="jinput()">
-                        <div class="each-toolbar-component has-text-centered">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="svg-component" height="100" width="100"
-                                viewBox="0 0 100 100">
-                                <g>
-                                    <path d="M 1 31 L 1 1 L 61 1 L 41 31" fill="none" stroke="green" stroke-width="2.5"
-                                        stroke-miterlimit="0.01" />
-                                    <path d="M 1 31 L 41 31" fill="none" stroke="green" stroke-width="2.5"
-                                        stroke-miterlimit="0.01" />
-                                </g>
-                            </svg>
-                            Input
-                        </div>
-                    </div>
-                    <div class="toolbar-component" onclick="joutput()">
-                        <div class="each-toolbar-component has-text-centered">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="svg-component" height="100" width="100"
-                                viewBox="0 0 100 100">
-                                <g>
-                                    <path d="M 61 31 L 61 1 L 1 1 L 21 31" fill="none" stroke="green" stroke-width="2.5"
-                                        stroke-miterlimit="0.01" />
-                                    <path d="M 61 31 L 21 31" fill="none" stroke="green" stroke-width="2.5"
-                                        stroke-miterlimit="0.01" />
-                                </g>
-                            </svg>
-                            Output
-                        </div>
-                    </div> -->
-                </div>
-            </div>
-        </div>
+	<div class="columns is-variable is-1 is-centered is-flex is-flex-wrap-wrap">
+		<div class="column is-2-desktop is-3-tablet is-2-mobile center-content">
+			<div class="v-datalist-container">
+				<div class="v-datalist-title">
+					ToolBar
+				</div>
+				<div class="v-datalist-row toolbar-item-list">
+					<div class="toolbar-component" onclick="jpmos()">
+						<div class="each-toolbar-component has-text-centered">
+							<svg class="svg-component" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+								<g>
+									<path d="M 29.78 77 L 29.78 27" fill="none" stroke="green" stroke-width="2.5"
+										stroke-miterlimit="0.01" />
+									<path d="M 35.33 77 L 35.33 27" fill="none" stroke="green" stroke-width="2.5"
+										stroke-miterlimit="0.01" />
+									<path d="M 35.33 39.5 L 52 39.5 L 52 2" fill="none" stroke="green"
+										stroke-width="2.5" stroke-miterlimit="0.01" />
+									<path d="M 52 102 L 52 64.5 L 35.33 64.5" fill="none" stroke="green"
+										stroke-width="2.5" stroke-miterlimit="0.01" />
+									<path d="M 2 52 L 18.67 52" fill="none" stroke="green" stroke-width="2.5"
+										stroke-miterlimit="0.01" />
+									<ellipse cx="24.02" cy="51.11" rx="5.357142857142858" ry="5.357142857142858"
+										fill="none" stroke="green" stroke-width="2.5" />
+								</g>
+							</svg>
+							PMOS
+						</div>
+					</div>
+					<div class="toolbar-component" onclick="jnmos()">
+						<div class="each-toolbar-component has-text-centered">
+							<svg xmlns="http://www.w3.org/2000/svg" class="svg-component" height="100" width="100"
+								viewBox="0 0 100 100">
+								<g class="draggable-group">
+									<path d="M 27.71 77 L 27.71 27" fill="none" stroke="green" stroke-width="2.5"
+										stroke-miterlimit="0.01" />
+									<path d="M 36.29 77 L 36.29 27" fill="none" stroke="green" stroke-width="2.5"
+										stroke-miterlimit="0.01" />
+									<path d="M 36.29 39.5 L 62 39.5 L 62 2" fill="none" stroke="green"
+										stroke-width="2.5" stroke-miterlimit="0.01" />
+									<path d="M 62 102 L 62 64.5 L 36.29 64.5" fill="none" stroke="green"
+										stroke-width="2.5" stroke-miterlimit="0.011" />
+									<path d="M 2 52 L 27.71 52" fill="none" stroke="green" stroke-width="2.5"
+										stroke-miterlimit="0.01">
+								</g>
+							</svg>
+							NMOS
+						</div>
+					</div>
+					<div class="toolbar-component" onclick="jvdd()">
+						<div class="each-toolbar-component has-text-centered">
+							<svg class="svg-component" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+								<g>
+									<path d="M 21 41 L 21 1 L 1 1 L 41 1" fill="none" stroke="green" stroke-width="2.5"
+										stroke-miterlimit="0.01" />
+								</g>
+							</svg>
+							VDD
+						</div>
+					</div>
+					<div class="toolbar-component" onclick="jground()">
+						<div class="each-toolbar-component has-text-centered">
+							<svg xmlns="http://www.w3.org/2000/svg" class="svg-component" height="100" width="100"
+								viewBox="0 0 100 100">
+								<g>
+									<path d="M 1 31 L 61 31 L 31 31 L 31 1" fill="none" stroke="green"
+										stroke-width="2.5" stroke-miterlimit="0.01" />
+									<path d="M 11 41 L 51 41" fill="none" stroke="green" stroke-width="2.5"
+										stroke-miterlimit="0.01" />
+									<path d="M 21 51 L 41 51" fill="none" stroke="green" stroke-width="2.5"
+										stroke-miterlimit="0.01" />
+								</g>
+							</svg>
+							Ground
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 
-        <div class="column is-7-desktop is-9-tablet is-10-mobile my-2 center-content">
-            <div class="is-flex is-flex-wrap-wrap center-content simulation-container" id="diagram">
-            </div>
-        </div>
+		<div class="column is-7-desktop is-9-tablet is-10-mobile center-content">
+			<div class="is-flex is-flex-wrap-wrap center-content simulation-container" id="diagram">
+			</div>
+		</div>
 
-        <div class="column is-3-desktop is-8-tablet is-8-mobile my-2 center-content">
-            <div class="v-datalist-container">
-                <div class="v-datalist-title">
-                    Observation
-                </div>
-                <div class="v-datalist-row" id="obs-table">
-                    <div class="v-table-wrap">
+		<div class="column is-3-desktop is-8-tablet is-8-mobile center-content">
+			<div class="v-datalist-container">
+				<div class="v-datalist-title">
+					Observation
+				</div>
+				<div class="v-datalist-row" id="obs-table">
+					<div class="v-table-wrap">
 						<table class="table is-bordered is-fullwidth">
 							<thead id="table-head">
 								<tr>
 									<th colspan="1">Inputs</th>
-									<th colspan="1">Expected Values</th>
-									<th colspan="1">Observed Values</th>
-								</tr>
-								<tr>
-									<th>Input 1</th>
-									<!-- <th>Input 2</th> -->
-									<th>Output</th>
-									<th>Output</th>
+									<th colspan="1">Expected Output</th>
+									<th colspan="1">Observed Output</th>
 								</tr>
 							</thead>
 							<tbody id="table-body">
@@ -202,77 +168,74 @@
 						</table>
 					</div>
 					<div id="result"></div>
-                </div>
-                <div id = "output-box">
-                   
-                </div>
-            </div>
-        </div>
-    </div>
+				</div>
+				<div id="output-box">
 
-    <script>
-        //Creating js map to store connections
-        const jsmap = new Map();
-        // these arrays are used to store various components
-        var list_pmos = [];
-        var list_nmos = [];
-        var list_input = [];
-        var list_ouput = [];
-        var list_ground = [];
-        var list_vdd = [];
-        var list_inverter = [];
-        // Disable right click 
-        var container = document.getElementById("diagram");
-        container.addEventListener("contextmenu", function (e) {
-            e.preventDefault();
-        });
+				</div>
+			</div>
+		</div>
+	</div>
 
-        var pmos_nand = 0;
-        var nmos_nand = 0;
-        // Tab selection
-        var selected_tab = 0
-        const tabs = document.querySelectorAll('.v-tabs li');
+	<script>
+		//Creating js map to store connections
+		const jsmap = new Map();
+		// these arrays are used to store various components
+		let list_pmos = [];
+		let list_nmos = [];
+		let list_input = [];
+		let list_ouput = [];
+		let list_ground = [];
+		let list_vdd = [];
+		let list_inverter = [];
+		// Disable right click 
+		let container = document.getElementById("diagram");
+		container.addEventListener("contextmenu", function (e) {
+			e.preventDefault();
+		});
 
-        tabs.forEach(tab => {
-            tab.addEventListener('click', () => {
-                tabs.forEach(item => item.classList.remove('is-active'));
-                tab.classList.add('is-active');
+		let pmos_nand = 0;
+		let nmos_nand = 0;
+		// Tab selection
+		let selected_tab = 0
+		const tabs = document.querySelectorAll('.v-tabs li');
 
-                var parent = tab.parentNode;
-                selected_tab = Array.prototype.indexOf.call(parent.children, tab);
-            })
-        })
+		tabs.forEach(tab => {
+			tab.addEventListener('click', () => {
+				tabs.forEach(item => item.classList.remove('is-active'));
+				tab.classList.add('is-active');
 
-        function expand_instructions()
-        {
-            a = document.getElementById("instruction-bar")
-            b = document.getElementById("content-box")
-            if(a.classList.contains("active")){
-                a.classList.remove("active")
-                b.classList.remove("content-box-height")
-            }
-            else{
-                a.classList.add("active")
-                b.classList.remove("content")
-                b.classList.add("content-box-height")
-                b.classList.add("content")
-            }
-        }
+				let parent = tab.parentNode;
+				selected_tab = Array.prototype.indexOf.call(parent.children, tab);
+			})
+		})
 
-    </script>
+		function expand_instructions() {
+			a = document.getElementById("instruction-bar")
+			b = document.getElementById("content-box")
+			if (a.classList.contains("active")) {
+				a.classList.remove("active")
+				b.classList.remove("content-box-height")
+			}
+			else {
+				a.classList.add("active")
+				b.classList.remove("content")
+				b.classList.add("content-box-height")
+				b.classList.add("content")
+			}
+		}
 
-    <script src="js/components.js"></script>
-    <script src="js/integrate.js"></script>
-    <script src="js/circuit.js"></script>
-    <script src="js/nand.js"></script>
+	</script>
 
-    <!-- <button onclick="changeoutput()">Input</button> -->
+	<script src="js/components.js"></script>
+	<script src="js/integrate.js"></script>
+	<script src="js/circuit.js"></script>
+	<script src="js/nand.js"></script>
 
-    <script>
-        jfinput0()
-        // jfinput1()
-        jfoutput()
-    </script>
-
+	<script>
+		jfinput0()
+		jfoutput()
+	</script>
+	<script src="https://cdn.jsdelivr.net/gh/virtual-labs/virtual-style@0.0.8-b/js/script.js"></script>
 </body>
+
 </html>
