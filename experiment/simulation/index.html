@@ -49,7 +49,7 @@
 
 	<div class="columns is-variable is-1 is-centered is-flex is-flex-wrap-wrap">
 		<div id="start" class="column is-2-desktop is-2-tablet is-3-mobile center-content">
-			<button class="v-button" onclick="notvalid()">Validate</button>
+			<button class="v-button" onclick="notValid()">Validate</button>
 		</div>
 		<div id="restart" class="column is-2-desktop is-2-tablet is-3-mobile center-content">
 			<button class="v-button" onclick="location.reload()">Reset</button>
@@ -63,28 +63,29 @@
 					ToolBar
 				</div>
 				<div class="v-datalist-row toolbar-item-list">
-					<div class="toolbar-component" onclick="jpmos()">
+					<div class="toolbar-component" onclick="compPmos()">
 						<div class="each-toolbar-component has-text-centered">
-							<svg class="svg-component" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+							<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+								version="1.1" viewBox="-0.5 -0.5 84 84">
 								<g>
-									<path d="M 29.78 77 L 29.78 27" fill="none" stroke="green" stroke-width="2.5"
-										stroke-miterlimit="0.01" />
-									<path d="M 35.33 77 L 35.33 27" fill="none" stroke="green" stroke-width="2.5"
-										stroke-miterlimit="0.01" />
-									<path d="M 35.33 39.5 L 52 39.5 L 52 2" fill="none" stroke="green"
-										stroke-width="2.5" stroke-miterlimit="0.01" />
-									<path d="M 52 102 L 52 64.5 L 35.33 64.5" fill="none" stroke="green"
-										stroke-width="2.5" stroke-miterlimit="0.01" />
-									<path d="M 2 52 L 18.67 52" fill="none" stroke="green" stroke-width="2.5"
-										stroke-miterlimit="0.01" />
-									<ellipse cx="24.02" cy="51.11" rx="5.357142857142858" ry="5.357142857142858"
-										fill="none" stroke="green" stroke-width="2.5" />
+									<path d="M 31 61 L 31 21" fill="none" stroke="rgb(0, 0, 0)" stroke-width="3"
+										stroke-miterlimit="10" pointer-events="stroke" />
+									<path d="M 41 61 L 41 21" fill="none" stroke="rgb(0, 0, 0)" stroke-width="3"
+										stroke-miterlimit="10" pointer-events="stroke" />
+									<path d="M 41 31 L 61 31 L 61 1" fill="none" stroke="rgb(0, 0, 0)" stroke-width="3"
+										stroke-miterlimit="10" pointer-events="stroke" />
+									<path d="M 61 81 L 61 51 L 41 51" fill="none" stroke="rgb(0, 0, 0)" stroke-width="3"
+										stroke-miterlimit="10" pointer-events="stroke" />
+									<path d="M 1 41 L 17.67 41" fill="none" stroke="rgb(0, 0, 0)" stroke-width="3"
+										stroke-miterlimit="10" pointer-events="stroke" />
+									<ellipse cx="23.02" cy="40.11" rx="5.357142857142858" ry="5.357142857142858"
+										fill="none" stroke="rgb(0, 0, 0)" stroke-width="3" pointer-events="all" />
 								</g>
 							</svg>
 							PMOS
 						</div>
 					</div>
-					<div class="toolbar-component" onclick="jnmos()">
+					<div class="toolbar-component" onclick="compNmos()">
 						<div class="each-toolbar-component has-text-centered">
 							<svg xmlns="http://www.w3.org/2000/svg" class="svg-component" height="100" width="100"
 								viewBox="0 0 100 100">
@@ -104,7 +105,7 @@
 							NMOS
 						</div>
 					</div>
-					<div class="toolbar-component" onclick="jvdd()">
+					<div class="toolbar-component" onclick="compVdd()">
 						<div class="each-toolbar-component has-text-centered">
 							<svg class="svg-component" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
 								<g>
@@ -115,7 +116,7 @@
 							VDD
 						</div>
 					</div>
-					<div class="toolbar-component" onclick="jground()">
+					<div class="toolbar-component" onclick="compGround()">
 						<div class="each-toolbar-component has-text-centered">
 							<svg xmlns="http://www.w3.org/2000/svg" class="svg-component" height="100" width="100"
 								viewBox="0 0 100 100">
@@ -131,6 +132,34 @@
 							Ground
 						</div>
 					</div>
+					<!-- <div class="toolbar-component" onclick="jinput()">
+                        <div class="each-toolbar-component has-text-centered">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="svg-component" height="100" width="100"
+                                viewBox="0 0 100 100">
+                                <g>
+                                    <path d="M 1 31 L 1 1 L 61 1 L 41 31" fill="none" stroke="green" stroke-width="2.5"
+                                        stroke-miterlimit="0.01" />
+                                    <path d="M 1 31 L 41 31" fill="none" stroke="green" stroke-width="2.5"
+                                        stroke-miterlimit="0.01" />
+                                </g>
+                            </svg>
+                            Input
+                        </div>
+                    </div>
+                    <div class="toolbar-component" onclick="joutput()">
+                        <div class="each-toolbar-component has-text-centered">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="svg-component" height="100" width="100"
+                                viewBox="0 0 100 100">
+                                <g>
+                                    <path d="M 61 31 L 61 1 L 1 1 L 21 31" fill="none" stroke="green" stroke-width="2.5"
+                                        stroke-miterlimit="0.01" />
+                                    <path d="M 61 31 L 21 31" fill="none" stroke="green" stroke-width="2.5"
+                                        stroke-miterlimit="0.01" />
+                                </g>
+                            </svg>
+                            Output
+                        </div>
+                    </div> -->
 				</div>
 			</div>
 		</div>
@@ -161,11 +190,11 @@
 					</div>
 					<div id="result"></div>
 				</div>
-				<div class="v-datalist-row text-danger" id="error-container" style="display:none !important;">
-                    Required no.of components of this type are already present in the workspace
-                </div>
 				<div id="output-box">
 
+				</div>
+				<div class="v-datalist-row text-danger" id="error-container" style="display:none;">
+					Required no.of components of this type are already present in the workspace
 				</div>
 			</div>
 		</div>
@@ -173,25 +202,25 @@
 
 	<script>
 		//Creating js map to store connections
-		const jsmap = new Map();
+		const connectionMap = new Map();
 		// these arrays are used to store various components
-		let list_pmos = [];
-		let list_nmos = [];
-		let list_input = [];
-		let list_ouput = [];
-		let list_ground = [];
-		let list_vdd = [];
-		let list_inverter = [];
+		const listPmos = [];
+		const listNmos = [];
+		const listInput = [];
+		const listOutput = [];
+		const listGround = [];
+		const listVdd = [];
+		const listInverter = [];
 		// Disable right click 
-		let container = document.getElementById("diagram");
+		const container = document.getElementById("diagram");
 		container.addEventListener("contextmenu", function (e) {
 			e.preventDefault();
 		});
 
-		let pmos_nand = 0;
-		let nmos_nand = 0;
+		let pmosNand = 0;
+		let nmosNand = 0;
 		// Tab selection
-		let selected_tab = 0
+		let selectedTab = 0
 		const tabs = document.querySelectorAll('.v-tabs li');
 
 		tabs.forEach(tab => {
@@ -200,7 +229,7 @@
 				tab.classList.add('is-active');
 
 				let parent = tab.parentNode;
-				selected_tab = Array.prototype.indexOf.call(parent.children, tab);
+				selectedTab = Array.prototype.indexOf.call(parent.children, tab);
 			})
 		})
 
@@ -211,9 +240,12 @@
 	<script src="js/circuit.js"></script>
 	<script src="js/not.js"></script>
 
+	<!-- <button onclick="changeoutput()">Input</button> -->
+
 	<script>
-		jfinput0()
-		jfoutput()
+		compInput0()
+		// jfinput1()
+		compOutput()
 	</script>
 	<script src="https://cdn.jsdelivr.net/gh/virtual-labs/virtual-style@0.0.8-b/js/script.js"></script>
 </body>

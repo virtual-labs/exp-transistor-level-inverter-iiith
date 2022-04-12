@@ -1,75 +1,82 @@
 // This function checks map when called
 
-function checkandupdate() {
+function checkAndUpdate() {
 	// these variables are for pseudo nmos circuit
-	nmos_nand = 0;
-	pmos_nand = 0;
-	list_ouput[0].voltage = 0;
+	nmosNand = 0;
+	pmosNand = 0;
+	listOutput[0].voltage = 0;
 	// if any vdd is connected to any pmos store voltage
-	for (i = 0; i < list_vdd.length; i++) {
-		for (j = 0; j < list_pmos.length; j++) {
-			const r = list_vdd[i].id.concat("$", list_pmos[j].id);
-			if (jsmap.has(r)) {
-				list_pmos[j].voltage = 5;
+	for (i = 0; i < listVdd.length; i++) {
+		for (j = 0; j < listPmos.length; j++) {
+			const r = listVdd[i].id.concat("$", listPmos[j].id);
+			if (connectionMap.has(r)) {
+				listPmos[j].voltage = 5;
 
 			}
 		}
 
 	}
 	// if any ground is connected to any pmos store voltage
-	for (i = 0; i < list_ground.length; i++) {
-		for (j = 0; j < list_pmos.length; j++) {
-			const r = list_ground[i].id.concat("$", list_pmos[j].id);
-			if (jsmap.has(r)) {
-				list_pmos[j].voltage = -5;
+	for (i = 0; i < listGround.length; i++) {
+		for (j = 0; j < listPmos.length; j++) {
+			const r = listGround[i].id.concat("$", listPmos[j].id);
+			if (connectionMap.has(r)) {
+				listPmos[j].voltage = -5;
 
 			}
 		}
 
 	}
 	// if amy vdd is connected to nmos store that voltage
-	for (i = 0; i < list_vdd.length; i++) {
-		for (j = 0; j < list_nmos.length; j++) {
-			const r = list_vdd[i].id.concat("$", list_nmos[j].id);
-			if (jsmap.has(r)) {
-				list_nmos[j].voltage = 5;
+	for (i = 0; i < listVdd.length; i++) {
+		for (j = 0; j < listNmos.length; j++) {
+			const r = listVdd[i].id.concat("$", listNmos[j].id);
+			if (connectionMap.has(r)) {
+				listNmos[j].voltage = 5;
 
 			}
 		}
 
 	}
-	for (i = 0; i < list_ground.length; i++) {
-		for (j = 0; j < list_nmos.length; j++) {
-			const r = list_ground[i].id.concat("$", list_nmos[j].id);
-			if (jsmap.has(r)) {
-				list_nmos[j].voltage = -5;
+	for (i = 0; i < listGround.length; i++) {
+		for (j = 0; j < listNmos.length; j++) {
+			const r = listGround[i].id.concat("$", listNmos[j].id);
+			if (connectionMap.has(r)) {
+				listNmos[j].voltage = -5;
 
 			}
 		}
 
 	}
-	for (i = 0; i < list_input.length; i++) {
-		for (j = 0; j < list_pmos.length; j++) {
-			const r = list_input[i].id.concat("$", list_pmos[j].id);
-			if (jsmap.has(r)) {
-				if (list_input[i].input == 0) {
+	for (i = 0; i < listInput.length; i++) {
+		for (j = 0; j < listPmos.length; j++) {
+			const r = listInput[i].id.concat("$", listPmos[j].id);
+			if (connectionMap.has(r)) {
+				if (listInput[i].input === 0) {
 
-					if (list_pmos[j].voltage == 5) {
-						list_pmos[j].outvoltage = 5;
+					if (listPmos[j].voltage === 5) {
+						listPmos[j].outvoltage = 5;
 					}
 					else {
-						if (list_pmos[j].voltage == 0) {
-							list_pmos[j].outvoltage = 9;
+						if (listPmos[j].voltage === 0) {
+							listPmos[j].outvoltage = 9;
 						}
 						else {
-							list_pmos[j].outvoltage = -5;
+							listPmos[j].outvoltage = -5;
 						}
+
+						//listPmos[j].outvoltage = 5;
 					}
-					list_pmos[j].outterminal = 1;
+					console.log("Voltage stored in pmos");
+
+					listPmos[j].outterminal = 1;
+					console.log(listPmos[j].outterminal)
 				}
 				else {
-					list_pmos[j].outterminal = -1;
-					list_pmos[j].outvoltage = 0;
+					listPmos[j].outterminal = -1;
+					console.log(listPmos[j].outterminal)
+					console.log("Pmos disabled");
+					listPmos[j].outvoltage = 0;
 				}
 
 
@@ -77,54 +84,60 @@ function checkandupdate() {
 		}
 
 	}
-	for (i = 0; i < list_input.length; i++) {
-		for (j = 0; j < list_nmos.length; j++) {
-			const r = list_input[i].id.concat("$", list_nmos[j].id);
-			// check if jsmap have the given nmos input connection
-			if (jsmap.has(r)) {
-				list_nmos[j].midterminal = 1;
+	for (i = 0; i < listInput.length; i++) {
+		for (j = 0; j < listNmos.length; j++) {
+			const r = listInput[i].id.concat("$", listNmos[j].id);
+			// check if connectionMap have the given nmos input connection
+			if (connectionMap.has(r)) {
+				listNmos[j].midterminal = 1;
 				// if input signal is one
-				if (list_input[i].input == 1) {
-					if (list_nmos[j].voltage == -5) {
-						list_nmos[j].outvoltage = -5;
+				if (listInput[i].input === 1) {
+					if (listNmos[j].voltage === -5) {
+						listNmos[j].outvoltage = -5;
 					}
 					else {
-						if (list_nmos[j].voltage == 0) {
-							list_nmos[j].outvoltage = -9;
+						if (listNmos[j].voltage === 0) {
+							listNmos[j].outvoltage = -9;
 						}
 						else {
-							list_nmos[j].outvoltage = 5;
+							listNmos[j].outvoltage = 5;
 						}
 
 					}
-					list_nmos[j].outterminal = 1;
+					listNmos[j].outterminal = 1;
+
+					//console.log("Voltage stored in nmos");
 				}
 				else {
-					list_nmos[j].outterminal = 0;
-					list_nmos[j].midterminal = 1;
+					listNmos[j].outterminal = 0;
+					listNmos[j].midterminal = 1;
+					// listNmos[j].outvoltage = 0;
+					// console.log("Nmos disabled");
 				}
 
 			}
 			else {  // no carrying of voltage
-				list_nmos[j].midterminal = 0;
+				listNmos[j].midterminal = 0;
 
 			}
 		}
 
 	}
 
-	for (i = 0; i < list_pmos.length; i++) {
-		for (j = 0; j < list_ouput.length; j++) {
-			const r = list_pmos[i].id.concat("$", list_ouput[j].id);
+	for (i = 0; i < listPmos.length; i++) {
+		for (j = 0; j < listOutput.length; j++) {
+			const r = listPmos[i].id.concat("$", listOutput[j].id);
 
-			if (jsmap.has(r)) {
+			if (connectionMap.has(r)) {
 
-				if (list_pmos[i].outterminal == 1) {
-					list_ouput[j].voltage = list_pmos[i].outvoltage;
-					pmos_nand++;
+				if (listPmos[i].outterminal === 1) {
+					listOutput[j].voltage = listPmos[i].outvoltage;
+					pmosNand++;
+					console.log("Pmos succesfully conducted");
+					console.log(listOutput[j].voltage)
 				}
-				if (list_pmos[i].outterminal == -1) {
-					list_ouput[j].voltage = list_pmos[i].outvoltage;
+				if (listPmos[i].outterminal === -1) {
+					listOutput[j].voltage = listPmos[i].outvoltage;
 
 				}
 
@@ -133,14 +146,15 @@ function checkandupdate() {
 
 	}
 	// if any nmos is connected to output then the voltages are propogated based on input signals
-	for (i = 0; i < list_nmos.length; i++) {
-		for (j = 0; j < list_ouput.length; j++) {
-			const r = list_nmos[i].id.concat("$", list_ouput[j].id);
-			if (jsmap.has(r)) {
+	for (i = 0; i < listNmos.length; i++) {
+		for (j = 0; j < listOutput.length; j++) {
+			const r = listNmos[i].id.concat("$", listOutput[j].id);
+			if (connectionMap.has(r)) {
 				// if nmos 
-				if (list_nmos[i].outterminal == 1) {
-					list_ouput[j].voltage = list_nmos[i].outvoltage;
-					nmos_nand++;
+				if (listNmos[i].outterminal === 1) {
+					listOutput[j].voltage = listNmos[i].outvoltage;
+					nmosNand++;
+					console.log("Nmos succesfully conducted");
 				}
 
 
@@ -154,94 +168,36 @@ function checkandupdate() {
 
 
 }
+// if any input is connected to volatge then based on the input signal we check if nmos conducts or not
 
-function permutator(inputArr) {
-	let results = [];
+// similar case for pmos
 
-	function permute(arr, memo) {
-		let cur
-		
-		memo = memo || [];
+/*function check1() {
 
-		for (let i = 0; i < arr.length; i++) {
-			cur = arr.splice(i, 1);
-			if (arr.length === 0) {
-				results.push(memo.concat(cur));
-			}
-			permute(arr.slice(), memo.concat(cur));
-			arr.splice(i, 0, cur[0]);
-		}
+    
+	console.log(listOutput[0].voltage)
+	circuitvalid()
 
-		return results;
-	}
 
-	return permute(inputArr);
-}
+}*/
 
-function check_pseudo_nmos() {
-	x = permutator([0, 1])
-	ps_nmos_circuit_valid = 0
-	for (let i = 0; i < x.length; i++) {
-		if (jsmap.has("vdd0$pmos0") && jsmap.has("ground" + x[i][0] + "$pmos0") && jsmap.has("pmos0$output0") && jsmap.has("input0$nmos0") && jsmap.has("nmos0$output0") && jsmap.has("ground" + x[i][1] + "$nmos0")) {
-			ps_nmos_circuit_valid = 1
-			break
-		}
-	}
-	return ps_nmos_circuit_valid
-}
-
-function circuitvalid() {
-	ps_nmos_circuit_valid = check_pseudo_nmos()
-	// check if correct nand gate is made using correct components
-	if (selected_tab == 0 && jsmap.has("vdd0$pmos0") && jsmap.has("input0$pmos0") && jsmap.has("pmos0$output0") && jsmap.has("input0$nmos0") && jsmap.has("nmos0$output0") && jsmap.has("ground0$nmos0")) {
-		document.getElementById("output-box").innerHTML = "&#10004; Circuit is correct"
-		document.getElementById("output-box").classList.remove('text-danger')
-		document.getElementById("output-box").classList.add('text-success')
-	}
-	else if (selected_tab == 1 && ps_nmos_circuit_valid) {
-		document.getElementById("output-box").innerHTML = "&#10004; Circuit is correct"
-		document.getElementById("output-box").classList.remove('text-danger')
-		document.getElementById("output-box").classList.add('text-success')
-	}
-	else {
-		document.getElementById("output-box").innerHTML = "&#10060; Circuit is incorrect"
-		document.getElementById("output-box").classList.remove('text-success')
-		document.getElementById("output-box").classList.add('text-danger')
-	}
-}
-
-function get_truth_value() {
-	out = list_ouput[0].voltage
-    k = document.getElementById("input0")
-    ps_nmos_circuit_valid = check_pseudo_nmos()
-    if(list_input[0].input == 0 && ps_nmos_circuit_valid == 1)
-    {
-        return "1"
-    }
-    else if(list_input[0].input == 1 && ps_nmos_circuit_valid == 1)
-    {
-        return "0"
-    }
-	if (x == 5) {
+function getTruthValue() {
+	out = listOutput[0].voltage
+	k = document.getElementById("input0")
+	psNmosCircuitValid = checkPseudoNmos()
+	if (listInput[0].input === 0 && psNmosCircuitValid === 1) {
 		return "1"
 	}
-	else if (x == -5) {
+	else if (listInput[0].input === 1 && psNmosCircuitValid === 1) {
+		return "0"
+	}
+	if (out === 5) {
+		return "1"
+	}
+	else if (out === -5) {
 		return "0"
 	}
 	else {
 		return "-"
-	}
-}
-
-function changeoutput() {
-	// change input signal 
-	for (i = 0; i < list_input.length; i++) {
-		if (list_input[i].input == 0) {
-			list_input[i].input = 1;
-
-		}
-		else {
-			list_input[i].input = 0;
-		}
 	}
 }
