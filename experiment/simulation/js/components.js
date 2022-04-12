@@ -1,5 +1,5 @@
 
-const instance = jsPlumb.getInstance({
+const jsplumbInstance = jsPlumb.getInstance({
 
 	container: diagram,
 	maxConnections: -1,
@@ -15,8 +15,8 @@ const instance = jsPlumb.getInstance({
 	paintStyle: { strokeWidth: 3, stroke: "#456" },
 	connectionsDetachable: true,
 });
-instance.bind("ready", function () {
-	instance.registerConnectionTypes({
+jsplumbInstance.bind("ready", function () {
+	jsplumbInstance.registerConnectionTypes({
 		"red-connection": {
 			paintStyle: { stroke: "red", strokeWidth: 3 },
 			hoverPaintStyle: { stroke: "red", strokeWidth: 8 },
@@ -26,27 +26,29 @@ instance.bind("ready", function () {
 });
 
 
-instance.bind("connection", function (ci) {
-	let con = instance.getAllConnections();
-	jsmap.clear();
+jsplumbInstance.bind("connection", () => {
+	const con = jsplumbInstance.getAllConnections();
+	connectionMap.clear();
 	for (i = 0; i < con.length; i++) {
-		let s = con[i].sourceId, t = con[i].targetId;
-		let r = s.concat("$", t);
-		jsmap.set(r, t)
+		const s = con[i].sourceId, t = con[i].targetId;
+		const r = s.concat("$", t);
+		connectionMap.set(r, t)
 
 	}
 });
-instance.bind("dblclick", function (ci) {
+jsplumbInstance.bind("dblclick", function (ci) {
 
-	instance.deleteConnection(ci);
-	let con = instance.getAllConnections();
-	jsmap.clear();
+	jsplumbInstance.deleteConnection(ci);
+	const con = jsplumbInstance.getAllConnections();
+	connectionMap.clear();
 	for (i = 0; i < con.length; i++) {
-		let s = con[i].sourceId, t = con[i].targetId;
-		let r = s.concat("$", t);
-		jsmap.set(r, t)
+		const s = con[i].sourceId, t = con[i].targetId;
+		const r = s.concat("$", t);
+		connectionMap.set(r, t)
 
 	}
+	console.log(connectionMap)
+
 });
 /*instance.bind("click", function (conn) {
 
@@ -70,41 +72,47 @@ let comp_count2 = 1
 let comp_count3 = 1
 let comp_count4 = 2
 
-function addinstancepmos(id) {
-    addinstance(id, "Bottom", -1, true)
-    addinstance(id, "Left", -1, false)
-    addinstance(id, "Top", -1, false)
+function addInstancePmos(id) {
+	addInstance(id, [0.72, 1, 0, 1], -1, true)
+	addInstance(id, [0, 0.5, -1, 0], -1, false)
+	addInstance(id, [0.72, 0, 0, -1], -1, false)
+	console.log(jsplumbInstance);
 }
 
-function addinstancenmos(id) {
-    addinstance(id, "Bottom", -1, false)
-    addinstance(id, "Left", -1, false)
-    addinstance(id, "Top", -1, true)
+function addInstanceNmos(id) {
+	addInstance(id, [0.5, 1, 0, 1], -1, false)
+	addInstance(id, [0, 0.5, -1, 0], -1, false)
+	addInstance(id, [0.5, 0, 0, -1], -1, true)
 }
 
-function addinstancevdd(id) {
-    addinstance(id, "Bottom", -1, true)
+function addInstanceVdd(id) {
+	addInstance(id, [0.5, 1, 0, 1], -1, true)
 }
 
-function addinstanceground(id) {
-    addinstance(id, "Top", -1, true)
+function addInstanceGround(id) {
+	addInstance(id, [0.5, 0, 0, -1], -1, true)
 }
 
-function addinstancefinalinput(id) {
-    addinstance(id, "Right", -1, true)
+function addInstanceFinalInput(id) {
+	addInstance(id, [1, 0.5, 1, 0], -1, true)
 }
 
-function addinstancefinaloutput(id) {
-    addinstance(id, "Left", -1, false)
+function addInstanceFinalOutput(id) {
+	addInstance(id, [0, 0.5, -1, 0], -1, false)
 }
 
-function addinstance(id, position, num, src) {
-    instance.addEndpoint(id, {
-        endpoint: ["Dot", { radius: 5 }],
-        anchor: [position],
-        isTarget: !src,
-        isSource: src,
-        maxConnections: num,
-        connectionType: "red-connection"
-    });
+function addInstance(id, position, num, src) {
+	jsplumbInstance.addEndpoint(id, {
+		endpoint: ["Dot", { radius: 5 }],
+		anchor: position,
+		isTarget: !src,
+		isSource: src,
+		maxConnections: num,
+		connectionType: "red-connection"
+	});
 }
+
+// top -> [0.5, 0, 0, -1]
+// bottom -> [ 0.5, 1, 0, 1 ]
+// right -> [1, 0.5, 1, 0]
+// left -> [0, 0.5, -1, 0]
