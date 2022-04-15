@@ -17,13 +17,29 @@
 }
 
 #diagram .component {
-  /* border-radius: 0.625rem; */
+  border-radius: 0.625rem;
   border: 0.125rem solid green;
   width: 5rem;
+  /* width: 7rem; */
+  min-height: 4.75rem;
   text-align: center;
   cursor: move;
   background-color: white;
   position: absolute;
+  display: flex;
+}
+
+#diagram .component2 {
+  border-radius: 0.625rem;
+  border: 0.125rem solid green;
+  /* width: 5rem; */
+  width: 7rem;
+  min-height: 4.75rem;
+  text-align: center;
+  cursor: move;
+  background-color: white;
+  position: absolute;
+  display: flex;
 }
 
 #diagram .io-component {
@@ -73,10 +89,11 @@
 
 .each-toolbar-component {
   padding: 0.625rem;
-  font-size: 0.625rem ;
+  font-size: 0.9rem ;
 }
 
 .svg-component {
+  flex: 1;
   height: 100%;
   width: 100%;
 }
@@ -97,21 +114,38 @@
   .toolbar-item-list {
     flex-direction: column;
     flex-wrap: nowrap;
+    justify-content: flex-start;
   }
   .toolbar-component {
     width: 90%
   }
   #diagram .component {
     width: 3.125rem;
+    min-height: 2.96875rem;
+  }
+  #diagram .component2 {
+    width: 4.375rem;
+    min-height: 2.96875rem;
+  }
+  .each-toolbar-component {
+    font-size: 0.7rem;
   }
 }
 
 @media screen and (min-width: 769px) and (max-width: 1023px) {
   #diagram .component {
     width: 4.375rem;
+    min-height: 4.15625rem;
   }
+  #diagram .component2 {
+    width: 6.125rem;
+    min-height: 4.15625rem;
+  }
+
 }
 
 #output-box{
   overflow: auto;
 }
+
+/* 16 -> 1*/
