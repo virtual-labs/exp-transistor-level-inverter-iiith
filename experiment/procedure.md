@@ -1,6 +1,4 @@
-# Complementary CMOS Circuit 
-
----
+# Complementary CMOS Circuit
 
 ## Components Required - 
 
@@ -22,8 +20,6 @@
 * By default, the input has been set to 1 and the corresponding output observed is 0. To check otherwise, double-click the input.
 
 # Psuedo NMOS
-
----
 
 ## Components Required - 
 
