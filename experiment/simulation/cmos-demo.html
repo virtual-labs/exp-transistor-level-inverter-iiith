@@ -50,7 +50,6 @@
                     <p>Start- Starts the simulation after the inputs are properly selected. Default speed is 1x. Select the speed through dropdown menu</p>
                     <p>Reset - Resets the simulation</p>
                     <p>Click on the green input bits to set their values.</p>
-                    <p>There is one output </p>
                 </div>
             </div>
         </div>
@@ -75,15 +74,14 @@
             <div id="circuit-board">
                 <svg class="svg" xmlns="http://www.w3.org/2000/svg" width="100%" height="120%"
                     viewBox="0 0 925 1000 ">
-
                     <g>
-                        <path d="M 401 261 L 401 221" fill="none" stroke="rgb(0, 0, 0)" stroke-width="3"
+                        <path d="M 401 276 L 401 206" fill="none" stroke="rgb(0, 0, 0)" stroke-width="3"
                             stroke-miterlimit="10" pointer-events="stroke" />
-                        <path d="M 411 261 L 411 221" fill="none" stroke="rgb(0, 0, 0)" stroke-width="3"
+                        <path d="M 411 276 L 411 206" fill="none" stroke="rgb(0, 0, 0)" stroke-width="3"
                             stroke-miterlimit="10" pointer-events="stroke" />
-                        <path d="M 411 231 L 431 231 L 431 201" fill="none" stroke="rgb(0, 0, 0)" stroke-width="3"
+                        <path d="M 411 231 L 431 231 L 431 181" fill="none" stroke="rgb(0, 0, 0)" stroke-width="3"
                             stroke-miterlimit="10" pointer-events="stroke" />
-                        <path d="M 431 281 L 431 251 L 411 251" fill="none" stroke="rgb(0, 0, 0)" stroke-width="3"
+                        <path d="M 431 305 L 431 251 L 411 251" fill="none" stroke="rgb(0, 0, 0)" stroke-width="3"
                             stroke-miterlimit="10" pointer-events="stroke" />
                         <path d="M 371 241 L 387.67 241" fill="none" stroke="rgb(0, 0, 0)" stroke-width="3"
                             stroke-miterlimit="10" pointer-events="stroke" />
@@ -91,13 +89,13 @@
                             fill="none" stroke="rgb(0, 0, 0)" stroke-width="3" pointer-events="all" />
                     </g>
                     <g>
-                        <path d="M 401 551 L 401 511" fill="none" stroke="rgb(0, 0, 0)" stroke-width="3"
+                        <path d="M 401 566 L 401 496" fill="none" stroke="rgb(0, 0, 0)" stroke-width="3"
                             stroke-miterlimit="10" pointer-events="stroke" />
-                        <path d="M 411 551 L 411 511" fill="none" stroke="rgb(0, 0, 0)" stroke-width="3"
+                        <path d="M 411 566 L 411 496" fill="none" stroke="rgb(0, 0, 0)" stroke-width="3"
                             stroke-miterlimit="10" pointer-events="stroke" />
-                        <path d="M 411 521 L 431 521 L 431 491" fill="none" stroke="rgb(0, 0, 0)" stroke-width="3"
+                        <path d="M 411 521 L 431 521 L 431 471" fill="none" stroke="rgb(0, 0, 0)" stroke-width="3"
                             stroke-miterlimit="10" pointer-events="stroke" />
-                        <path d="M 431 571 L 431 541 L 411 541" fill="none" stroke="rgb(0, 0, 0)" stroke-width="3"
+                        <path d="M 431 591 L 431 541 L 411 541" fill="none" stroke="rgb(0, 0, 0)" stroke-width="3"
                             stroke-miterlimit="10" pointer-events="stroke" />
                         <path d="M 371 531 L 401 531" fill="none" stroke="rgb(0, 0, 0)" stroke-width="3"
                             stroke-miterlimit="10" pointer-events="stroke" />
@@ -115,20 +113,20 @@
                             stroke-width="3" stroke-miterlimit="10" pointer-events="stroke" />
                     </g>
                     <path id="path1" fill="none" stroke="#97d23d" stroke-width="3"
-                        d="M 431 131 L 431 201" /><!--vdd to pmos-->
+                        d="M 431 131 L 431 181" /><!--vdd to pmos-->
                     <path id="path2" fill="none" stroke="#97d23d" stroke-width="3"
-                        d="M 431 651 L 431 571" /><!--gnd to nmos-->
+                        d="M 431 651 L 431 591" /><!--gnd to nmos-->
                     <path id="path3" fill="none" stroke="#97d23d" stroke-width="3"
-                        d="M 431 281 L 431 385 L 655 385" /><!--pmos to output-->
+                        d="M 431 301 L 431 385 L 655 385" /><!--pmos to output-->
                     <path id="path4" fill="none" stroke="#97d23d" stroke-width="3"
-                        d="M 431 491 L 431 385 L 655 385"  /><!--nmos to output-->
+                        d="M 431 471 L 431 385 L 655 385"  /><!--nmos to output-->
                     <path id="path5" fill="none" stroke="#97d23d" stroke-width="3"
                         d="M 150 385 L 250 385 L 250 240 L 370 240"  /><!--input to pmos-->
-                    <path id="path5" fill="none" stroke="#97d23d" stroke-width="3"
+                    <path id="path6" fill="none" stroke="#97d23d" stroke-width="3"
                         d="M 150 385 L 250 385 L 250 530 L 370 530 "  /><!--input to nmos-->
-                    <circle id="k" cx="150" cy="385" r="15" onclick="unsetI2()"
+                    <circle id="input" cx="150" cy="385" r="15" onclick="setInput()"
                         style="fill:green;stroke:rgb(68, 68, 119);stroke-width:3;fill-opacity:1;stroke-opacity:1" />
-                    <circle id="qb" cx="650" cy="385" r="15"
+                    <circle id="output" cx="650" cy="385" r="15"
                         style="fill:green;stroke:rgb(68, 68, 119);stroke-width:3;fill-opacity:1;stroke-opacity:1" />
                     <text font-size="1.5em" x="120" y="354" fill="black">Input</text>
                     <text font-size="1.5em" x="610" y="354" fill="black">Output</text>
