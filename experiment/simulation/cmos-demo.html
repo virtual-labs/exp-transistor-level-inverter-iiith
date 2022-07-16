@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/virtual-labs/virtual-style@0.0.7-b/css/style.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/virtual-labs/virtual-style@0.0.8-b/css/style.min.css">
     <link rel="stylesheet" href="css/demo.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
 
@@ -42,14 +42,17 @@
 
         <div class="columns is-centered">
             <div class="column">
-                <div class="v-instruction-container instructions-box">
-                    <div class="v-instruction-title" id="task-title">Instructions</div>
-                    <div class="v-instruction-text" id="task-description">
-                        Simulation of circuit of Complementary CMOS.
+                <div class="v-collapsible-instruction-container v-instruction-container">
+                    <div class="v-collapsible is-size-5">Instructions</div>
+                    <div class="v-content" style="text-align: left; padding-left: 10%; padding-right: 10%;">
+                        <ul style="list-style: disc;">
+                            <li><b>Start</b>- Starts the simulation after the inputs are properly selected. Default
+                                speed is 1x.</li>
+                            <li>Select the speed through dropdown menu</li>
+                            <li><b>Reset</b> - Resets the simulation</li>
+                            <li>Click on the green input bits to set their values.</li>
+                        </ul>
                     </div>
-                    <p>Start- Starts the simulation after the inputs are properly selected. Default speed is 1x. Select the speed through dropdown menu</p>
-                    <p>Reset - Resets the simulation</p>
-                    <p>Click on the green input bits to set their values.</p>
                 </div>
             </div>
         </div>
@@ -57,81 +60,57 @@
 
     <div class="columns is-centered">
         <div class="column" style="margin:auto;text-align:center">
-            <div class="v-select">
-                <select  autocomplete="off" name="speed" onchange="setSpeed(this.value)" id="speed">
-                  <option value="1" >1x</option>
-                  <option value="2">2x</option>
-                  <option value="4">4x</option>
-                </select>
-            </div>
+            <select class="speed-box" autocomplete="off" name="speed" onchange="setSpeed(this.value)" id="speed">
+                <option value="1" >1x</option>
+                <option value="2">2x</option>
+                <option value="4">4x</option>
+            </select>
             <button class="v-button" id="play-or-pause" onclick="simulationStatus()">Start</button>
             <button class="v-button" id="restart" onclick="restartCircuit()">Reset</button>
         </div>
     </div>
 
     <div class="columns is-centered is-flex is-flex-direction-row is-flex-wrap-wrap is-align-content-start">
-        <div class="column is-9-desktop is-12-tablet is-12-mobile">
+        <div class="column is-7-desktop is-12-tablet is-12-mobile">
             <div id="circuit-board">
                 <svg class="svg" xmlns="http://www.w3.org/2000/svg" width="100%" height="120%"
                     viewBox="0 0 925 1000 ">
                     <g>
-                        <path d="M 401 276 L 401 206" fill="none" stroke="rgb(0, 0, 0)" stroke-width="3"
-                            stroke-miterlimit="10" pointer-events="stroke" />
-                        <path d="M 411 276 L 411 206" fill="none" stroke="rgb(0, 0, 0)" stroke-width="3"
-                            stroke-miterlimit="10" pointer-events="stroke" />
-                        <path d="M 411 231 L 431 231 L 431 181" fill="none" stroke="rgb(0, 0, 0)" stroke-width="3"
-                            stroke-miterlimit="10" pointer-events="stroke" />
-                        <path d="M 431 305 L 431 251 L 411 251" fill="none" stroke="rgb(0, 0, 0)" stroke-width="3"
-                            stroke-miterlimit="10" pointer-events="stroke" />
-                        <path d="M 371 241 L 387.67 241" fill="none" stroke="rgb(0, 0, 0)" stroke-width="3"
-                            stroke-miterlimit="10" pointer-events="stroke" />
+                        <path d="M 401 276 L 401 206" class="demo-transistor"  />
+                        <path d="M 411 276 L 411 206" class="demo-transistor"  />
+                        <path d="M 411 231 L 431 231 L 431 181" class="demo-transistor"  />
+                        <path d="M 431 305 L 431 251 L 411 251" class="demo-transistor"  />
+                        <path d="M 371 241 L 387.67 241" class="demo-transistor"  />
                         <ellipse cx="393.02" cy="240.11" rx="5.357142857142858" ry="5.357142857142858"
                             fill="none" stroke="rgb(0, 0, 0)" stroke-width="3" pointer-events="all" />
                     </g>
                     <g>
-                        <path d="M 401 566 L 401 496" fill="none" stroke="rgb(0, 0, 0)" stroke-width="3"
-                            stroke-miterlimit="10" pointer-events="stroke" />
-                        <path d="M 411 566 L 411 496" fill="none" stroke="rgb(0, 0, 0)" stroke-width="3"
-                            stroke-miterlimit="10" pointer-events="stroke" />
-                        <path d="M 411 521 L 431 521 L 431 471" fill="none" stroke="rgb(0, 0, 0)" stroke-width="3"
-                            stroke-miterlimit="10" pointer-events="stroke" />
-                        <path d="M 431 591 L 431 541 L 411 541" fill="none" stroke="rgb(0, 0, 0)" stroke-width="3"
-                            stroke-miterlimit="10" pointer-events="stroke" />
-                        <path d="M 371 531 L 401 531" fill="none" stroke="rgb(0, 0, 0)" stroke-width="3"
-                            stroke-miterlimit="10" pointer-events="stroke" />
+                        <path d="M 401 566 L 401 496" class="demo-transistor"  />
+                        <path d="M 411 566 L 411 496" class="demo-transistor"  />
+                        <path d="M 411 521 L 431 521 L 431 471" class="demo-transistor"  />
+                        <path d="M 431 591 L 431 541 L 411 541" class="demo-transistor"  />
+                        <path d="M 371 531 L 401 531" class="demo-transistor"  />
                     </g>
                     <g>
-                        <path d="M 431 651 L 431 671 L 401 671 L 461 671" fill="none" stroke="rgb(0, 0, 0)"
-                            stroke-width="2.5" stroke-miterlimit="10" pointer-events="stroke" />
-                        <path d="M 411 681 L 451 681" fill="none" stroke="rgb(0, 0, 0)" stroke-width="3"
-                            stroke-miterlimit="10" pointer-events="stroke" />
-                        <path d="M 421 691 L 441 691" fill="none" stroke="rgb(0, 0, 0)" stroke-width="3"
-                            stroke-miterlimit="10" pointer-events="stroke" />
+                        <path d="M 431 651 L 431 671 L 401 671 L 461 671" class="demo-transistor" />
+                        <path d="M 411 681 L 451 681" class="demo-transistor"  />
+                        <path d="M 421 691 L 441 691" class="demo-transistor"  />
                     </g>
                     <g>
-                        <path d="M 431 131 L 431 101 L 412 101 L 451 101" fill="none" stroke="rgb(0, 0, 0)"
-                            stroke-width="3" stroke-miterlimit="10" pointer-events="stroke" />
+                        <path d="M 431 131 L 431 101 L 412 101 L 451 101" class="demo-transistor" />
                     </g>
-                    <path id="path1" fill="none" stroke="#97d23d" stroke-width="3"
-                        d="M 431 131 L 431 181" /><!--vdd to pmos-->
-                    <path id="path2" fill="none" stroke="#97d23d" stroke-width="3"
-                        d="M 431 651 L 431 591" /><!--gnd to nmos-->
-                    <path id="path3" fill="none" stroke="#97d23d" stroke-width="3"
-                        d="M 431 301 L 431 385 L 655 385" /><!--pmos to output-->
-                    <path id="path4" fill="none" stroke="#97d23d" stroke-width="3"
-                        d="M 431 471 L 431 385 L 655 385"  /><!--nmos to output-->
-                    <path id="path5" fill="none" stroke="#97d23d" stroke-width="3"
-                        d="M 150 385 L 250 385 L 250 240 L 370 240"  /><!--input to pmos-->
-                    <path id="path6" fill="none" stroke="#97d23d" stroke-width="3"
-                        d="M 150 385 L 250 385 L 250 530 L 370 530 "  /><!--input to nmos-->
-                    <circle id="input" cx="150" cy="385" r="15" onclick="setInput()"
-                        style="fill:green;stroke:rgb(68, 68, 119);stroke-width:3;fill-opacity:1;stroke-opacity:1" />
-                    <circle id="output" cx="650" cy="385" r="15"
-                        style="fill:green;stroke:rgb(68, 68, 119);stroke-width:3;fill-opacity:1;stroke-opacity:1" />
-                    <text font-size="1.5em" x="120" y="354" fill="black">Input</text>
-                    <text font-size="1.5em" x="610" y="354" fill="black">Output</text>
-                    <text font-size="1.5em" x="410" y="80" fill="black">VDD</text>
-                    <text font-size="1.5em" x="410" y="734" fill="black">GND</text>
+                    <path id="path1" class="demo-wires" d="M 431 131 L 431 181" /><!--vdd to pmos-->
+                    <path id="path2" class="demo-wires" d="M 431 651 L 431 591" /><!--gnd to nmos-->
+                    <path id="path3" class="demo-wires" d="M 431 301 L 431 385 L 655 385" /><!--pmos to output-->
+                    <path id="path4" class="demo-wires" d="M 431 471 L 431 385 L 655 385"  /><!--nmos to output-->
+                    <path id="path5" class="demo-wires" d="M 150 385 L 250 385 L 250 240 L 370 240"  /><!--input to pmos-->
+                    <path id="path6" class="demo-wires" d="M 150 385 L 250 385 L 250 530 L 370 530 "  /><!--input to nmos-->
+                    <circle id="input" cx="150" cy="385" r="20" onclick="setInput()" class="demo-circles" />
+                    <circle id="output" cx="650" cy="385" r="20" class="demo-circles" />
+                    <text class="demo-text" x="120" y="354">Input</text>
+                    <text class="demo-text" x="610" y="354">Output</text>
+                    <text class="demo-text" x="410" y="80">VDD</text>
+                    <text class="demo-text" x="410" y="734">GND</text>
                 </svg>
             </div>
         </div>
@@ -150,6 +129,7 @@
             <li class="menu-option">Cancel</li>
         </ul>
     </div>
+    <script src="https://cdn.jsdelivr.net/gh/virtual-labs/virtual-style@0.0.8-b/js/script.js"></script>
     <script type="module" src="js/animation-cmos.js"></script>
 </body>
 </html>

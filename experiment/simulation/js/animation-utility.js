@@ -1,9 +1,12 @@
+"use strict"
 export function setCoordinates(xObject,yObject,textObject){
     gsap.set(textObject,{
         x: xObject,
-        y: yObject
+        y: yObject,
+        fontSize: "1.5rem",
+        fontWeight: "bold",
     })
-};
+}
 export function fillInputDots(object,cxObject,cyObject,rObject,fillObject) {
     gsap.set(object, {
         attr: { cx: cxObject, cy: cyObject, r: rObject, fill: fillObject }
@@ -25,5 +28,5 @@ export function setColor(object) {
     fillColor(object,"#eeeb22");
 }
 export function unsetColor(object) {
-    fillColor(object,"#29e");
+    fillColor(object,"#03b1fc");
 }
