@@ -1,15 +1,11 @@
 'use strict';
-import { connectionMap, listPmos, listNmos,listInput, listOutput, listGround ,listVdd,listInverter } from './main.js';
+import { connectionMap, listPmos, listNmos,listInput, listOutput, listGround ,listVdd } from './main.js';
 import{checkPseudoNmos} from './not.js';
-let pmosNand = 0;
-let nmosNand = 0;
 
 // This function checks map when called
 export function checkAndUpdate() {
     // these variables are for pseudo nmos circuit
     
-    nmosNand = 0;
-    pmosNand = 0;
     listOutput[0].voltage = 0;
     // if any vdd is connected to any pmos store voltage
     for (let i = 0; i < listVdd.length; i++) {
@@ -111,7 +107,6 @@ export function checkAndUpdate() {
             if (connectionMap.has(mapElement)) {
                 if (listPmos[i].outTerminal === 1) {
                     listOutput[j].voltage = listPmos[i].outVoltage;
-                    pmosNand++;
                 }
                 if (listPmos[i].outTerminal === -1) {
                     listOutput[j].voltage = listPmos[i].outVoltage;
@@ -128,7 +123,6 @@ export function checkAndUpdate() {
                 // if nmos 
                 if (listNmos[i].outTerminal === 1) {
                     listOutput[j].voltage = listNmos[i].outVoltage;
-                    nmosNand++;
                 }
             }
         }

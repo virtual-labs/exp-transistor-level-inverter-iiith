@@ -1,6 +1,6 @@
 'use strict'
-import {compOutput, compInput0} from './integrate.js'
-import { jsplumbInstance } from './components.js';
+import { compOutput, compInput0,resetCounts } from './integrate.js'
+import { jsplumbInstance, editConnectionMap } from './components.js';
 //Creating js map to store connections
 export const connectionMap = new Map();
 // these arrays are used to store various components
@@ -11,6 +11,8 @@ export const listOutput = [];
 export const listGround = [];
 export const listVdd = [];
 export const listInverter = [];
+
+const EMPTY = "";
 
 // Disable right click 
 const container = document.getElementById("diagram");
@@ -35,45 +37,62 @@ tabs.forEach(tab => {
 
 window.refreshWorkingArea = refreshWorkingArea;
 
-export function refreshWorkingArea() {
-    console.log("selectedTab: " + selectedTab);
-    jsplumbInstance.reset();
-    connectionMap.clear();
-    for(const pmosElem of listPmos) {
+function emptyList() {
+    for (const pmosElem of listPmos) {
         let elem = document.getElementById(pmosElem.id);
         elem.parentNode.removeChild(elem);
     }
-    for(const nmosElem of listNmos) {
+    for (const nmosElem of listNmos) {
         let elem = document.getElementById(nmosElem.id);
         elem.parentNode.removeChild(elem);
     }
-    for(const groundElem of listGround) {
+    for (const groundElem of listGround) {
         let elem = document.getElementById(groundElem.id);
         elem.parentNode.removeChild(elem);
     }
-    for(const vddElem of listVdd) {
+    for (const vddElem of listVdd) {
         let elem = document.getElementById(vddElem.id);
         elem.parentNode.removeChild(elem);
     }
-    for(const inputElem of listInput) {
+    for (const inputElem of listInput) {
         let elem = document.getElementById(inputElem.id);
         elem.parentNode.removeChild(elem);
     }
-    for(const outputElem of listOutput) {
+    for (const outputElem of listOutput) {
         let elem = document.getElementById(outputElem.id);
         elem.parentNode.removeChild(elem);
     }
-    window.count = { PMOS: 0, NMOS: 0, VDD: 0, Ground: 0, Inverter: 0, Mux: 0, Latch: 0, Transistor: 0, Clock: 0, Clockbar: 0 };
-    window.maxCount = { PMOS: 1, NMOS: 1, VDD: 1, Ground: 2, Inverter: 0, Mux: 0, Latch: 0, Transistor: 0, Clock: 0, Clockbar: 0 };
     listPmos.length = 0;
     listNmos.length = 0;
     listGround.length = 0;
     listVdd.length = 0;
     listInput.length = 0;
     listOutput.length = 0;
+}
+
+function refreshObservations() {
+    // refresh the errors
+    document.getElementById("error-container").innerHTML = EMPTY;
+    // refresh the output table
+    document.getElementById("table-body").innerHTML = EMPTY;
+    // refresh result
+    document.getElementById("output-box").innerHTML = EMPTY;
+}
+
+export function refreshWorkingArea() {
+    // to reset the working area
+    jsplumbInstance.deleteEveryEndpoint();
+    editConnectionMap();
+
+    // to remove all the svgs called in the working area
+    emptyList();
+
+    resetCounts();
+
     compInput0();
     compOutput();
-    document.getElementById("error-container").innerHTML = "";
+
+    refreshObservations();
 }
 
 // refreshWorkingArea();

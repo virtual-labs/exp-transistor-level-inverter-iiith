@@ -1,23 +1,35 @@
 'use strict';
-import { connectionMap, listPmos, listNmos,listInput, listOutput, listGround ,listVdd } from './main.js';
+import { listPmos, listNmos,listInput, listOutput, listGround ,listVdd, selectedTab } from './main.js';
+import { jsplumbInstance,addInstanceFinalInput,addInstanceFinalOutput } from './components.js';
+import { addInstanceGround, addInstanceVdd, addInstancePmos, addInstanceNmos } from './components.js';
+import { checkAndUpdate } from './circuit.js';
+import { modifyOutput, circuitValid,showTruthTable} from './not.js';
+
+let count = { PMOS: 0, NMOS: 0, VDD: 0, Ground: 0, Inverter: 0, Mux: 0, Latch: 0, Transistor: 0, Clock: 0, Clockbar: 0 };
+let maxCount = { PMOS: 1, NMOS: 1, VDD: 1, Ground: 2, Inverter: 0, Mux: 0, Latch: 0, Transistor: 0, Clock: 0, Clockbar: 0 };
+
 window.compPmos=compPmos;
 window.compNmos=compNmos;
 window.compVdd=compVdd;
 window.compGround=compGround;
 window.notValid = notValid;
-import { jsplumbInstance,addInstanceFinalInput,addInstanceFinalOutput } from './components.js';
-import { addInstanceGround, addInstanceVdd, addInstancePmos, addInstanceNmos } from './components.js';
-window.count = { PMOS: 0, NMOS: 0, VDD: 0, Ground: 0, Inverter: 0, Mux: 0, Latch: 0, Transistor: 0, Clock: 0, Clockbar: 0 };
-window.maxCount = { PMOS: 1, NMOS: 1, VDD: 1, Ground: 2, Inverter: 0, Mux: 0, Latch: 0, Transistor: 0, Clock: 0, Clockbar: 0 };
-import { checkAndUpdate } from './circuit.js';
-import { modifyOutput, circuitValid,showTruthTable} from './not.js';
+
+export function resetCounts() {
+    count = { PMOS: 0, NMOS: 0, VDD: 0, Ground: 0, Inverter: 0, Mux: 0, Latch: 0, Transistor: 0, Clock: 0, Clockbar: 0 };
+    if(selectedTab===0) {
+        maxCount = { PMOS: 1, NMOS: 1, VDD: 1, Ground: 1, Inverter: 0, Mux: 0, Latch: 0, Transistor: 0, Clock: 0, Clockbar: 0 };
+    }
+    else {
+        maxCount = { PMOS: 1, NMOS: 1, VDD: 1, Ground: 2, Inverter: 0, Mux: 0, Latch: 0, Transistor: 0, Clock: 0, Clockbar: 0 };
+    }
+}
 
 export function notValid() {
     checkAndUpdate();
     modifyOutput();
     circuitValid();
     showTruthTable();
-    document.getElementById('error-container').style = 'display:none;';
+    document.getElementById('error-container').innerHTML = "";
 }
 function printExcessComponents() {
     const result = document.getElementById("error-container")
@@ -25,15 +37,15 @@ function printExcessComponents() {
     result.className = "text-danger";
 }
 export function compPmos() {
-    window.maxCount.PMOS -= 1;
-    if (window.maxCount.PMOS < 0) {
+    maxCount.PMOS -= 1;
+    if (maxCount.PMOS < 0) {
         printExcessComponents();
         return;
     }
 
     //  keep tracking count
-    const id = "pmos" + window.count.PMOS;
-    window.count.PMOS += 1;
+    const id = "pmos" + count.PMOS;
+    count.PMOS += 1;
     const container = document.getElementById("diagram");
 
     // render in workspace
@@ -62,13 +74,13 @@ export function compPmos() {
 }
 
 export function compNmos() {
-    window.maxCount.NMOS -= 1;
-    if (window.maxCount.NMOS < 0) {
+    maxCount.NMOS -= 1;
+    if (maxCount.NMOS < 0) {
         printExcessComponents();
         return;
     }
 
-    const id = "nmos" + window.count.NMOS;
+    const id = "nmos" + count.NMOS;
 
     const svgElement = document.createElement('div');
     svgElement.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="-0.5 -0.5 84 84"><g><path d="M 31 61 L 31 21" fill="none" stroke="rgb(0, 0, 0)" stroke-width="3" stroke-miterlimit="10" pointer-events="stroke"/><path d="M 41 61 L 41 21" fill="none" stroke="rgb(0, 0, 0)" stroke-width="3" stroke-miterlimit="10" pointer-events="stroke"/><path d="M 41 31 L 61 31 L 61 1" fill="none" stroke="rgb(0, 0, 0)" stroke-width="3" stroke-miterlimit="10" pointer-events="stroke"/><path d="M 61 81 L 61 51 L 41 51" fill="none" stroke="rgb(0, 0, 0)" stroke-width="3" stroke-miterlimit="10" pointer-events="stroke"/><path d="M 1 41 L 31 41" fill="none" stroke="rgb(0, 0, 0)" stroke-width="3" stroke-miterlimit="10" pointer-events="stroke"/></g></svg>'
@@ -78,7 +90,7 @@ export function compNmos() {
     svgElement.midTerminal = 1;
     svgElement.outTerminal = 1;
     svgElement.outVoltage = 0;
-    window.count.NMOS += 1;
+    count.NMOS += 1;
     const container = document.getElementById("diagram");
 
     const divPushed = new Object();
@@ -97,20 +109,20 @@ export function compNmos() {
 }
 
 export function compVdd() {
-    window.maxCount.VDD -= 1;
-    if (window.maxCount.VDD < 0) {
+    maxCount.VDD -= 1;
+    if (maxCount.VDD < 0) {
         printExcessComponents();
         return;
     }
 
-    const id = "vdd" + window.count.VDD;
+    const id = "vdd" + count.VDD;
 
     const svgElement = document.createElement('div');
     svgElement.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="-0.5 -6 44 34" ><g><path d="M 21 31 L 21 1 L 1 1 L 41 1" fill="none" stroke="rgb(0, 0, 0)" stroke-width="2" stroke-miterlimit="10" pointer-events="stroke"/></g></svg>'
     svgElement.id = id;
     svgElement.className = 'component';
     svgElement.voltage = 1;
-    window.count.VDD += 1;
+    count.VDD += 1;
 
     const divPushed = new Object();
     divPushed.id = id;
@@ -126,13 +138,13 @@ export function compVdd() {
 
 export function compGround() {
 
-    window.maxCount.Ground -= 1;
-    if (window.maxCount.Ground < 0) {
+    maxCount.Ground -= 1;
+    if (maxCount.Ground < 0) {
         printExcessComponents();
         return;
     }
 
-    const id = "ground" + window.count.Ground;
+    const id = "ground" + count.Ground;
     const container = document.getElementById("diagram");
 
     const svgElement = document.createElement('div');
@@ -140,7 +152,7 @@ export function compGround() {
     svgElement.id = id;
     svgElement.className = 'component';
     svgElement.voltage = 0;
-    window.count.Ground += 1;
+    count.Ground += 1;
 
     const divPushed = new Object();
     divPushed.id = id;
@@ -244,7 +256,7 @@ export function compInput0() {
         }.bind(m, i), u)
     }
 
-    function v(t) {
+    function v() {
         var a;
         (a = n) && (e.cancelAnimationFrame ? e.cancelAnimationFrame(a.value) : e.webkitCancelAnimationFrame ? e.webkitCancelAnimationFrame(a.value) : e.webkitCancelRequestAnimationFrame ? e.webkitCancelRequestAnimationFrame(a.value) : e.mozCancelRequestAnimationFrame ? e.mozCancelRequestAnimationFrame(a.value) : e.oCancelRequestAnimationFrame ? e.oCancelRequestAnimationFrame(a.value) : e.msCancelRequestAnimationFrame ? e.msCancelRequestAnimationFrame(a.value) : clearTimeout(a)), n = null
     }

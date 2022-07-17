@@ -1,5 +1,5 @@
 'use strict';
-import { connectionMap, listPmos, listNmos,listInput, listOutput, listGround ,listVdd,listInverter,selectedTab,currentTab } from './main.js';
+import { connectionMap,listInput, selectedTab,currentTab } from './main.js';
 import { checkAndUpdate, getTruthValue } from './circuit.js';
 
 

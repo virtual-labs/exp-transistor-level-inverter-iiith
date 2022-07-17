@@ -1,5 +1,5 @@
 'use strict';
-import { connectionMap, listPmos, listNmos,listInput, listOutput, listGround ,listVdd,listInverter } from './main.js';
+import { connectionMap } from './main.js';
 
 export const jsplumbInstance = jsPlumb.getInstance({
     container: diagram,
@@ -31,11 +31,13 @@ export function editConnectionMap() {
     connectionMap.clear();
     jsplumbInstance.getAllConnections().forEach(connection => {
         const connectionId = `${connection.sourceId}$${connection.targetId}`
+        console.log(connectionId);
         connectionMap.set(connectionId, connection.targetId)
     });
 }
 
 jsplumbInstance.bind("connection", () => {
+    console.log("connection");
     editConnectionMap();
 });
 
