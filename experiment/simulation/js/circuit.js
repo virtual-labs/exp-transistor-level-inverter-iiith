@@ -1,8 +1,13 @@
 'use strict';
+import { connectionMap, listPmos, listNmos,listInput, listOutput, listGround ,listVdd,listInverter } from './main.js';
+import{checkPseudoNmos} from './not.js';
+let pmosNand = 0;
+let nmosNand = 0;
 
 // This function checks map when called
-function checkAndUpdate() {
+export function checkAndUpdate() {
     // these variables are for pseudo nmos circuit
+    
     nmosNand = 0;
     pmosNand = 0;
     listOutput[0].voltage = 0;
@@ -130,7 +135,7 @@ function checkAndUpdate() {
     }
 }
 
-function getTruthValue() {
+export function getTruthValue() {
     const out = listOutput[0].voltage;
     const psNmosCircuitValid = checkPseudoNmos();
     if (listInput[0].input === 0 && psNmosCircuitValid === 1) {

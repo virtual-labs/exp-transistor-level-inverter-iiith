@@ -138,3 +138,8 @@
 #output-box {
   overflow: auto;
 }
+
+.v-instruction-container {
+  border: .2rem solid #97d23d;
+  justify-content: flex-start;
+}

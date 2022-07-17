@@ -29,30 +29,31 @@
             </ul>
         </div>
     </div>
-
     <div class="columns is-centered is-flex">
-        <div class="column is-6-desktop is-10-tablet is-10-mobile">
-            <div class="v-collapsible-instruction-container">
-                <div class="v-collapsible is-size-5">Instructions</div>
-                <div class="v-content">
+        <div class="column">
+            <div class="v-collapsible-instruction-container v-instruction-container">
+                <div class="v-collapsible is-size-5" id="task-description">
+                    Instructions
+                </div>
+                <div class="v-content" style="text-align: left; padding-left: 10%; padding-right: 10%;">
                     <ul style="list-style: disc;">
-                        <li>Click or tap on an element in the tool bar to place it in the workspace</li>
-                        <li>Double click on a wire to delete it</li>
+                        <li>Click on components on the left side to add them to the circuit board.</li>
+                        <li>Drag and drop components to move them around, connect them using wires by dragging your
+                            cursor from one endpoint to another.</li>
+                        <li>Double click on a wire to delete it.</li>
                         <li>Double click or long press on input element to change it's value</li>
-                        <li>If you did anything wrong click on reset button</li>
                         <li>Select the appropriate tab and click on validate after completion of circuit</li>
                     </ul>
                 </div>
             </div>
         </div>
     </div>
-
     <div class="columns is-variable is-1 is-centered is-flex is-flex-wrap-wrap">
         <div id="start" class="column is-2-desktop is-2-tablet is-3-mobile center-content">
             <button class="v-button" onclick="notValid()">Validate</button>
         </div>
         <div id="restart" class="column is-2-desktop is-2-tablet is-3-mobile center-content">
-            <button class="v-button" onclick="location.reload()">Reset</button>
+            <button class="v-button" onclick="refreshWorkingArea()">Reset</button>
         </div>
     </div>
 
@@ -166,60 +167,12 @@
                 <div id="output-box">
 
                 </div>
-                <div class="v-datalist-row text-danger" id="error-container" style="display:none;">
-                    Required no. of components of this type are already present in the workspace
+                <div class="v-datalist-row text-danger" id="error-container">
                 </div>
             </div>
         </div>
     </div>
-
-    <script>
-        //Creating js map to store connections
-        const connectionMap = new Map();
-        // these arrays are used to store various components
-        const listPmos = [];
-        const listNmos = [];
-        const listInput = [];
-        const listOutput = [];
-        const listGround = [];
-        const listVdd = [];
-        const listInverter = [];
-        // Disable right click 
-        const container = document.getElementById("diagram");
-        container.addEventListener("contextmenu", function (e) {
-            e.preventDefault();
-        });
-
-        let pmosNand = 0;
-        let nmosNand = 0;
-        // Tab selection
-        const currentTab = { CMOS: 0, PNMOS: 1 }
-        let selectedTab = currentTab.CMOS
-        const tabs = document.querySelectorAll('.v-tabs li');
-
-        tabs.forEach(tab => {
-            tab.addEventListener('click', () => {
-                tabs.forEach(item => item.classList.remove('is-active'));
-                tab.classList.add('is-active');
-
-                let parent = tab.parentNode;
-                selectedTab = Array.prototype.indexOf.call(parent.children, tab);
-            })
-        })
-
-    </script>
-
-    <script src="js/components.js"></script>
-    <script src="js/integrate.js"></script>
-    <script src="js/circuit.js"></script>
-    <script src="js/not.js"></script>
-
-    <!-- <button onclick="changeoutput()">Input</button> -->
-
-    <script>
-        compInput0()
-        compOutput()
-    </script>
+    <script type="module" src="js/main.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/virtual-labs/virtual-style@0.0.8-b/js/script.js"></script>
 </body>
 

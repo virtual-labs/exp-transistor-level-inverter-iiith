@@ -1,15 +1,39 @@
 'use strict';
+import { connectionMap, listPmos, listNmos,listInput, listOutput, listGround ,listVdd } from './main.js';
+window.compPmos=compPmos;
+window.compNmos=compNmos;
+window.compVdd=compVdd;
+window.compGround=compGround;
+window.notValid = notValid;
+import { jsplumbInstance,addInstanceFinalInput,addInstanceFinalOutput } from './components.js';
+import { addInstanceGround, addInstanceVdd, addInstancePmos, addInstanceNmos } from './components.js';
+window.count = { PMOS: 0, NMOS: 0, VDD: 0, Ground: 0, Inverter: 0, Mux: 0, Latch: 0, Transistor: 0, Clock: 0, Clockbar: 0 };
+window.maxCount = { PMOS: 1, NMOS: 1, VDD: 1, Ground: 2, Inverter: 0, Mux: 0, Latch: 0, Transistor: 0, Clock: 0, Clockbar: 0 };
+import { checkAndUpdate } from './circuit.js';
+import { modifyOutput, circuitValid,showTruthTable} from './not.js';
 
-function compPmos() {
-    maxCount.PMOS -= 1
-    if (maxCount.PMOS < 0) {
-        document.getElementById('error-container').style.display = 'flex';
+export function notValid() {
+    checkAndUpdate();
+    modifyOutput();
+    circuitValid();
+    showTruthTable();
+    document.getElementById('error-container').style = 'display:none;';
+}
+function printExcessComponents() {
+    const result = document.getElementById("error-container")
+    result.innerHTML = "Required no. of components of this type are already present in the workspace";
+    result.className = "text-danger";
+}
+export function compPmos() {
+    window.maxCount.PMOS -= 1;
+    if (window.maxCount.PMOS < 0) {
+        printExcessComponents();
         return;
     }
 
     //  keep tracking count
-    const id = "pmos" + count.PMOS;
-    count.PMOS += 1;
+    const id = "pmos" + window.count.PMOS;
+    window.count.PMOS += 1;
     const container = document.getElementById("diagram");
 
     // render in workspace
@@ -37,14 +61,14 @@ function compPmos() {
     addInstancePmos(id);
 }
 
-function compNmos() {
-    maxCount.NMOS -= 1;
-    if (maxCount.NMOS < 0) {
-        document.getElementById('error-container').style.display = 'flex';
+export function compNmos() {
+    window.maxCount.NMOS -= 1;
+    if (window.maxCount.NMOS < 0) {
+        printExcessComponents();
         return;
     }
 
-    const id = "nmos" + count.NMOS;
+    const id = "nmos" + window.count.NMOS;
 
     const svgElement = document.createElement('div');
     svgElement.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="-0.5 -0.5 84 84"><g><path d="M 31 61 L 31 21" fill="none" stroke="rgb(0, 0, 0)" stroke-width="3" stroke-miterlimit="10" pointer-events="stroke"/><path d="M 41 61 L 41 21" fill="none" stroke="rgb(0, 0, 0)" stroke-width="3" stroke-miterlimit="10" pointer-events="stroke"/><path d="M 41 31 L 61 31 L 61 1" fill="none" stroke="rgb(0, 0, 0)" stroke-width="3" stroke-miterlimit="10" pointer-events="stroke"/><path d="M 61 81 L 61 51 L 41 51" fill="none" stroke="rgb(0, 0, 0)" stroke-width="3" stroke-miterlimit="10" pointer-events="stroke"/><path d="M 1 41 L 31 41" fill="none" stroke="rgb(0, 0, 0)" stroke-width="3" stroke-miterlimit="10" pointer-events="stroke"/></g></svg>'
@@ -54,7 +78,7 @@ function compNmos() {
     svgElement.midTerminal = 1;
     svgElement.outTerminal = 1;
     svgElement.outVoltage = 0;
-    count.NMOS += 1;
+    window.count.NMOS += 1;
     const container = document.getElementById("diagram");
 
     const divPushed = new Object();
@@ -72,21 +96,21 @@ function compNmos() {
     addInstanceNmos(id);
 }
 
-function compVdd() {
-    maxCount.VDD -= 1;
-    if (maxCount.VDD < 0) {
-        document.getElementById('error-container').style.display = 'flex';
+export function compVdd() {
+    window.maxCount.VDD -= 1;
+    if (window.maxCount.VDD < 0) {
+        printExcessComponents();
         return;
     }
 
-    const id = "vdd" + count.VDD;
+    const id = "vdd" + window.count.VDD;
 
     const svgElement = document.createElement('div');
     svgElement.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="-0.5 -6 44 34" ><g><path d="M 21 31 L 21 1 L 1 1 L 41 1" fill="none" stroke="rgb(0, 0, 0)" stroke-width="2" stroke-miterlimit="10" pointer-events="stroke"/></g></svg>'
     svgElement.id = id;
     svgElement.className = 'component';
     svgElement.voltage = 1;
-    count.VDD += 1;
+    window.count.VDD += 1;
 
     const divPushed = new Object();
     divPushed.id = id;
@@ -100,15 +124,15 @@ function compVdd() {
     addInstanceVdd(id);
 }
 
-function compGround() {
+export function compGround() {
 
-    maxCount.Ground -= 1;
-    if (maxCount.Ground < 0) {
-        document.getElementById('error-container').style.display = 'flex';
+    window.maxCount.Ground -= 1;
+    if (window.maxCount.Ground < 0) {
+        printExcessComponents();
         return;
     }
 
-    const id = "ground" + count.Ground;
+    const id = "ground" + window.count.Ground;
     const container = document.getElementById("diagram");
 
     const svgElement = document.createElement('div');
@@ -116,7 +140,7 @@ function compGround() {
     svgElement.id = id;
     svgElement.className = 'component';
     svgElement.voltage = 0;
-    count.Ground += 1;
+    window.count.Ground += 1;
 
     const divPushed = new Object();
     divPushed.id = id;
@@ -130,7 +154,7 @@ function compGround() {
     addInstanceGround(id);
 }
 
-function compInput0() {
+export function compInput0() {
     const id = "input0";
     const svgElement = document.createElement('div');
     svgElement.innerHTML = 'Input 1<br>1'
@@ -231,7 +255,7 @@ function compInput0() {
     }, !0), t.addEventListener("wheel", v, !0), t.addEventListener("scroll", v, !0), t.addEventListener(i, function (e) { u = e.clientX, r = e.clientY, l(e) }, !0)
 }(window, document);
 
-function compOutput() {
+export function compOutput() {
     const id = "output0";
     const svgElement = document.createElement('div');
     svgElement.innerHTML = 'Output<br>-'

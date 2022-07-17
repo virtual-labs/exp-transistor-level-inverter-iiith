@@ -1,14 +1,9 @@
 'use strict';
+import { connectionMap, listPmos, listNmos,listInput, listOutput, listGround ,listVdd,listInverter,selectedTab,currentTab } from './main.js';
+import { checkAndUpdate, getTruthValue } from './circuit.js';
 
-function notValid() {
-    checkAndUpdate();
-    modifyOutput();
-    circuitValid();
-    showTruthTable();
-    document.getElementById('error-container').style = 'display:none;';
-}
 
-function showTruthTable() {
+export function showTruthTable() {
     const output = [];
     const tableBody = document.getElementById("table-body");
     const divInput0 = document.getElementById("input0");
@@ -31,12 +26,12 @@ function showTruthTable() {
     tableBody.innerHTML = `<tr><td>0</td><td>1</td><td>${output[0]}</td></tr><tr><td>1</td><td>0</td><td>${output[1]} </td></tr>`;
 }
 
-function modifyOutput() {
+export function modifyOutput() {
     const divOutput0 = document.getElementById("output0");
     divOutput0.innerHTML = 'Output<br>' + getTruthValue();
 }
 
-function permutator(inputArr) {
+export function permutator(inputArr) {
     const results = [];
 
     function permute(arr, memo) {
@@ -59,7 +54,7 @@ function permutator(inputArr) {
     return permute(inputArr);
 }
 
-function checkPseudoNmos() {
+export function checkPseudoNmos() {
     const permutatorMap = permutator([0, 1]);
     let psNmosCircuitValid = 0;
     for (let i = 0; i < permutatorMap.length; i++) {
@@ -71,9 +66,10 @@ function checkPseudoNmos() {
     return psNmosCircuitValid;
 }
 
-function circuitValid() {
+export function circuitValid() {
     const psNmosCircuitValid = checkPseudoNmos()
     // check if correct nand gate is made using correct components
+    console.log(connectionMap);
     if (selectedTab === currentTab.CMOS && connectionMap.has("vdd0$pmos0") && connectionMap.has("input0$pmos0") && connectionMap.has("pmos0$output0") && connectionMap.has("input0$nmos0") && connectionMap.has("nmos0$output0") && connectionMap.has("ground0$nmos0") && connectionMap.size === 6) {
         changeObservation("&#10004; Circuit is correct", 'text-danger', 'text-success');
     } else if (selectedTab === currentTab.PNMOS && psNmosCircuitValid) {
@@ -83,7 +79,7 @@ function circuitValid() {
     }
 }
 
-function changeObservation(htmlText, removedClass, addedClass) {
+export function changeObservation(htmlText, removedClass, addedClass) {
     const observationBoxElem = document.getElementById("output-box");
     observationBoxElem.innerHTML = htmlText;
     observationBoxElem.classList.remove(removedClass);
