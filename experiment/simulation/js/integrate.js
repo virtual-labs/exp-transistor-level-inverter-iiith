@@ -1,5 +1,5 @@
 'use strict';
-import { listPmos, listNmos,listInput, listOutput, listGround ,listVdd, selectedTab } from './main.js';
+import { listPmos, listNmos,listInput, listOutput, listGround ,listVdd, selectedTab, currentTab } from './main.js';
 import { jsplumbInstance,addInstanceFinalInput,addInstanceFinalOutput } from './components.js';
 import { addInstanceGround, addInstanceVdd, addInstancePmos, addInstanceNmos } from './components.js';
 import { checkAndUpdate } from './circuit.js';
@@ -16,7 +16,7 @@ window.notValid = notValid;
 
 export function resetCounts() {
     count = { PMOS: 0, NMOS: 0, VDD: 0, Ground: 0, Inverter: 0, Mux: 0, Latch: 0, Transistor: 0, Clock: 0, Clockbar: 0 };
-    if(selectedTab===0) {
+    if(selectedTab===currentTab.CMOS) {
         maxCount = { PMOS: 1, NMOS: 1, VDD: 1, Ground: 1, Inverter: 0, Mux: 0, Latch: 0, Transistor: 0, Clock: 0, Clockbar: 0 };
     }
     else {

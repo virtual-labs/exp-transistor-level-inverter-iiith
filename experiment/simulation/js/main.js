@@ -95,6 +95,6 @@ export function refreshWorkingArea() {
     refreshObservations();
 }
 
-// refreshWorkingArea();
+refreshWorkingArea();
 compInput0();
 compOutput();
