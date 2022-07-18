@@ -96,5 +96,3 @@ export function refreshWorkingArea() {
 }
 
 refreshWorkingArea();
-compInput0();
-compOutput();
