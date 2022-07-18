@@ -69,7 +69,6 @@ export function checkPseudoNmos() {
 export function circuitValid() {
     const psNmosCircuitValid = checkPseudoNmos()
     // check if correct nand gate is made using correct components
-    console.log(connectionMap);
     if (selectedTab === currentTab.CMOS && connectionMap.has("vdd0$pmos0") && connectionMap.has("input0$pmos0") && connectionMap.has("pmos0$output0") && connectionMap.has("input0$nmos0") && connectionMap.has("nmos0$output0") && connectionMap.has("ground0$nmos0") && connectionMap.size === 6) {
         changeObservation("&#10004; Circuit is correct", 'text-danger', 'text-success');
     } else if (selectedTab === currentTab.PNMOS && psNmosCircuitValid) {

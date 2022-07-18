@@ -31,13 +31,11 @@ export function editConnectionMap() {
     connectionMap.clear();
     jsplumbInstance.getAllConnections().forEach(connection => {
         const connectionId = `${connection.sourceId}$${connection.targetId}`
-        console.log(connectionId);
         connectionMap.set(connectionId, connection.targetId)
     });
 }
 
 jsplumbInstance.bind("connection", () => {
-    console.log("connection");
     editConnectionMap();
 });
 
