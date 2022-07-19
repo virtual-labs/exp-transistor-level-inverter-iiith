@@ -1,22 +1,22 @@
 'use strict';
-import { listPmos, listNmos,listInput, listOutput, listGround ,listVdd, selectedTab, currentTab } from './main.js';
-import { jsplumbInstance,addInstanceFinalInput,addInstanceFinalOutput } from './components.js';
+import { listPmos, listNmos, listInput, listOutput, listGround, listVdd, selectedTab, currentTab } from './main.js';
+import { jsplumbInstance, addInstanceFinalInput, addInstanceFinalOutput } from './components.js';
 import { addInstanceGround, addInstanceVdd, addInstancePmos, addInstanceNmos } from './components.js';
 import { checkAndUpdate } from './circuit.js';
-import { modifyOutput, circuitValid,showTruthTable} from './not.js';
+import { modifyOutput, circuitValid, showTruthTable } from './not.js';
 
 let count = { PMOS: 0, NMOS: 0, VDD: 0, Ground: 0, Inverter: 0, Mux: 0, Latch: 0, Transistor: 0, Clock: 0, Clockbar: 0 };
 let maxCount = { PMOS: 1, NMOS: 1, VDD: 1, Ground: 2, Inverter: 0, Mux: 0, Latch: 0, Transistor: 0, Clock: 0, Clockbar: 0 };
 
-window.compPmos=compPmos;
-window.compNmos=compNmos;
-window.compVdd=compVdd;
-window.compGround=compGround;
+window.compPmos = compPmos;
+window.compNmos = compNmos;
+window.compVdd = compVdd;
+window.compGround = compGround;
 window.notValid = notValid;
 
 export function resetCounts() {
     count = { PMOS: 0, NMOS: 0, VDD: 0, Ground: 0, Inverter: 0, Mux: 0, Latch: 0, Transistor: 0, Clock: 0, Clockbar: 0 };
-    if(selectedTab===currentTab.CMOS) {
+    if (selectedTab === currentTab.CMOS) {
         maxCount = { PMOS: 1, NMOS: 1, VDD: 1, Ground: 1, Inverter: 0, Mux: 0, Latch: 0, Transistor: 0, Clock: 0, Clockbar: 0 };
     }
     else {
@@ -50,7 +50,17 @@ export function compPmos() {
 
     // render in workspace
     const svgElement = document.createElement('div');
-    svgElement.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="-0.5 -0.5 84 84" ><g><path d="M 31 61 L 31 21" fill="none" stroke="rgb(0, 0, 0)" stroke-width="3" stroke-miterlimit="10" pointer-events="stroke"/><path d="M 41 61 L 41 21" fill="none" stroke="rgb(0, 0, 0)" stroke-width="3" stroke-miterlimit="10" pointer-events="stroke"/><path d="M 41 31 L 61 31 L 61 1" fill="none" stroke="rgb(0, 0, 0)" stroke-width="3" stroke-miterlimit="10" pointer-events="stroke"/><path d="M 61 81 L 61 51 L 41 51" fill="none" stroke="rgb(0, 0, 0)" stroke-width="3" stroke-miterlimit="10" pointer-events="stroke"/><path d="M 1 41 L 17.67 41" fill="none" stroke="rgb(0, 0, 0)" stroke-width="3" stroke-miterlimit="10" pointer-events="stroke"/><ellipse cx="23.02" cy="40.11" rx="5.357142857142858" ry="5.357142857142858" fill="none" stroke="rgb(0, 0, 0)" stroke-width="3" pointer-events="all"/></g></svg>'
+    svgElement.innerHTML = `
+        <svg xmlns="http://www.w3.org/2000/svg"xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="-0.5 -0.5 84 84" >
+            <g class="demo-transistor">
+                <path d="M 31 61 L 31 21"/>
+                <path d="M 41 61 L 41 21"/>
+                <path d="M 41 31 L 61 31 L 61 1"/>
+                <path d="M 61 81 L 61 51 L 41 51"/>
+                <path d="M 1 41 L 17.67 41"/>
+                <ellipse cx="23.02" cy="40.11" rx="5.357142857142858" ry="5.357142857142858"/>
+            </g>
+        </svg>`;
     svgElement.id = id;
     svgElement.className = 'component';
     svgElement.midTerminal = 1;
@@ -59,7 +69,7 @@ export function compPmos() {
     svgElement.outVoltage = 0;
     // d.number = count1;
     // Added javasript objects and their properties
-    const divPushed = new Object();
+    const divPushed = {};
     divPushed.id = id;
     divPushed.voltage = 0;
     divPushed.midTerminal = 1;
@@ -83,7 +93,16 @@ export function compNmos() {
     const id = "nmos" + count.NMOS;
 
     const svgElement = document.createElement('div');
-    svgElement.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="-0.5 -0.5 84 84"><g><path d="M 31 61 L 31 21" fill="none" stroke="rgb(0, 0, 0)" stroke-width="3" stroke-miterlimit="10" pointer-events="stroke"/><path d="M 41 61 L 41 21" fill="none" stroke="rgb(0, 0, 0)" stroke-width="3" stroke-miterlimit="10" pointer-events="stroke"/><path d="M 41 31 L 61 31 L 61 1" fill="none" stroke="rgb(0, 0, 0)" stroke-width="3" stroke-miterlimit="10" pointer-events="stroke"/><path d="M 61 81 L 61 51 L 41 51" fill="none" stroke="rgb(0, 0, 0)" stroke-width="3" stroke-miterlimit="10" pointer-events="stroke"/><path d="M 1 41 L 31 41" fill="none" stroke="rgb(0, 0, 0)" stroke-width="3" stroke-miterlimit="10" pointer-events="stroke"/></g></svg>'
+    svgElement.innerHTML = `
+        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="-0.5 -0.5 84 84">
+            <g class="demo-transistor">
+                <path d="M 31 61 L 31 21"/>
+                <path d="M 41 61 L 41 21"/>
+                <path d="M 41 31 L 61 31 L 61 1"/>
+                <path d="M 61 81 L 61 51 L 41 51"/>
+                <path d="M 1 41 L 31 41"/>
+            </g>
+        </svg>`;
     svgElement.id = id;
     svgElement.className = 'component';
     svgElement.voltage = 0;
@@ -93,7 +112,7 @@ export function compNmos() {
     count.NMOS += 1;
     const container = document.getElementById("diagram");
 
-    const divPushed = new Object();
+    const divPushed = {};
     divPushed.id = id;
     divPushed.voltage = 0;
     divPushed.midTerminal = 1;
@@ -118,13 +137,18 @@ export function compVdd() {
     const id = "vdd" + count.VDD;
 
     const svgElement = document.createElement('div');
-    svgElement.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="-0.5 -6 44 34" ><g><path d="M 21 31 L 21 1 L 1 1 L 41 1" fill="none" stroke="rgb(0, 0, 0)" stroke-width="2" stroke-miterlimit="10" pointer-events="stroke"/></g></svg>'
+    svgElement.innerHTML = `
+        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="-0.5 -6 44 34" >
+            <g class="demo-transistor">
+                <path d="M 21 31 L 21 1 L 1 1 L 41 1"/>
+            </g>
+        </svg>`;
     svgElement.id = id;
     svgElement.className = 'component';
     svgElement.voltage = 1;
     count.VDD += 1;
 
-    const divPushed = new Object();
+    const divPushed = {};
     divPushed.id = id;
     divPushed.voltage = 1;
     const container = document.getElementById("diagram");
@@ -148,13 +172,20 @@ export function compGround() {
     const container = document.getElementById("diagram");
 
     const svgElement = document.createElement('div');
-    svgElement.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="-0.5 8 64 44" ><g><path d="M 31 1 L 31 21 L 1 21 L 61 21" fill="none" stroke="rgb(0, 0, 0)" stroke-width="2.5" stroke-miterlimit="10" pointer-events="stroke"/><path d="M 11 31 L 51 31" fill="none" stroke="rgb(0, 0, 0)" stroke-width="2.5" stroke-miterlimit="10" pointer-events="stroke"/><path d="M 21 41 L 41 41" fill="none" stroke="rgb(0, 0, 0)" stroke-width="2.5" stroke-miterlimit="10" pointer-events="stroke"/></g></svg>'
+    svgElement.innerHTML = `
+        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="-0.5 8 64 44" >
+            <g class="demo-transistor">
+                <path d="M 31 1 L 31 21 L 1 21 L 61 21"/>
+                <path d="M 11 31 L 51 31"/>
+                <path d="M 21 41 L 41 41"/>
+            </g>
+        </svg>`;
     svgElement.id = id;
     svgElement.className = 'component';
     svgElement.voltage = 0;
     count.Ground += 1;
 
-    const divPushed = new Object();
+    const divPushed = {};
     divPushed.id = id;
     divPushed.voltage = 0;
 
@@ -207,7 +238,7 @@ export function compInput0() {
     svgElement.voltage = 5;
     const container = document.getElementById("diagram");
 
-    const divPushed = new Object();
+    const divPushed = {};
     divPushed.id = id;
     divPushed.input = 1;
     divPushed.voltage = 5;
@@ -221,52 +252,6 @@ export function compInput0() {
 
 }
 
-! function (e, t) {
-    "use strict";
-    var n = null,
-        a = "ontouchstart" in e || navigator.MaxTouchPoints > 0 || navigator.msMaxTouchPoints > 0,
-        i = a ? "touchstart" : "mousedown",
-        o = a ? "touchend" : "mouseup",
-        m = a ? "touchmove" : "mousemove",
-        u = 0,
-        r = 0,
-        s = 10,
-        c = 10;
-
-    function l(i) {
-        v(i);
-        var m = i.target,
-            u = parseInt(m.getAttribute("data-long-press-delay") || "1500", 10);
-        n = function (t, n) {
-            if (!(e.requestAnimationFrame || e.webkitRequestAnimationFrame || e.mozRequestAnimationFrame && e.mozCancelRequestAnimationFrame || e.oRequestAnimationFrame || e.msRequestAnimationFrame)) return e.setTimeout(t, n);
-            var a = (new Date).getTime(),
-                i = {},
-                o = function () {
-                    (new Date).getTime() - a >= n ? t.call() : i.value = requestAnimFrame(o)
-                };
-            return i.value = requestAnimFrame(o), i
-        }(function (e) {
-            v();
-            var n = a ? e.touches[0].clientX : e.clientX,
-                i = a ? e.touches[0].clientY : e.clientY;
-            this.dispatchEvent(new CustomEvent("long-press", { bubbles: !0, cancelable: !0, detail: { clientX: n, clientY: i } })) && t.addEventListener(o, function e(n) {
-                t.removeEventListener(o, e, !0),
-                    function (e) { e.stopImmediatePropagation(), e.preventDefault(), e.stopPropagation() }(n)
-            }, !0)
-        }.bind(m, i), u)
-    }
-
-    function v() {
-        var a;
-        (a = n) && (e.cancelAnimationFrame ? e.cancelAnimationFrame(a.value) : e.webkitCancelAnimationFrame ? e.webkitCancelAnimationFrame(a.value) : e.webkitCancelRequestAnimationFrame ? e.webkitCancelRequestAnimationFrame(a.value) : e.mozCancelRequestAnimationFrame ? e.mozCancelRequestAnimationFrame(a.value) : e.oCancelRequestAnimationFrame ? e.oCancelRequestAnimationFrame(a.value) : e.msCancelRequestAnimationFrame ? e.msCancelRequestAnimationFrame(a.value) : clearTimeout(a)), n = null
-    }
-    "function" != typeof e.CustomEvent && (e.CustomEvent = function (e, n) { n = n || { bubbles: !1, cancelable: !1, detail: void 0 }; var a = t.createEvent("CustomEvent"); return a.initCustomEvent(e, n.bubbles, n.cancelable, n.detail), a }, e.CustomEvent.prototype = e.Event.prototype), e.requestAnimFrame = e.requestAnimationFrame || e.webkitRequestAnimationFrame || e.mozRequestAnimationFrame || e.oRequestAnimationFrame || e.msRequestAnimationFrame || function (t) { e.setTimeout(t, 1e3 / 60) }, t.addEventListener(o, v, !0), t.addEventListener(m, function (e) {
-        var t = Math.abs(u - e.clientX),
-            n = Math.abs(r - e.clientY);
-        (t >= s || n >= c) && v()
-    }, !0), t.addEventListener("wheel", v, !0), t.addEventListener("scroll", v, !0), t.addEventListener(i, function (e) { u = e.clientX, r = e.clientY, l(e) }, !0)
-}(window, document);
-
 export function compOutput() {
     const id = "output0";
     const svgElement = document.createElement('div');
@@ -278,7 +263,7 @@ export function compOutput() {
     svgElement.outputsign = 1;
     svgElement.voltage = 0;
 
-    const divPushed = new Object();
+    const divPushed = {};
     divPushed.id = id;
     divPushed.voltage = 0;
     divPushed.outputsign = 1;

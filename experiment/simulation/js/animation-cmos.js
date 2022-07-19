@@ -24,15 +24,15 @@ const observ = document.getElementById("observations");
 const speed = document.getElementById("speed");
 
 const objects = [
-    document.getElementById("input"), 
+    document.getElementById("input"),
     document.getElementById("output")
 ];
 const textInput = [document.createElementNS(svgns, "text")];
 const textOutput = [document.createElementNS(svgns, "text")];
 const inputDots = [
-    document.createElementNS(svgns, "circle"), 
-    document.createElementNS(svgns, "circle"), 
-    document.createElementNS(svgns, "circle"), 
+    document.createElementNS(svgns, "circle"),
+    document.createElementNS(svgns, "circle"),
+    document.createElementNS(svgns, "circle"),
     document.createElementNS(svgns, "circle")
 ];
 const outputDots = [
@@ -104,20 +104,28 @@ function allDisappear() {
     }
 }
 
-function setInputDots(){
+function setInputDots() {
     setter("1", inputDots[1]);
     setter("0", inputDots[3]);
 }
 
 function setInput() {
-    if (textInput[0].textContent !== "0" && timeline.progress() === 0) {
-        changeTo0(143, 393, 0, 0);
+    if (timeline.progress() === 0) {
+        if (textInput[0].textContent !== "0") {
+            changeTo0(143, 393, 0, 0);
+        }
+        else{
+            changeTo1(143, 393, 0, 0);
+        }
+        setter(textInput[0].textContent, inputDots[0]);
+        setter(textInput[0].textContent, inputDots[2]);
     }
-    else if (textInput[0].textContent !== "1" && timeline.progress() === 0) {
-        changeTo1(143, 393, 0, 0);
+    else if (timeline.progress() === 1) {
+        observ.innerHTML = "Simulation has finished. Press Reset to start again";
     }
-    setter(textInput[0].textContent, inputDots[0]);
-    setter(textInput[0].textContent, inputDots[2]);
+    else {
+        observ.innerHTML = "Simulation has started wait for it to end";
+    }
 }
 
 function changeTo1(coordinateX, coordinateY, object, textObject) {
@@ -153,7 +161,7 @@ function setter(value, component) {
     if (value === "1") {
         unsetColor(component);
     }
-    else if (value === "0") {
+    else {
         setColor(component);
     }
 }
@@ -183,18 +191,18 @@ function simulationStatus() {
     if (!decide) {
         startCircuit();
     }
-    else if (decide) {
+    else {
         stopCircuit();
     }
 }
 function stopCircuit() {
-    if (timeline.time() !== 0 && timeline.progress() !== 1) {
+    if (timeline.progress() !== 1) {
         timeline.pause();
         observ.innerHTML = "Simulation has been stopped.";
         decide = false;
         status.innerHTML = "Start";
     }
-    else if (timeline.progress() === 1) {
+    else {
         observ.innerHTML = "Please Restart the simulation";
     }
 }
@@ -224,7 +232,7 @@ function startCircuit() {
     }
 }
 
-function initInputDots(){
+function initInputDots() {
     //sets the coordinates of the input dots
     for (const inputDot of inputDots) {
         fillInputDots(inputDot, 200, 200, 15, "#FF0000");

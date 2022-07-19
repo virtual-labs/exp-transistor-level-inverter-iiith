@@ -46,8 +46,7 @@ export function permutator(inputArr) {
             }
             permute(arr.slice(), memo.concat(currentCase));
             arr.splice(i, 0, currentCase[0]);
-        }
-
+        }        
         return results;
     }
 

@@ -4,13 +4,13 @@ import { jsplumbInstance, editConnectionMap } from './components.js';
 //Creating js map to store connections
 export const connectionMap = new Map();
 // these arrays are used to store various components
-export const listPmos = [];
-export const listNmos = [];
-export const listInput = [];
-export const listOutput = [];
-export const listGround = [];
-export const listVdd = [];
-export const listInverter = [];
+export let listPmos = [];
+export let listNmos = [];
+export let listInput = [];
+export let listOutput = [];
+export let listGround = [];
+export let listVdd = [];
+export let listInverter = [];
 
 const EMPTY = "";
 
@@ -62,12 +62,12 @@ function emptyList() {
         let elem = document.getElementById(outputElem.id);
         elem.parentNode.removeChild(elem);
     }
-    listPmos.length = 0;
-    listNmos.length = 0;
-    listGround.length = 0;
-    listVdd.length = 0;
-    listInput.length = 0;
-    listOutput.length = 0;
+    listPmos = [];
+    listNmos = [];
+    listInput = [];
+    listOutput = [];
+    listGround = [];
+    listVdd = [];
 }
 
 function refreshObservations() {
