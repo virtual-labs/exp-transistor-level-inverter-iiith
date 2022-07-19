@@ -46,8 +46,8 @@ export function editConnectionMap() {
             stroke: getWireColor(connection.sourceId),
             strokeWidth: 8,
         });
-        const connectionId = `${connection.sourceId}$${connection.targetId}`
-        connectionMap.set(connectionId, connection.targetId)
+        const connectionId = `${connection.sourceId}$${connection.targetId}`;
+        connectionMap.set(connectionId, connection.targetId);
     });
 }
 

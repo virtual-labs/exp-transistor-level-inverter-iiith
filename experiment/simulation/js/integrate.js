@@ -32,7 +32,7 @@ export function notValid() {
     document.getElementById('error-container').innerHTML = "";
 }
 function printExcessComponents() {
-    const result = document.getElementById("error-container")
+    const result = document.getElementById("error-container");
     result.innerHTML = "Required no. of components of this type are already present in the workspace";
     result.className = "text-danger";
 }
@@ -200,40 +200,40 @@ export function compGround() {
 export function compInput0() {
     const id = "input0";
     const svgElement = document.createElement('div');
-    svgElement.innerHTML = 'Input 1<br>1'
+    svgElement.innerHTML = 'Input 1<br>1';
     svgElement.id = id;
     svgElement.className = 'io-component';
     svgElement.style.top = "1.25rem";
     svgElement.style.left = "0.625rem";
     svgElement.classList.add("high");
     svgElement.addEventListener("dblclick", () => {
-        const divInput0 = document.getElementById("input0")
+        const divInput0 = document.getElementById("input0");
         if (divInput0.classList.contains("high")) {
-            divInput0.classList.remove("high")
-            divInput0.classList.add("low")
-            divInput0.innerHTML = 'Input 1<br>0'
+            divInput0.classList.remove("high");
+            divInput0.classList.add("low");
+            divInput0.innerHTML = 'Input 1<br>0';
             listInput[0].input = 0;
         } else {
-            divInput0.classList.remove("low")
-            divInput0.classList.add("high")
-            divInput0.innerHTML = 'Input 1<br>1'
+            divInput0.classList.remove("low");
+            divInput0.classList.add("high");
+            divInput0.innerHTML = 'Input 1<br>1';
             listInput[0].input = 1;
         }
-    })
+    });
     svgElement.addEventListener("long-press", () => {
-        const divInput0 = document.getElementById("input0")
+        const divInput0 = document.getElementById("input0");
         if (divInput0.classList.contains("high")) {
-            divInput0.classList.remove("high")
-            divInput0.classList.add("low")
-            divInput0.innerHTML = 'Input 1<br>0'
+            divInput0.classList.remove("high");
+            divInput0.classList.add("low");
+            divInput0.innerHTML = 'Input 1<br>0';
             listInput[0].input = 0;
         } else {
-            divInput0.classList.remove("low")
-            divInput0.classList.add("high")
-            divInput0.innerHTML = 'Input 1<br>1'
+            divInput0.classList.remove("low");
+            divInput0.classList.add("high");
+            divInput0.innerHTML = 'Input 1<br>1';
             listInput[0].input = 1;
         }
-    })
+    });
     svgElement.input = 0;
     svgElement.voltage = 5;
     const container = document.getElementById("diagram");
@@ -255,7 +255,7 @@ export function compInput0() {
 export function compOutput() {
     const id = "output0";
     const svgElement = document.createElement('div');
-    svgElement.innerHTML = 'Output<br>-'
+    svgElement.innerHTML = 'Output<br>-';
     svgElement.id = id;
     svgElement.className = 'io-component';
     svgElement.style.top = "1.25rem";

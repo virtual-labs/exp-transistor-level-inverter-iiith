@@ -134,7 +134,7 @@ function changeTo1(coordinateX, coordinateY, object, textObject) {
     setCoordinates(coordinateX, coordinateY, textInput[textObject]);
 
     fillColor(objects[object], "#03b1fc");
-    objectAppear(textInput[0])
+    objectAppear(textInput[0]);
     clearObservation();
 }
 
@@ -144,7 +144,7 @@ function changeTo0(coordinateX, coordinateY, object, textObject) {
     setCoordinates(coordinateX, coordinateY, textInput[textObject]);
 
     fillColor(objects[object], "#eeeb22");
-    objectAppear(textInput[0])
+    objectAppear(textInput[0]);
     clearObservation();
 }
 

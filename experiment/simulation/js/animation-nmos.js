@@ -134,7 +134,7 @@ function changeTo1(coordinateX, coordinateY, object, textObject) {
     setCoordinates(coordinateX, coordinateY, textInput[textObject]);
 
     fillColor(objects[object], "#03b1fc");
-    objectAppear(textInput[0])
+    objectAppear(textInput[0]);
     clearObservation();
 }
 
@@ -144,7 +144,7 @@ function changeTo0(coordinateX, coordinateY, object, textObject) {
     setCoordinates(coordinateX, coordinateY, textInput[textObject]);
 
     fillColor(objects[object], "#eeeb22");
-    objectAppear(textInput[0])
+    objectAppear(textInput[0]);
     clearObservation();
 }
 
@@ -395,7 +395,7 @@ timeline.add(outputDotsAppear, 5);
 timeline.add(simulator2, 5);
 timeline.add(outputDotsDisappear, 9);
 timeline.add(outputHandler, 9);
-timeline.add()
+timeline.add();
 timeline.add(display, 10);
 timeline.eventCallback("onComplete", display);
 timeline.pause();

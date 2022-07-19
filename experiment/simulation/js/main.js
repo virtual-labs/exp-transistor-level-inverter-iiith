@@ -1,5 +1,5 @@
-'use strict'
-import { compOutput, compInput0,resetCounts } from './integrate.js'
+'use strict';
+import { compOutput, compInput0,resetCounts } from './integrate.js';
 import { jsplumbInstance, editConnectionMap } from './components.js';
 //Creating js map to store connections
 export const connectionMap = new Map();
@@ -21,8 +21,8 @@ container.addEventListener("contextmenu", function (e) {
 });
 
 // Tab selection
-export const currentTab = { CMOS: 0, PNMOS: 1 }
-export let selectedTab = currentTab.CMOS
+export const currentTab = { CMOS: 0, PNMOS: 1 };
+export let selectedTab = currentTab.CMOS;
 const tabs = document.querySelectorAll('.v-tabs li');
 
 tabs.forEach(tab => {
@@ -32,8 +32,8 @@ tabs.forEach(tab => {
         let parent = tab.parentNode;
         selectedTab = Array.prototype.indexOf.call(parent.children, tab);
         refreshWorkingArea();
-    })
-})
+    });
+});
 
 window.refreshWorkingArea = refreshWorkingArea;
 
