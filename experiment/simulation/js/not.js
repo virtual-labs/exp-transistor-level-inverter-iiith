@@ -53,17 +53,21 @@ export function permutator(inputArr) {
     return permute(inputArr);
 }
 
+export function checkConnectionNmos(perm) {
+    return connectionMap.has("vdd0$pmos0")
+    && connectionMap.has("ground" + perm[0] + "$pmos0")
+    && connectionMap.has("pmos0$output0")
+    && connectionMap.has("input0$nmos0")
+    && connectionMap.has("nmos0$output0")
+    && connectionMap.has("ground" + perm[1] + "$nmos0")
+    && connectionMap.size === 6;
+}
+
 export function checkPseudoNmos() {
     const permutatorMap = permutator([0, 1]);
     let psNmosCircuitValid = 0;
     for (const perm of permutatorMap) {
-        if (connectionMap.has("vdd0$pmos0")
-            && connectionMap.has("ground" + perm[0] + "$pmos0")
-            && connectionMap.has("pmos0$output0")
-            && connectionMap.has("input0$nmos0")
-            && connectionMap.has("nmos0$output0")
-            && connectionMap.has("ground" + perm[1] + "$nmos0")
-            && connectionMap.size === 6) {
+        if (checkConnectionNmos(perm)) {
             psNmosCircuitValid = 1;
             break;
         }
@@ -71,17 +75,20 @@ export function checkPseudoNmos() {
     return psNmosCircuitValid;
 }
 
+export function checkConnectionPmos() {
+    return connectionMap.has("vdd0$pmos0") 
+    && connectionMap.has("input0$pmos0") 
+    && connectionMap.has("pmos0$output0") 
+    && connectionMap.has("input0$nmos0") 
+    && connectionMap.has("nmos0$output0") 
+    && connectionMap.has("ground0$nmos0") 
+    && connectionMap.size === 6;
+}
+
 export function circuitValid() {
     const psNmosCircuitValid = checkPseudoNmos();
     // check if correct nand gate is made using correct components
-    if (selectedTab === currentTab.CMOS 
-        && connectionMap.has("vdd0$pmos0") 
-        && connectionMap.has("input0$pmos0") 
-        && connectionMap.has("pmos0$output0") 
-        && connectionMap.has("input0$nmos0") 
-        && connectionMap.has("nmos0$output0") 
-        && connectionMap.has("ground0$nmos0") 
-        && connectionMap.size === 6) {
+    if (selectedTab === currentTab.CMOS && checkConnectionPmos()) {
         changeObservation("&#10004; Circuit is correct", 'text-danger', 'text-success');
     } else if (selectedTab === currentTab.PNMOS && psNmosCircuitValid) {
         changeObservation("&#10004; Circuit is correct", 'text-danger', 'text-success');

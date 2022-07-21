@@ -198,7 +198,7 @@ function simulationStatus() {
 function stopCircuit() {
     if (timeline.progress() !== 1) {
         timeline.pause();
-        observ.innerHTML = "Simulation has been stopped.";
+        observ.innerHTML = "Simulation has been Paused.";
         decide = false;
         status.innerHTML = "Start";
     }
@@ -225,9 +225,6 @@ function startCircuit() {
         }
         else {
             observ.innerHTML = "Please set the value of input to 0 or 1";
-        }
-        if (timeline.progress() === 1) {
-            observ.innerHTML = "Please Restart the simulation";
         }
     }
 }
