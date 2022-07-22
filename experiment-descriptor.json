@@ -28,6 +28,13 @@
       "content-type": "text"
     },
     {
+      "target": "pretest.html",
+      "source": "pretest.json",
+      "label": "Pretest",
+      "unit-type": "task",
+      "content-type": "assesment"
+    },
+    {
       "target": "cmos-demo.html",
       "source": "simulation/cmos-demo.html",
       "label": "Demo",
@@ -36,17 +43,10 @@
     },
     {
       "target": "simulation.html",
-      "source": "simulation/index.html",
-      "label": "Simulation",
+      "source": "simulation/practice.html",
+      "label": "Practice",
       "unit-type": "task",
       "content-type": "simulation"
-    },
-    {
-      "target": "assignment.html",
-      "source": "assignment.md",
-      "label": "Assignment",
-      "unit-type": "task",
-      "content-type": "text"
     },
     {
       "target": "posttest.html",
@@ -56,11 +56,11 @@
       "content-type": "assesment"
     },
     {
-      "target": "pretest.html",
-      "source": "pretest.json",
-      "label": "Pretest",
+      "target": "assignment.html",
+      "source": "assignment.md",
+      "label": "Assignment",
       "unit-type": "task",
-      "content-type": "assesment"
+      "content-type": "text"
     },
     {
       "target": "references.html",

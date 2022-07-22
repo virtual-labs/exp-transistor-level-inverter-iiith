@@ -1,6 +1,6 @@
 [
     {
-        "question": "1. In inverter circuits what would be a preferred load? ",
+        "question": "1. In inverter circuits what would be a preferred load?",
         "answers": {
             "a": "Resistor",
             "b": "MOSFET",
@@ -20,7 +20,7 @@
         "correctAnswer": "a"
     },
     {
-        "question": "3. How many regions of operation does a CMOS inverter has?>",
+        "question": "3. How many regions of operation does a CMOS inverter has?",
         "answers": {
             "a": "3",
             "b": "4",
@@ -30,7 +30,7 @@
         "correctAnswer": "c"
     },
     {
-        "question": " 4. The output and input impedance of a CMOS inverter are>",
+        "question": " 4. The output and input impedance of a CMOS inverter are?",
         "answers": {
             "a": "High, Low",
             "b": "High, High",
@@ -46,16 +46,6 @@
             "b": "VDD",
             "c": "VDD/2",
             "d": "VDD-VIN/2"
-        },
-        "correctAnswer": "c"
-    },
-    {
-        "question": "6. Which of the following are desired characteristics in a CMOS inverter <img src='images/option_exp1.png>",
-        "answers": {
-            "a": "i, iii, iv",
-            "b": "i, iv, v",
-            "c": "i, ii, iv, v",
-            "d": "All"
         },
         "correctAnswer": "c"
     }

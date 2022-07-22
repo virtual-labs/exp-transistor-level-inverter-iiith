@@ -38,5 +38,5 @@
 
 ## Observations - 
 
-* On clicking "validate" option after completing the circuit (assumin g all connections are done correctly) you should see a table on the right side of the workspace
+* On clicking "validate" option after completing the circuit (assuming all connections are done correctly) you should see a table on the right side of the workspace
 * By default, the input has been set to 1 and the corresponding output observed is 0. To check otherwise, double-click or long tap the input.
