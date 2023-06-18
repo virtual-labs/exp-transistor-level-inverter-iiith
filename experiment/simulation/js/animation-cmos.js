@@ -256,7 +256,7 @@ function simulator2() {
             },
 
             duration: 4,
-            delay: 5,
+            delay: 4,
             repeat: 0,
             repeatDelay: 3,
             yoyo: true,
@@ -276,7 +276,7 @@ function simulator2() {
             },
 
             duration: 4,
-            delay: 5,
+            delay: 4,
             repeat: 0,
             repeatDelay: 3,
             yoyo: true,
@@ -387,12 +387,12 @@ outputDisappear();
 timeline.add(setInputDots, 0);
 timeline.add(inputDotsAppear, 0);
 timeline.add(simulator1, 0);
-timeline.add(outputDotsAppear, 5);
-timeline.add(inputDotsDisappear, 6);
-timeline.add(simulator2, 5);
-timeline.add(outputDotsDisappear, 9);
-timeline.add(outputHandler, 9);
-timeline.add(display, 10);
+timeline.add(outputDotsAppear, 4);
+timeline.add(inputDotsDisappear, 4);
+timeline.add(simulator2, 4);
+timeline.add(outputDotsDisappear, 8);
+timeline.add(outputHandler, 8);
+timeline.add(display, 9);
 timeline.eventCallback("onComplete", display);
 timeline.pause();
 inputDotsDisappear();
