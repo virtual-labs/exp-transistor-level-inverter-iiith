@@ -7,7 +7,13 @@
             "c": "Both",
             "d": "None of the above"
         },
-        "correctAnswer": "b"
+        "correctAnswer": "b",
+        "explanations": { 
+        "a":"Resistor is not the preferred load for inverter circuits because they require a load that can be switched on and off rapidly to generate alternating current.",
+        "b":"MOSFETs are active components that can function as switches in electronic circuits. In an inverter circuit, MOSFETs are used to control the flow of current and generate the desired alternating current output.",
+        "c":"One/both of the options are wrong.",
+        "d":"One of the above answers is true."
+        }
     },
     {
         "question": "2. Which of the following do we prefer for a pull down device in an inverter circuit?",
@@ -17,7 +23,13 @@
             "c": "Resistor",
             "d": "Both a and c"
         },
-        "correctAnswer": "a"
+        "correctAnswer": "a",
+        "explanations": { 
+        "a":"When the input signal to the NMOS transistor is high (logic 1), it turns off, allowing the output to be pulled down to a low voltage.",
+        "b":"PMOS transistors are often used as pull-up devices in complementary MOS (CMOS) circuits.",
+        "c":"Resistors are passive components and do not provide the active switching behavior required for efficient logic operation.",
+        "d":"One/both of those options are wrong. "
+        }
     },
     {
         "question": "3. How many regions of operation does a CMOS inverter has?",
@@ -27,7 +39,10 @@
             "c": "5",
             "d": "2"
         },
-        "correctAnswer": "c"
+        "correctAnswer": "c",
+        "explanations": { 
+        "c":"CMOS inverter has five distinct regions of operation based on the input voltage levels and the behavior of the PMOS and NMOS transistors. They are: Strong Inversion,Weak Inversion,Transition Region,Moderate Inversion,Strong Inversion"
+        }
     },
     {
         "question": " 4. The output and input impedance of a CMOS inverter are?",
@@ -37,7 +52,13 @@
             "c": "Low, High",
             "d": "Low, Low"
         },
-        "correctAnswer": "c"
+        "correctAnswer": "c",
+        "explanations": { 
+            "a":"A CMOS inverter has a high output impedance, meaning it provides a relatively high resistance to the external load which is not the case in reality, so option is false.",
+            "b":"A CMOS inverter does not have both high output and input impedance.",
+            "c":"A CMOS inverter has a low output impedance, meaning it provides a relatively low resistance to the external load. At the same time, its input impedance is high, meaning it presents a relatively high resistance to the input signal.",
+            "d":"A CMOS inverter does not have both low output and input impedance. "
+        }
     },
     {
         "question": "5. For an ideal CMOS inverter switching threshold voltage is equal to",
@@ -47,6 +68,12 @@
             "c": "VDD/2",
             "d": "VDD-VIN/2"
         },
-        "correctAnswer": "c"
+        "correctAnswer": "c",
+        "explanations": { 
+        "a":"This option is incorrect because setting the switching threshold voltage at 0 would result in an asymmetric operation of the CMOS inverter and unequal noise margins.",
+        "b":"This option is incorrect because setting the switching threshold voltage equal to VDD would also result in an asymmetric operation of the CMOS inverter and unequal noise margins.",
+        "c":"This choice of threshold voltage allows for symmetric operation and equal noise margins for both logic levels.",
+        "d":"This option is incorrect because it does not accurately represent the switching threshold voltage of an ideal CMOS inverter."
+        }
     }
 ]

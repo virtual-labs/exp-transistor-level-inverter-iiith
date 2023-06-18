@@ -7,7 +7,13 @@
       "c": "3",
       "d": "4"
     },
-    "correctAnswer": "a"
+    "correctAnswer": "a",
+    "explanations": { 
+    "a":"It is a single input gate. The input signal is inverted to its complementary logic level at the output.",
+    "b":"This option is incorrect because an inverter does not have two inputs. It does not have the capability to handle multiple inputs simultaneously.",
+    "c":"This option is incorrect because an inverter does not have three inputs. It does not have the capability to handle multiple inputs simultaneously.",
+    "d":"This option is incorrect because an inverter does not have four inputs. It does not have the capability to handle multiple inputs simultaneously."
+    }
   },
   {
     "question": "2. Inverter gate is same as __________.",
@@ -17,7 +23,13 @@
       "c": "NOR gate",
       "d": "NAND gate"
     },
-    "correctAnswer": "b"
+    "correctAnswer": "b",
+    "explanations": { 
+    "a":"An AND gate is a different type of logic gate that performs a logical AND operation on multiple input signals. It does not function the same as an inverter gate.",
+    "b":"It takes a single input and produces the logical complement or inverse of that input at the output. It reverses the logic level of the input signal.",
+    "c":"A NOR gate is another type of logic gate that performs a logical NOR operation on multiple input signals. It does not have the same functionality as an inverter gate.",
+    "d":"A NAND gate is a different logic gate that performs a logical NAND operation on multiple input signals. It does not have the same function as an inverter gate."
+    }
   },
   {
     "question": "3. Which is the most suitable representation for a NOT gate?",
@@ -27,7 +39,13 @@
       "c": "<img src='images/3rd.jpg'>",
       "d": "<img src='images/4th.jpg'>"
     },
-    "correctAnswer": "a"
+    "correctAnswer": "a",
+    "explanations": { 
+    "a":"It takes a single input and produces the logical complement or inverse of that input at the output.",
+    "b":"It does not have multiple inputs.",
+    "c":"It does not have multiple outputs",
+    "d":"It does not have multiple inputs and/or outputs."
+    }
   },
   {
     "question": "4. Identify which statement is true for inverter?",
@@ -37,7 +55,13 @@
       "c": "A high input gives a high output",
       "d": "A low input gives a high output"
     },
-    "correctAnswer": "d"
+    "correctAnswer": "d",
+    "explanations": { 
+    "a":"Any difference in inputs guarantees a high output - The output of an inverter is determined by the specific input level, as explained. Simply having a difference in inputs does not guarantee a high output.",
+    "b":"Any difference in inputs guarantees a low output - The output of an inverter is not guaranteed to be low for any difference in inputs. The specific input level determines the output.",
+    "c":"In an inverter, a high input (typically represented as '1') results in a low output (typically represented as '0'), not a high output.",
+    "d":"The inverter essentially inverts the input signal, so a low input results in a high output."
+    }
   },
   {
     "question": "5. What is the traditional symbol for inverter?",
@@ -47,7 +71,13 @@
       "c": "<img src='images/not.jpg'>",
       "d": "<img src='images/inv.jpg'>"
     },
-    "correctAnswer": "c"
+    "correctAnswer": "c",
+    "explanations": { 
+    "a":"Region D refers to the saturation region of a MOSFET, where the transistor operates as an amplifier with a constant voltage drop across it. In this region, the input voltage Vin should be greater than Vdd/2 and less than or equal to Vdd-Vtp, where Vdd represents the supply voltage and Vtp is the threshold voltage of the MOSFET.",
+    "b":"Vin = Vdd/2 represents the switching threshold voltage for a CMOS inverter, not the correct input voltage range for region D.",
+    "c":"The range 0 ≤ Vin ≤ Vtn typically corresponds to the cutoff region of a MOSFET, not region D.",
+    "d":"The correct input voltage range for region D is not Vin ≥ Vdd-Vtp"
+    }
   },
   {
     "question": "6. Choose the electrical analogue of an inverter?",
@@ -57,7 +87,9 @@
       "c": "<img src='images/elec_anal3.jpg'>",
       "d": "None of these"
     },
-    "correctAnswer": "b"
+    "correctAnswer": "b",
+    "explanations": { 
+    }
   },
   {
     "question": "7. What is the correct input voltage range for region D?",
@@ -67,7 +99,9 @@
       "c": "0 ≤ V<sub>in</sub> ≤ V<sub>tn</sub>",
       "d": "V<sub>in</sub> ≥ V<sub>dd</sub>-V<sub>tp</sub>"
     },
-    "correctAnswer": "a"
+    "correctAnswer": "a",
+    "explanations": { 
+    }
   },
   {
     "question": "8. What are the operation states of n-device and p-device respectively in region B?",
@@ -77,7 +111,13 @@
       "c": "Linear & saturated",
       "d": "Saturated & linear"
     },
-    "correctAnswer": "d"
+    "correctAnswer": "d",
+    "explanations": { 
+    "a":" The NMOS is fully turned on and conducting in region B, and the PMOS is partially turned on but not fully conducting",
+    "b":"Cut-off refers to a state where the transistor is non-conducting, and in region B, both devices are conducting to some extent",
+    "c":"The NMOS is fully turned on and conducting. The p-device (PMOS) is partially turned on but not fully conducting.",
+    "d":"In region B, the n-device (NMOS) operates in the saturated region, where it is fully turned on and conducting. The p-device (PMOS) operates in the linear region, where it is partially turned on but not fully conducting. Therefore, the correct operation states for the devices in region B are saturated for the NMOS and linear for the PMOS."
+    }
   },
   {
     "question": "9. What is delay?",
@@ -87,7 +127,13 @@
       "c": "Average of rise time and fall time",
       "d": "Addition of rise time and fall time"
     },
-    "correctAnswer": "c"
+    "correctAnswer": "c",
+    "explanations": { 
+    "a":"The delay is not determined by taking the maximum of the rise time and the fall time. While both rise time and fall time contribute to the overall delay, the maximum value does not accurately represent the delay of the circuit.",
+    "b":"The delay is not the product of the rise time and fall time. Multiplying these two values does not accurately represent the overall delay of the circuit.",
+    "c":"The rise time is the time taken for the output signal to transition from a low level to a high level, and the fall time is the time taken for the output signal to transition from a high level to a low level. Taking the average of these two values provides an estimation of the overall delay of the circuit.",
+    "d":"The delay is not determined by simply adding the rise time and fall time together. While both contribute to the overall delay, their addition does not accurately represent the delay of the circuit."
+    }
   },
   {
     "question": "10. What is desirable β<sub>n</sub>/β<sub>p</sub> ratio for an inverter?",
@@ -97,6 +143,12 @@
       "c": "0.5",
       "d": "∞"
     },
-    "correctAnswer": "b"
+    "correctAnswer": "b",
+    "explanations": { 
+    "a":"A βn/βp ratio of 0 would not be desirable for an inverter as it would result in an imbalanced operation between the n-device and the p-device.",
+    "b":"In an ideal inverter, the βn/βp ratio is often chosen to be 1 to achieve symmetrical rise and fall times, as well as balanced performance for both high-to-low and low-to-high transitions.",
+    "c":"A βn/βp ratio of 0.5 would not be desirable for an inverter as it would lead to asymmetrical behaviour and imbalanced performance between the n-device and the p-device.",
+    "d":"A βn/βp ratio of ∞ (infinity) would not be desirable for an inverter as it would result in imbalanced operation between the n-device and the p-device and can lead to performance issues."
+    }
   }
 ]
