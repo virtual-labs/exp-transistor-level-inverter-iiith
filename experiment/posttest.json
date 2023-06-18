@@ -32,8 +32,8 @@
   {
     "question": "4. Identify which statement is true for inverter?",
     "answers": {
-      "a": "Any difference in inputs gurantees a high output",
-      "b": "Any difference in inputs gurantees a low output",
+      "a": "Any difference in inputs guarantees a high output",
+      "b": "Any difference in inputs guarantees a low output",
       "c": "A high input gives a high output",
       "d": "A low input gives a high output"
     },
