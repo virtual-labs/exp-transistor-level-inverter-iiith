@@ -75,6 +75,7 @@ function refreshObservations() {
     document.getElementById("error-container").innerHTML = EMPTY;
     // refresh the output table
     document.getElementById("table-body").innerHTML = EMPTY;
+    document.getElementById("table-head").innerHTML = EMPTY;
     // refresh result
     document.getElementById("output-box").innerHTML = EMPTY;
 }

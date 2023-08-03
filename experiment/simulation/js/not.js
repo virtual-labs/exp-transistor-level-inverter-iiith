@@ -23,6 +23,12 @@ export function showTruthTable() {
         listInput[0].input = 0;
         checkAndUpdate();
     }
+    let head =  `<tr>
+    <th colspan="1">Inputs</th>
+    <th colspan="1">Expected Output</th>
+    <th colspan="1">Observed Output</th>
+</tr>`;
+    document.getElementById("table-head").innerHTML = head;
     tableBody.innerHTML = `<tr><td>0</td><td>1</td><td>${output[0]}</td></tr><tr><td>1</td><td>0</td><td>${output[1]} </td></tr>`;
 }
 

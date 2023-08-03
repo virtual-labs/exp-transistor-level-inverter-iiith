@@ -1,6 +1,6 @@
 **CMOS INVERTER**
 
-In the [transistor](http://cse14-iiith.vlabs.ac.in/final-build/EXP_1sep2010/exp1/Theory.html?domain=Computer%20Science%20&%20Engineering&lab=VLSI%20LAB#transistor) level design of CMOS inverter consists of nmos and pmos transistor in series. The PMOS transistor is connected between Vdd and output node, whereas the NMOS is connected betweeen the output node and gnd.
+In the transistor level design of CMOS inverter consists of nmos and pmos transistor in series. The PMOS transistor is connected between Vdd and output node, whereas the NMOS is connected betweeen the output node and gnd.
 
 **WORKING OF CMOS INVERTER**
 
@@ -16,7 +16,7 @@ The transistor is in linear region when V<sub>gs</sub> - V<sub>t</sub> > V<sub>d
 
 The transistor is said to be in saturation region when v<sub>gs</sub> - V<sub>t</sub> < V<sub>ds</sub>
 
-The transfer characteristic(i.e. the output voltage vs input voltage) is shown in the figure below. The operation is divided into 5 region depending on the range of input voltage(Move your mouse over the region to know about the region). The output voltage in every region is obtained by equating drain to source current of pmos and nmos.
+The transfer characteristic(i.e. the output voltage vs input voltage) is shown in the figure below. The operation is divided into 5 regions depending on the range of input voltage. The output voltage in every region is obtained by equating drain to source current of pmos and nmos.
 
 <img src="images/DC_CHARC.jpg">
 
@@ -29,18 +29,21 @@ W/L ratio is directly proportional to Î². The ratio Î²n/Î²p is crucial in 
 
 **EFFECT OF CAPACITANCE ON THE RISE AND FALL TIME**
 
-The rise time is defined as the time required to charge the capacitor from 10% to 90% and fall time is defined as the time required for the capacitor to discharge from 90% to 10%. How the rise time and the fall time is calculated is shown in the figure below :
+The rise time is defined as the time required to charge the capacitor from 10% to 90% and fall time is defined as the time required for the capacitor to discharge from 90% to 10%.
 
-Greater value of capacitor implies larger rise and fall time,which furthur implies large delay. The rise time and fall time are directly proportional to the capacitance. Therefore, greater the value of capacitance, greater will be the time taken for rising and falling.
+Greater value of capacitor implies larger rise and fall time, which further implies large delay. The rise time and fall time are directly proportional to the capacitance. Therefore, greater the value of capacitance, greater will be the time taken for rising and falling.
 
 **PSEUDO NMOS**
 
 The gate of p-device is permanently grounded which is equivalent to use of NMOS in depletion mode
 
 **SOME BASIC DEFINITIONS AND THEORY**
+
 **TRANSISTOR**
 
-Basically transistor consistes of three parts - GATE, SOURCE and DRAIN as shown in figure below:
+Basically transistor consists of three parts - GATE, SOURCE and DRAIN as shown in figure below:
+
+<img src="images/MOSFET.png">
 
 The gate is a control input which determines the flow of electric current between source and drain. Physically drain and source are equivalent and the two types of transistor i.e. n-transistor and p-transistor differ only in the way electric current flows between source and drain according to the different values applied at the controlling gate input. In n-transistor when logic 1 is aplied to gate, the current flows bwetween source and drain while no current flows when logic 0 is applied. The p-transistor works just the opposite way - the current flows between source and drain when logic 0 is applied and no current on logic 1.
 
@@ -55,7 +58,7 @@ For NMOS, gain factor is denoted by βn and for PMOS, gain factor is denoted by 
 
 **DELAY**
 
-Delay time is the time taken for the input transistion (50% level) into output (50% level). The single gate delay is given by the average of rise time and fall time, so delay also is directly proportional to the capacitance value
+Delay time is the time taken for the input transition (50% level) into output (50% level). The single gate delay is given by the average of rise time and fall time, so delay also is directly proportional to the capacitance value
 
 **DEPLETION MODE**
 
