@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
+    "@virtual-labs/buildexp": "^1.0.5",
     "abab": "^2.0.6",
     "abort-controller": "^3.0.0",
     "acorn": "^8.9.0",

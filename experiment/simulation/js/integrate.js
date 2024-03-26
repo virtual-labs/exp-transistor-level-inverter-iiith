@@ -3,7 +3,7 @@ import { listPmos, listNmos, listInput, listOutput, listGround, listVdd, selecte
 import { jsplumbInstance, addInstanceFinalInput, addInstanceFinalOutput } from './components.js';
 import { addInstanceGround, addInstanceVdd, addInstancePmos, addInstanceNmos } from './components.js';
 import { checkAndUpdate } from './circuit.js';
-import { modifyOutput, circuitValid, showTruthTable } from './not.js';
+import { modifyOutput, circuitValid, showTruthTable, showTruthTableBuffer } from './not.js';
 
 let count = { PMOS: 0, NMOS: 0, VDD: 0, Ground: 0, Inverter: 0, Mux: 0, Latch: 0, Transistor: 0, Clock: 0, Clockbar: 0 };
 let maxCount = { PMOS: 1, NMOS: 1, VDD: 1, Ground: 2, Inverter: 0, Mux: 0, Latch: 0, Transistor: 0, Clock: 0, Clockbar: 0 };
@@ -19,8 +19,11 @@ export function resetCounts() {
     if (selectedTab === currentTab.CMOS) {
         maxCount = { PMOS: 1, NMOS: 1, VDD: 1, Ground: 1, Inverter: 0, Mux: 0, Latch: 0, Transistor: 0, Clock: 0, Clockbar: 0 };
     }
-    else {
+    else if (selectedTab === currentTab.PNMOS) {
         maxCount = { PMOS: 1, NMOS: 1, VDD: 1, Ground: 2, Inverter: 0, Mux: 0, Latch: 0, Transistor: 0, Clock: 0, Clockbar: 0 };
+    }
+    else {
+        maxCount = { PMOS: 2, NMOS: 2, VDD: 1, Ground: 1, Inverter: 0, Mux: 0, Latch: 0, Transistor: 0, Clock: 0, Clockbar: 0 };
     }
 }
 
@@ -28,7 +31,10 @@ export function notValid() {
     checkAndUpdate();
     modifyOutput();
     circuitValid();
-    showTruthTable();
+    if (selectedTab === currentTab.BUFFER)
+        showTruthTableBuffer();
+    else
+        showTruthTable();
     document.getElementById('error-container').innerHTML = "";
 }
 function printExcessComponents() {
