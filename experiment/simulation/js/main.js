@@ -21,7 +21,7 @@ container.addEventListener("contextmenu", function (e) {
 });
 
 // Tab selection
-export const currentTab = { CMOS: 0, PNMOS: 1 };
+export const currentTab = { CMOS: 0, PNMOS: 1, BUFFER:2 };
 export let selectedTab = currentTab.CMOS;
 const tabs = document.querySelectorAll('.v-tabs li');
 
@@ -70,7 +70,7 @@ function emptyList() {
     listVdd = [];
 }
 
-function refreshObservations() {
+export function refreshObservations() {
     // refresh the errors
     document.getElementById("error-container").innerHTML = EMPTY;
     // refresh the output table

@@ -1,6 +1,6 @@
 'use strict';
 import { connectionMap, listPmos, listNmos,listInput, listOutput, listGround ,listVdd } from './main.js';
-import{checkPseudoNmos} from './not.js';
+import{checkConnectionPmos, checkPseudoNmos, checkConnectionBuffer} from './not.js';
 
 // This function checks map when called
 export function checkAndUpdate() {
@@ -139,6 +139,27 @@ export function getTruthValue() {
         return "1";
     } else if (listInput[0].input === 1 && psNmosCircuitValid === 1) {
         return "0";
+    }
+    if (out === 5 || out === 9) {
+        return "1";
+    } else if (out === -5 || out === -9) {
+        return "0";
+    } else {
+        return "-";
+    }
+}
+
+export function getTruthValueBuffer() {
+    const out = listOutput[0].voltage;
+    console.log(out)
+    console.log(listInput[0])
+    let perm = [['0','1','0','1'], ['0','1','1','0'], ['1','0','0','1'], ['1','0','1','0']]
+    const CircuitValid = (checkConnectionBuffer(perm[0]) || checkConnectionBuffer(perm[1]) || checkConnectionBuffer(perm[2]) || checkConnectionBuffer(perm[3]));
+    console.log(CircuitValid)
+    if (listInput[0].input === 0 && CircuitValid === true) {
+        return "0";
+    } else if (listInput[0].input === 1 && CircuitValid === true) {
+        return "1";
     }
     if (out === 5 || out === 9) {
         return "1";
