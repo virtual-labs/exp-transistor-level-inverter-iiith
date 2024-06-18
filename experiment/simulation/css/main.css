@@ -146,3 +146,22 @@
   stroke-miterlimit: 10;
   pointer-events: stroke;
 }
+.context-menu {
+  display: none;
+  position: absolute;
+  background: white;
+  border: 1px solid #ccc;
+  z-index: 1000;
+}
+.context-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.context-menu ul li {
+  padding: 8px 12px;
+  cursor: pointer;
+}
+.context-menu ul li:hover {
+  background: #eee;
+}

@@ -14,15 +14,19 @@ window.compVdd = compVdd;
 window.compGround = compGround;
 window.notValid = notValid;
 
+const contextMenu = document.getElementById("contextMenu");
+const deleteOption = document.getElementById("deleteOption");
+const cancelOption = document.getElementById("cancelOption");
+document.addEventListener("click", function() {
+    contextMenu.style.display = "none";
+});
 export function resetCounts() {
     count = { PMOS: 0, NMOS: 0, VDD: 0, Ground: 0, Inverter: 0, Mux: 0, Latch: 0, Transistor: 0, Clock: 0, Clockbar: 0 };
     if (selectedTab === currentTab.CMOS) {
         maxCount = { PMOS: 1, NMOS: 1, VDD: 1, Ground: 1, Inverter: 0, Mux: 0, Latch: 0, Transistor: 0, Clock: 0, Clockbar: 0 };
-    }
-    else if (selectedTab === currentTab.PNMOS) {
+    } else if (selectedTab === currentTab.PNMOS) {
         maxCount = { PMOS: 1, NMOS: 1, VDD: 1, Ground: 2, Inverter: 0, Mux: 0, Latch: 0, Transistor: 0, Clock: 0, Clockbar: 0 };
-    }
-    else {
+    } else {
         maxCount = { PMOS: 2, NMOS: 2, VDD: 1, Ground: 1, Inverter: 0, Mux: 0, Latch: 0, Transistor: 0, Clock: 0, Clockbar: 0 };
     }
 }
@@ -37,11 +41,24 @@ export function notValid() {
         showTruthTable();
     document.getElementById('error-container').innerHTML = "";
 }
+
 function printExcessComponents() {
     const result = document.getElementById("error-container");
     result.innerHTML = "Required no. of components of this type are already present in the workspace";
     result.className = "text-danger";
 }
+
+function deleteElement(id, type) {
+    const element = document.getElementById(id);
+    if (element) {
+        element.remove();
+        maxCount[type] += 1;
+        count[type] -= 1;
+    }
+    jsplumbInstance.removeAllEndpoints(id);
+    // no=no-1;
+}
+
 export function compPmos() {
     maxCount.PMOS -= 1;
     if (maxCount.PMOS < 0) {
@@ -49,12 +66,10 @@ export function compPmos() {
         return;
     }
 
-    //  keep tracking count
     const id = "pmos" + count.PMOS;
     count.PMOS += 1;
     const container = document.getElementById("diagram");
 
-    // render in workspace
     const svgElement = document.createElement('div');
     svgElement.innerHTML = `
         <svg xmlns="https://www.w3.org/2000/svg"xmlns:xlink="https://www.w3.org/1999/xlink" version="1.1" viewBox="-0.5 -0.5 84 84" >
@@ -73,14 +88,28 @@ export function compPmos() {
     svgElement.outTerminal = 1;
     svgElement.voltage = 0;
     svgElement.outVoltage = 0;
-    // d.number = count1;
-    // Added javasript objects and their properties
-    const divPushed = {};
-    divPushed.id = id;
-    divPushed.voltage = 0;
-    divPushed.midTerminal = 1;
-    divPushed.outTerminal = 1;
-    divPushed.outVoltage = 0;
+
+    const divPushed = { id, voltage: 0, midTerminal: 1, outTerminal: 1, outVoltage: 0 };
+
+    svgElement.addEventListener('contextmenu', (originalEvent) => {
+        console.log("Mouse X:", originalEvent.clientX, "Mouse Y:", originalEvent.clientY);
+        originalEvent.preventDefault();
+        contextMenu.style.top = `${originalEvent.clientY}px`;
+        contextMenu.style.left = `${originalEvent.clientX}px`;
+        contextMenu.style.display = "block";
+    
+        console.log("Context menu should appear at X:", contextMenu.style.left, "Y:", contextMenu.style.top);
+    
+        deleteOption.addEventListener("click", function(event) {
+            event.preventDefault();
+            console.log("Deleting item...");
+            deleteElement(id, 'PMOS');
+            contextMenu.style.display = "none";
+        });
+    });
+    
+        // deleteElement(id, 'PMOS');
+    
 
     container.insertAdjacentElement("afterbegin", svgElement);
     jsplumbInstance.draggable(id, { "containment": true });
@@ -97,6 +126,8 @@ export function compNmos() {
     }
 
     const id = "nmos" + count.NMOS;
+    count.NMOS += 1;
+    const container = document.getElementById("diagram");
 
     const svgElement = document.createElement('div');
     svgElement.innerHTML = `
@@ -115,21 +146,31 @@ export function compNmos() {
     svgElement.midTerminal = 1;
     svgElement.outTerminal = 1;
     svgElement.outVoltage = 0;
-    count.NMOS += 1;
-    const container = document.getElementById("diagram");
 
-    const divPushed = {};
-    divPushed.id = id;
-    divPushed.voltage = 0;
-    divPushed.midTerminal = 1;
-    divPushed.outTerminal = 1;
-    divPushed.outVoltage = 0;
+    const divPushed = { id, voltage: 0, midTerminal: 1, outTerminal: 1, outVoltage: 0 };
+
+    svgElement.addEventListener('contextmenu', (originalEvent) => {
+        console.log("Mouse X:", originalEvent.clientX, "Mouse Y:", originalEvent.clientY);
+        originalEvent.preventDefault();
+        contextMenu.style.top = `${originalEvent.clientY}px`;
+        contextMenu.style.left = `${originalEvent.clientX}px`;
+        contextMenu.style.display = "block";
+    
+        console.log("Context menu should appear at X:", contextMenu.style.left, "Y:", contextMenu.style.top);
+    
+        deleteOption.addEventListener("click", function(event) {
+            event.preventDefault();
+            console.log("Deleting item...");
+            deleteElement(id, 'NMOS');
+            contextMenu.style.display = "none";
+        });
+    });
+    
 
     container.insertAdjacentElement("afterbegin", svgElement);
-
     jsplumbInstance.draggable(id, { "containment": true });
-    listNmos.push(divPushed);
 
+    listNmos.push(divPushed);
     addInstanceNmos(id);
 }
 
@@ -141,6 +182,8 @@ export function compVdd() {
     }
 
     const id = "vdd" + count.VDD;
+    count.VDD += 1;
+    const container = document.getElementById("diagram");
 
     const svgElement = document.createElement('div');
     svgElement.innerHTML = `
@@ -152,22 +195,34 @@ export function compVdd() {
     svgElement.id = id;
     svgElement.className = 'component';
     svgElement.voltage = 1;
-    count.VDD += 1;
 
-    const divPushed = {};
-    divPushed.id = id;
-    divPushed.voltage = 1;
-    const container = document.getElementById("diagram");
+    const divPushed = { id, voltage: 1 };
 
+    svgElement.addEventListener('contextmenu', (originalEvent) => {
+        console.log("Mouse X:", originalEvent.clientX, "Mouse Y:", originalEvent.clientY);
+        originalEvent.preventDefault();
+        contextMenu.style.top = `${originalEvent.clientY}px`;
+        contextMenu.style.left = `${originalEvent.clientX}px`;
+        contextMenu.style.display = "block";
+    
+        console.log("Context menu should appear at X:", contextMenu.style.left, "Y:", contextMenu.style.top);
+    
+        deleteOption.addEventListener("click", function(event) {
+            event.preventDefault();
+            console.log("Deleting item...");
+            deleteElement(id, 'VDD');
+            contextMenu.style.display = "none";
+        });
+    });
+    
     container.insertAdjacentElement("afterbegin", svgElement);
     jsplumbInstance.draggable(id, { "containment": true });
-    listVdd.push(divPushed);
 
+    listVdd.push(divPushed);
     addInstanceVdd(id);
 }
 
 export function compGround() {
-
     maxCount.Ground -= 1;
     if (maxCount.Ground < 0) {
         printExcessComponents();
@@ -175,6 +230,7 @@ export function compGround() {
     }
 
     const id = "ground" + count.Ground;
+    count.Ground += 1;
     const container = document.getElementById("diagram");
 
     const svgElement = document.createElement('div');
@@ -189,22 +245,38 @@ export function compGround() {
     svgElement.id = id;
     svgElement.className = 'component';
     svgElement.voltage = 0;
-    count.Ground += 1;
 
-    const divPushed = {};
-    divPushed.id = id;
-    divPushed.voltage = 0;
+    const divPushed = { id, voltage: 0 };
+
+    svgElement.addEventListener('contextmenu', (originalEvent) => {
+        console.log("Mouse X:", originalEvent.clientX, "Mouse Y:", originalEvent.clientY);
+        originalEvent.preventDefault();
+        contextMenu.style.top = `${originalEvent.clientY}px`;
+        contextMenu.style.left = `${originalEvent.clientX}px`;
+        contextMenu.style.display = "block";
+    
+        console.log("Context menu should appear at X:", contextMenu.style.left, "Y:", contextMenu.style.top);
+    
+        deleteOption.addEventListener("click", function(event) {
+            event.preventDefault();
+            console.log("Deleting item...");
+            deleteElement(id, 'Ground');
+            contextMenu.style.display = "none";
+        });
+    });
+    
 
     container.insertAdjacentElement("afterbegin", svgElement);
-
     jsplumbInstance.draggable(id, { "containment": true });
-    listGround.push(divPushed);
 
+    listGround.push(divPushed);
     addInstanceGround(id);
 }
 
 export function compInput0() {
     const id = "input0";
+    const container = document.getElementById("diagram");
+
     const svgElement = document.createElement('div');
     svgElement.innerHTML = 'Input 1<br>1';
     svgElement.id = id;
@@ -212,6 +284,7 @@ export function compInput0() {
     svgElement.style.top = "1.25rem";
     svgElement.style.left = "0.625rem";
     svgElement.classList.add("high");
+
     svgElement.addEventListener("dblclick", () => {
         const divInput0 = document.getElementById("input0");
         if (divInput0.classList.contains("high")) {
@@ -226,40 +299,37 @@ export function compInput0() {
             listInput[0].input = 1;
         }
     });
-    svgElement.addEventListener("long-press", () => {
-        const divInput0 = document.getElementById("input0");
-        if (divInput0.classList.contains("high")) {
-            divInput0.classList.remove("high");
-            divInput0.classList.add("low");
-            divInput0.innerHTML = 'Input 1<br>0';
-            listInput[0].input = 0;
-        } else {
-            divInput0.classList.remove("low");
-            divInput0.classList.add("high");
-            divInput0.innerHTML = 'Input 1<br>1';
-            listInput[0].input = 1;
-        }
-    });
-    svgElement.input = 0;
-    svgElement.voltage = 5;
-    const container = document.getElementById("diagram");
 
-    const divPushed = {};
-    divPushed.id = id;
-    divPushed.input = 1;
-    divPushed.voltage = 5;
+    svgElement.addEventListener('contextmenu', (originalEvent) => {
+        console.log("Mouse X:", originalEvent.clientX, "Mouse Y:", originalEvent.clientY);
+        originalEvent.preventDefault();
+        contextMenu.style.top = `${originalEvent.clientY}px`;
+        contextMenu.style.left = `${originalEvent.clientX}px`;
+        contextMenu.style.display = "block";
+    
+        console.log("Context menu should appear at X:", contextMenu.style.left, "Y:", contextMenu.style.top);
+    
+        deleteOption.addEventListener("click", function(event) {
+            event.preventDefault();
+            console.log("Deleting item...");
+            deleteElement(id, 'Input');
+            contextMenu.style.display = "none";
+        });
+    });
+    
+    const divPushed = { id, input: 1, voltage: 5 };
 
     container.insertAdjacentElement("afterbegin", svgElement);
-
     jsplumbInstance.draggable(id, { "containment": true });
+
     listInput.push(divPushed);
-
     addInstanceFinalInput(id);
-
 }
 
 export function compOutput() {
     const id = "output0";
+    const container = document.getElementById("diagram");
+
     const svgElement = document.createElement('div');
     svgElement.innerHTML = 'Output<br>-';
     svgElement.id = id;
@@ -269,16 +339,29 @@ export function compOutput() {
     svgElement.outputsign = 1;
     svgElement.voltage = 0;
 
-    const divPushed = {};
-    divPushed.id = id;
-    divPushed.voltage = 0;
-    divPushed.outputsign = 1;
-    const container = document.getElementById("diagram");
+    const divPushed = { id, voltage: 0, outputsign: 1 };
+
+    svgElement.addEventListener('contextmenu', (originalEvent) => {
+        console.log("Mouse X:", originalEvent.clientX, "Mouse Y:", originalEvent.clientY);
+        originalEvent.preventDefault();
+        contextMenu.style.top = `${originalEvent.clientY}px`;
+        contextMenu.style.left = `${originalEvent.clientX}px`;
+        contextMenu.style.display = "block";
+    
+        console.log("Context menu should appear at X:", contextMenu.style.left, "Y:", contextMenu.style.top);
+    
+        deleteOption.addEventListener("click", function(event) {
+            event.preventDefault();
+            console.log("Deleting item...");
+            deleteElement(id, 'Output');
+            contextMenu.style.display = "none";
+        });
+    });
+    
 
     container.insertAdjacentElement("afterbegin", svgElement);
-
     jsplumbInstance.draggable(id, { "containment": true });
-    listOutput.push(divPushed);
 
+    listOutput.push(divPushed);
     addInstanceFinalOutput(id);
 }
