@@ -93,6 +93,7 @@ jsplumbInstance.bind("connection", () => {
     });
 
 export function addInstancePmos(id) {
+    console.log("value",id);
     addInstance(id, [0.72, 1, 0, 1], -1, true);
     addInstance(id, [0, 0.5, -1, 0], -1, false);
     addInstance(id, [0.72, 0, 0, -1], -1, false);
@@ -121,6 +122,10 @@ export function addInstanceFinalOutput(id) {
 }
 
 export function addInstance(id, position, num, src) {
+    // console.log("id",id);
+    // console.log("position",position);
+    // console.log("num",num);
+    // console.log("src",src);
     jsplumbInstance.addEndpoint(id, {
         endpoint: ["Dot", { radius: 5 }],
         anchor: position,
@@ -129,6 +134,7 @@ export function addInstance(id, position, num, src) {
         maxConnections: num,
         connectionType: "red-connection"
     });
+    // console.log(jsplumbInstance.addEndpoint);
 }
 
 

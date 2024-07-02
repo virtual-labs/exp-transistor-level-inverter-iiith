@@ -10,7 +10,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jsPlumb/2.15.6/js/jsplumb.min.js"></script>
     <link rel="stylesheet" href="./css/main.css">
 </head>
-
 <body>
     <div class="columns mt-2 is-variable is-1 is-centered is-flex-wrap-wrap">
         <div class="v-tabs">
@@ -44,7 +43,7 @@
                         <li>Click on components on the left side to add them to the circuit board.</li>
                         <li>Drag and drop components to move them around, connect them using wires by dragging your
                             cursor from one endpoint to another.</li>
-                        <li>Double click on a wire to delete it.</li>
+                        <li>Right click on a wire or component and press on delete option to delete it.</li>
                         <li>Double click or long press on input element to change it's value</li>
                         <li>Once you have built the required circuit and selected the input bit values, click on validate. This will give the output value as per the input bit set and will also give a success/failure message along with a truth table containing observed and expected values for various input values.</li>
                     </ul>
@@ -159,6 +158,7 @@
             <li id="deleteOption">Delete</li>
             <li id="cancelOption">Cancel</li>
         </ul>
+        </div>
     <script type="module" src="js/main.js"></script>
     <script type="module" src="js/components.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/virtual-labs/virtual-style@0.0.8-b/js/script.js"></script>
