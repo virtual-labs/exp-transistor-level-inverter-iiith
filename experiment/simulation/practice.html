@@ -10,7 +10,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jsPlumb/2.15.6/js/jsplumb.min.js"></script>
     <link rel="stylesheet" href="./css/main.css">
 </head>
-
 <body>
     <div class="columns mt-2 is-variable is-1 is-centered is-flex-wrap-wrap">
         <div class="v-tabs">
@@ -44,7 +43,7 @@
                         <li>Click on components on the left side to add them to the circuit board.</li>
                         <li>Drag and drop components to move them around, connect them using wires by dragging your
                             cursor from one endpoint to another.</li>
-                        <li>Double click on a wire to delete it.</li>
+                        <li>Right click on a wire or component and press on delete option to delete it.</li>
                         <li>Double click or long press on input element to change it's value</li>
                         <li>Once you have built the required circuit and selected the input bit values, click on validate. This will give the output value as per the input bit set and will also give a success/failure message along with a truth table containing observed and expected values for various input values.</li>
                     </ul>
@@ -63,11 +62,11 @@
         <div class="column is-2-desktop is-12-tablet is-12-mobile">
             <div class="v-datalist-container" style="height:100%">
                 <div class="v-datalist-title">
-                    ToolBar
+                    Components
                 </div>
                 <div class="v-datalist-row toolbar-item-list">
-                    <div class="toolbar-component" onclick="compPmos()">
-                        <div class="each-toolbar-component has-text-centered">
+                    <div id="PMOS" class="toolbar-component" onclick="compPmos()">
+                        <div  class="each-toolbar-component has-text-centered">
                             <svg xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink"
                                 version="1.1" viewBox="-0.5 -0.5 84 84">
                                 <g class="demo-transistor">
@@ -82,8 +81,8 @@
                             PMOS
                         </div>
                     </div>
-                    <div class="toolbar-component" onclick="compNmos()">
-                        <div class="each-toolbar-component has-text-centered">
+                    <div id="NMOS" class="toolbar-component" onclick="compNmos()">
+                        <div  class="each-toolbar-component has-text-centered">
                             <svg xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink"
                                 version="1.1" viewBox="-0.5 -0.5 84 84">
                                 <g class="demo-transistor">
@@ -97,8 +96,8 @@
                             NMOS
                         </div>
                     </div>
-                    <div class="toolbar-component" onclick="compVdd()">
-                        <div class="each-toolbar-component has-text-centered">
+                    <div id="VDD" class="toolbar-component" onclick="compVdd()">
+                        <div   class="each-toolbar-component has-text-centered">
                             <svg xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink"
                                 version="1.1" viewBox="-0.5 -6 44 34">
                                 <g class="demo-transistor">
@@ -108,8 +107,8 @@
                             VDD
                         </div>
                     </div>
-                    <div class="toolbar-component" onclick="compGround()">
-                        <div class="each-toolbar-component has-text-centered">
+                    <div id = "GND" class="toolbar-component" onclick="compGround()">
+                        <div  class="each-toolbar-component has-text-centered">
                             <svg xmlns="https://www.w3.org/2000/svg" xmlns:xlink="https://www.w3.org/1999/xlink"
                                 version="1.1" viewBox="-0.5 8 64 44">
                                 <g class="demo-transistor">
@@ -154,7 +153,14 @@
             </div>
         </div>
     </div>
+    <div id="contextMenu" class="context-menu">
+        <ul>
+            <li id="deleteOption">Delete</li>
+            <li id="cancelOption">Cancel</li>
+        </ul>
+        </div>
     <script type="module" src="js/main.js"></script>
+    <script type="module" src="js/components.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/virtual-labs/virtual-style@0.0.8-b/js/script.js"></script>
 </body>
 

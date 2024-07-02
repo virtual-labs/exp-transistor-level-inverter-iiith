@@ -15,10 +15,10 @@ export let listInverter = [];
 const EMPTY = "";
 
 // Disable right click 
-const container = document.getElementById("diagram");
-container.addEventListener("contextmenu", function (e) {
-    e.preventDefault();
-});
+// const container = document.getElementById("diagram");
+// container.addEventListener("contextmenu", function (e) {
+//     e.preventDefault();
+// });
 
 // Tab selection
 export const currentTab = { CMOS: 0, PNMOS: 1, BUFFER:2 };
