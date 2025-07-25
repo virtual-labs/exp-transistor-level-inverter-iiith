@@ -60,7 +60,7 @@ export function showTruthTableBuffer() {
     <th colspan="1">Observed Output</th>
 </tr>`;
     document.getElementById("table-head").innerHTML = head;
-    tableBody.innerHTML = `<tr><td>0</td><td>1</td><td>${output[0]}</td></tr><tr><td>1</td><td>0</td><td>${output[1]} </td></tr>`;
+    tableBody.innerHTML = `<tr><td>0</td><td>0</td><td>${output[0]}</td></tr><tr><td>1</td><td>1</td><td>${output[1]} </td></tr>`;
 }
 
 export function modifyOutput() {

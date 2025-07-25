@@ -27,7 +27,7 @@
                     <ul>
                         <li id="task1" onclick="window.location.href = 'cmos-demo.html';">
                             <a>
-                                Complementary CMOS
+                                CMOS
                             </a>
                         </li>
                         <li id="task2" class="is-active">
@@ -51,6 +51,8 @@
                             <li>Select the speed through dropdown menu</li>
                             <li><b>Reset</b> - Resets the simulation</li>
                             <li>Click on the green input bits to set their values.</li>
+                            <li><b>Input = 0 (Yellow)</b>: NMOS transistor is OFF, output pulled HIGH through PMOS (load)</li>
+                            <li><b>Input = 1 (Blue)</b>: NMOS transistor is ON, output pulled LOW to ground</li>
                         </ul>
                     </div>
                 </div>
@@ -128,6 +130,9 @@
                     <text class="demo-text" x="345" y="60">VDD</text>
                     <text class="demo-text" x="340" y="774">GND</text>
                     <text class="demo-text" x="200" y="424">GND</text>
+                    <text class="demo-text" x="390" y="240" style="font-size: 12px;">PMOS</text>
+                    <text class="demo-text" x="385" y="240" style="font-size: 12px;">(Load)</text>
+                    <text class="demo-text" x="390" y="540" style="font-size: 12px;">NMOS</text>
                 </svg>
             </div>
         </div>
