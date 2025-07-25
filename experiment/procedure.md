@@ -1,4 +1,4 @@
-# Complementary CMOS Circuit
+# CMOS Circuit
 
 ## Components Required - 
 

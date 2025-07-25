@@ -135,7 +135,7 @@ function changeTo1(coordinateX, coordinateY, object, textObject) {
 
     fillColor(objects[object], "#03b1fc");
     objectAppear(textInput[0]);
-    clearObservation();
+    observ.innerHTML = "Input set to 1 (HIGH) - NMOS will conduct when simulation starts";
 }
 
 function changeTo0(coordinateX, coordinateY, object, textObject) {
@@ -145,7 +145,7 @@ function changeTo0(coordinateX, coordinateY, object, textObject) {
 
     fillColor(objects[object], "#eeeb22");
     objectAppear(textInput[0]);
-    clearObservation();
+    observ.innerHTML = "Input set to 0 (LOW) - NMOS will be off when simulation starts";
 }
 
 function reboot() {
@@ -218,7 +218,11 @@ function startCircuit() {
         if (textInput[0].textContent !== "2") {
             timeline.play();
             timeline.timeScale(parseInt(speed.value));
-            observ.innerHTML = "Simulation has started.";
+            if (textInput[0].textContent === "1") {
+                observ.innerHTML = "Simulation started: Input=1, NMOS will conduct, expect Output=0";
+            } else {
+                observ.innerHTML = "Simulation started: Input=0, NMOS is off, expect Output=1";
+            }
             decide = true;
             status.innerHTML = "Pause";
             circuitStarted = true;
@@ -241,6 +245,14 @@ function initOutputDots() {
     for (const outputDot of outputDots) {
         fillInputDots(outputDot, 200, 200, 15, "#FF0000");
         svg.append(outputDot);
+    }
+}
+
+function midSimulationFeedback() {
+    if (textInput[0].textContent === "1") {
+        observ.innerHTML = "NMOS conducting: Current flows from output to ground";
+    } else {
+        observ.innerHTML = "NMOS off: Output pulled high through PMOS load";
     }
 }
 
@@ -362,9 +374,11 @@ function simulator1() {
 function outputHandler() {
     if (textInput[0].textContent === "0") {
         textOutput[0].textContent = "1";
+        observ.innerHTML = "Input = 0: NMOS OFF → Output = 1 (HIGH)";
     }
     else {
         textOutput[0].textContent = "0";
+        observ.innerHTML = "Input = 1: NMOS ON → Output = 0 (LOW)";
     }
     objectAppear(textOutput[0]);
     setter(textOutput[0].textContent, objects[1]);
@@ -388,6 +402,7 @@ timeline.add(setInputDots, 0);
 timeline.add(inputDotsAppear, 0);
 timeline.add(simulator1, 0);
 timeline.add(inputDotsDisappear, 5);
+timeline.add(midSimulationFeedback, 5);
 timeline.add(outputDotsAppear, 5);
 timeline.add(simulator2, 5);
 timeline.add(outputDotsDisappear, 9);
