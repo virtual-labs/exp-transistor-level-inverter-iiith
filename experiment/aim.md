@@ -11,5 +11,5 @@ The output of inverter is complement of the input i.e. if the input is 0, the ou
 
 The transistor level schematic of inverter can be designed in many logics, following two logics will be used for designing in the experiment
 
-1. Complementary CMOS logic
+1. CMOS logic
 2. Pseudo NMOS logic
