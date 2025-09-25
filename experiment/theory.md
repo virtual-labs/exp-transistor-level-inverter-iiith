@@ -1,6 +1,24 @@
+**INVERTER: BASIC OPERATION**
+
+An inverter is a fundamental logic gate with one input and one output. Its output is always the complement of the input: if the input is 0, the output is 1, and vice versa.
+
+Symbol:
+<img src="images/not.jpg">
+
+Truth Table:
+
+| Input | Output |
+|-------|--------|
+|   0   |   1    |
+|   1   |   0    |
+
+The transistor-level schematic of an inverter can be designed using different logics. In this experiment, we focus on two approaches:
+1. CMOS logic
+2. Pseudo NMOS logic
+
 **CMOS INVERTER**
 
-In the transistor level design of CMOS inverter consists of nmos and pmos transistor in series. The PMOS transistor is connected between Vdd and output node, whereas the NMOS is connected betweeen the output node and gnd.
+In the transistor-level design of a CMOS inverter, NMOS and PMOS transistors are arranged in series. The PMOS transistor is connected between Vdd and the output node, whereas the NMOS is connected between the output node and ground.
 
 **WORKING OF CMOS INVERTER**
 
