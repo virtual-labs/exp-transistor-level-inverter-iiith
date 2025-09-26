@@ -1,102 +1,106 @@
 {
   "version": 2.0,
   "questions": [
-  {
-    "question": "1. The number of inputs in an inverter is ____.",
-    "answers": {
-      "a": "1",
-      "b": "2",
-      "c": "3",
-      "d": "4"
+    {
+      "question": "1. The number of inputs in an inverter is ____.",
+      "answers": {
+        "a": "1",
+        "b": "2",
+        "c": "3",
+        "d": "4"
+      },
+      "correctAnswer": "a",
+      "explanations": { 
+        "a":"Correct. An inverter is a single input gate; the input signal is inverted to its complementary logic level at the output.",
+        "b":"Incorrect. An inverter does not have two inputs; it is designed for a single input only.",
+        "c":"Incorrect. An inverter does not have three inputs; it is designed for a single input only.",
+        "d":"Incorrect. An inverter does not have four inputs; it is designed for a single input only."
+      },
+      "difficulty": "beginner"
     },
-    "correctAnswer": "a",
-    "explanations": { 
-    "a":"It is a single input gate. The input signal is inverted to its complementary logic level at the output.",
-    "b":"This option is incorrect because an inverter does not have two inputs. It does not have the capability to handle multiple inputs simultaneously.",
-    "c":"This option is incorrect because an inverter does not have three inputs. It does not have the capability to handle multiple inputs simultaneously.",
-    "d":"This option is incorrect because an inverter does not have four inputs. It does not have the capability to handle multiple inputs simultaneously."
+    {
+      "question": "2. Inverter gate is same as __________.",
+      "answers": {
+        "a": "AND gate",
+        "b": "NOT gate",
+        "c": "NOR gate",
+        "d": "NAND gate"
+      },
+      "correctAnswer": "b",
+      "explanations": { 
+        "a":"Incorrect. An AND gate performs a logical AND operation and is not the same as an inverter gate.",
+        "b":"Correct. An inverter gate is also called a NOT gate; it takes a single input and produces the logical complement at the output.",
+        "c":"Incorrect. A NOR gate performs a logical NOR operation and is not the same as an inverter gate.",
+        "d":"Incorrect. A NAND gate performs a logical NAND operation and is not the same as an inverter gate."
+      },
+      "difficulty": "beginner"
     },
-    "difficulty": "beginner"
-  },
-  {
-    "question": "2. Inverter gate is same as __________.",
-    "answers": {
-      "a": "AND gate",
-      "b": "NOT gate",
-      "c": "NOR gate",
-      "d": "NAND gate"
+    {
+      "question": "3. Which is the most suitable representation for a NOT gate?",
+      "answers": {
+        "a": "<img src='images/1st.jpg'>",
+        "b": "<img src='images/2nd.jpg'>",
+        "c": "<img src='images/3rd.jpg'>",
+        "d": "<img src='images/4th.jpg'>"
+      },
+      "correctAnswer": "a",
+      "explanations": { 
+        "a":"Correct. The NOT gate symbol takes a single input and produces the logical complement at the output.",
+        "b":"Incorrect. This symbol does not represent a NOT gate; it may have multiple inputs.",
+        "c":"Incorrect. This symbol does not represent a NOT gate; it may have multiple outputs.",
+        "d":"Incorrect. This symbol does not represent a NOT gate; it may have multiple inputs and/or outputs."
+      },
+      "difficulty": "intermediate"
     },
-    "correctAnswer": "b",
-    "explanations": { 
-    "a":"An AND gate is a different type of logic gate that performs a logical AND operation on multiple input signals. It does not function the same as an inverter gate.",
-    "b":"It takes a single input and produces the logical complement or inverse of that input at the output. It reverses the logic level of the input signal.",
-    "c":"A NOR gate is another type of logic gate that performs a logical NOR operation on multiple input signals. It does not have the same functionality as an inverter gate.",
-    "d":"A NAND gate is a different logic gate that performs a logical NAND operation on multiple input signals. It does not have the same function as an inverter gate."
+    {
+      "question": "4. Identify which statement is true for inverter?",
+      "answers": {
+        "a": "Any difference in inputs guarantees a high output",
+        "b": "Any difference in inputs guarantees a low output",
+        "c": "A high input gives a high output",
+        "d": "A low input gives a high output"
+      },
+      "correctAnswer": "d",
+      "explanations": { 
+        "a":"Incorrect. The output of an inverter is determined by the specific input level, not by differences in inputs.",
+        "b":"Incorrect. The output of an inverter is determined by the specific input level, not by differences in inputs.",
+        "c":"Incorrect. In an inverter, a high input results in a low output, not a high output.",
+        "d":"Correct. The inverter inverts the input signal, so a low input results in a high output."
+      },
+      "difficulty": "intermediate"
     },
-    "difficulty": "beginner"
-  },
-  {
-    "question": "3. Which is the most suitable representation for a NOT gate?",
-    "answers": {
-      "a": "<img src='images/1st.jpg'>",
-      "b": "<<img src='images/2nd.jpg'>>",
-      "c": "<img src='images/3rd.jpg'>",
-      "d": "<img src='images/4th.jpg'>"
+    {
+      "question": "5. What is the traditional symbol for inverter?",
+      "answers": {
+        "a": "<img src='images/nand.jpg'>",
+        "b": "<img src='images/nor.jpg'>",
+        "c": "<img src='images/not.jpg'>",
+        "d": "<img src='images/inv.jpg'>"
+      },
+      "correctAnswer": "c",
+      "explanations": { 
+        "a":"Incorrect. This image represents a NAND gate, not the traditional symbol for an inverter.",
+        "b":"Incorrect. This image represents a NOR gate, not the traditional symbol for an inverter.",
+        "c":"Correct. This image represents the traditional symbol for an inverter (NOT gate).",
+        "d":"Incorrect. This image does not represent the traditional symbol for an inverter."
+      },
+      "difficulty": "beginner"
     },
-    "correctAnswer": "a",
-    "explanations": { 
-    "a":"It takes a single input and produces the logical complement or inverse of that input at the output.",
-    "b":"It does not have multiple inputs.",
-    "c":"It does not have multiple outputs",
-    "d":"It does not have multiple inputs and/or outputs."
-    },
-    "difficulty": "intermediate"
-  },
-  {
-    "question": "4. Identify which statement is true for inverter?",
-    "answers": {
-      "a": "Any difference in inputs guarantees a high output",
-      "b": "Any difference in inputs guarantees a low output",
-      "c": "A high input gives a high output",
-      "d": "A low input gives a high output"
-    },
-    "correctAnswer": "d",
-    "explanations": { 
-    "a":"Any difference in inputs guarantees a high output - The output of an inverter is determined by the specific input level, as explained. Simply having a difference in inputs does not guarantee a high output.",
-    "b":"Any difference in inputs guarantees a low output - The output of an inverter is not guaranteed to be low for any difference in inputs. The specific input level determines the output.",
-    "c":"In an inverter, a high input (typically represented as '1') results in a low output (typically represented as '0'), not a high output.",
-    "d":"The inverter essentially inverts the input signal, so a low input results in a high output."
-    },
-    "difficulty": "intermediate"
-  },
-  {
-    "question": "5. What is the traditional symbol for inverter?",
-    "answers": {
-      "a": "<img src='images/nand.jpg'>",
-      "b": "<img src='images/nor.jpg'>",
-      "c": "<img src='images/not.jpg'>",
-      "d": "<img src='images/inv.jpg'>"
-    },
-    "correctAnswer": "c",
-    "explanations": { 
-    "a":"Region D refers to the saturation region of a MOSFET, where the transistor operates as an amplifier with a constant voltage drop across it. In this region, the input voltage Vin should be greater than Vdd/2 and less than or equal to Vdd-Vtp, where Vdd represents the supply voltage and Vtp is the threshold voltage of the MOSFET.",
-    "b":"Vin = Vdd/2 represents the switching threshold voltage for a CMOS inverter, not the correct input voltage range for region D.",
-    "c":"The range 0 ≤ Vin ≤ Vtn typically corresponds to the cutoff region of a MOSFET, not region D.",
-    "d":"The correct input voltage range for region D is not Vin ≥ Vdd-Vtp"
-    },
-    "difficulty": "beginner"
-  },
-  {
-    "question": "6. Choose the electrical analogue of an inverter?",
-    "answers": {
-      "a": "<img src='images/elec_anal2.jpg'>",
-      "b": "<img src='images/elec_anal1.jpg'>",
-      "c": "<img src='images/elec_anal3.jpg'>",
-      "d": "None of these"
-    },
-    "correctAnswer": "b",
-    "explanations": { 
-    },
+    {
+      "question": "6. Choose the electrical analogue of an inverter?",
+      "answers": {
+        "a": "<img src='images/elec_anal2.jpg'>",
+        "b": "<img src='images/elec_anal1.jpg'>",
+        "c": "<img src='images/elec_anal3.jpg'>",
+        "d": "None of these"
+      },
+      "correctAnswer": "b",
+      "explanations": { 
+        "a":"Incorrect. This image does not represent the electrical analogue of an inverter.",
+        "b":"Correct. This image represents the electrical analogue of an inverter.",
+        "c":"Incorrect. This image does not represent the electrical analogue of an inverter.",
+        "d":"Incorrect. None of these is the correct electrical analogue of an inverter."
+      },
     "difficulty": "advanced"
   },
   {
@@ -109,6 +113,10 @@
     },
     "correctAnswer": "a",
     "explanations": { 
+      "a":"Correct. The input voltage range for region D is Vdd/2 < Vin ≤ Vdd-Vtp.",
+      "b":"Incorrect. Vin = Vdd/2 is the switching threshold, not the range for region D.",
+      "c":"Incorrect. 0 ≤ Vin ≤ Vtn is the cutoff region, not region D.",
+      "d":"Incorrect. Vin ≥ Vdd-Vtp is not the correct range for region D."
     },
     "difficulty": "advanced"
   },
@@ -122,10 +130,10 @@
     },
     "correctAnswer": "d",
     "explanations": { 
-    "a":" The NMOS is fully turned on and conducting in region B, and the PMOS is partially turned on but not fully conducting",
-    "b":"Cut-off refers to a state where the transistor is non-conducting, and in region B, both devices are conducting to some extent",
-    "c":"The NMOS is fully turned on and conducting. The p-device (PMOS) is partially turned on but not fully conducting.",
-    "d":"In region B, the n-device (NMOS) operates in the saturated region, where it is fully turned on and conducting. The p-device (PMOS) operates in the linear region, where it is partially turned on but not fully conducting. Therefore, the correct operation states for the devices in region B are saturated for the NMOS and linear for the PMOS."
+      "a":"Incorrect. In region B, the NMOS is not in the linear and unsaturated state; the PMOS is not unsaturated.",
+      "b":"Incorrect. In region B, neither device is in cut-off; both are conducting to some extent.",
+      "c":"Incorrect. In region B, the NMOS is not linear and the PMOS is not saturated.",
+      "d":"Correct. In region B, the NMOS operates in the saturated region and the PMOS operates in the linear region."
     },
     "difficulty": "advanced"
   },
@@ -139,10 +147,10 @@
     },
     "correctAnswer": "c",
     "explanations": { 
-    "a":"The delay is not determined by taking the maximum of the rise time and the fall time. While both rise time and fall time contribute to the overall delay, the maximum value does not accurately represent the delay of the circuit.",
-    "b":"The delay is not the product of the rise time and fall time. Multiplying these two values does not accurately represent the overall delay of the circuit.",
-    "c":"The rise time is the time taken for the output signal to transition from a low level to a high level, and the fall time is the time taken for the output signal to transition from a high level to a low level. Taking the average of these two values provides an estimation of the overall delay of the circuit.",
-    "d":"The delay is not determined by simply adding the rise time and fall time together. While both contribute to the overall delay, their addition does not accurately represent the delay of the circuit."
+      "a":"Incorrect. The delay is not determined by taking the maximum of the rise time and the fall time.",
+      "b":"Incorrect. The delay is not the product of the rise time and fall time.",
+      "c":"Correct. The average of rise time and fall time provides an estimation of the overall delay of the circuit.",
+      "d":"Incorrect. The delay is not determined by simply adding the rise time and fall time together."
     },
     "difficulty": "intermediate"
   },
@@ -156,10 +164,10 @@
     },
     "correctAnswer": "b",
     "explanations": { 
-    "a":"A βn/βp ratio of 0 would not be desirable for an inverter as it would result in an imbalanced operation between the n-device and the p-device.",
-    "b":"In an ideal inverter, the βn/βp ratio is often chosen to be 1 to achieve symmetrical rise and fall times, as well as balanced performance for both high-to-low and low-to-high transitions.",
-    "c":"A βn/βp ratio of 0.5 would not be desirable for an inverter as it would lead to asymmetrical behaviour and imbalanced performance between the n-device and the p-device.",
-    "d":"A βn/βp ratio of ∞ (infinity) would not be desirable for an inverter as it would result in imbalanced operation between the n-device and the p-device and can lead to performance issues."
+      "a":"Incorrect. A βn/βp ratio of 0 would result in imbalanced operation between the n-device and the p-device.",
+      "b":"Correct. A βn/βp ratio of 1 is desirable for an inverter to achieve symmetrical rise and fall times and balanced performance.",
+      "c":"Incorrect. A βn/βp ratio of 0.5 would lead to asymmetrical behaviour and imbalanced performance.",
+      "d":"Incorrect. A βn/βp ratio of infinity would result in imbalanced operation and performance issues."
     },
     "difficulty": "advanced"
   }
